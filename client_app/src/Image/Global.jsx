@@ -1,4 +1,4 @@
-import Logo from './1.jpg'
+import Logo from './biglogo.svg'
 import Footer1 from './2.png'
 import Footer2 from './3.png'
 import Footer3 from './4.png'

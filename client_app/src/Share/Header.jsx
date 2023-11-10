@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import Cart from '../API/CartAPI';
 import User from '../API/User';
-import logo from '../Image/1.jpg'
+import logo from '../Image/biglogo.svg'
 import { addUser, deleteCart } from '../Redux/Action/ActionCart';
 import { changeCount } from '../Redux/Action/ActionCount';
 import { addSession, deleteSession } from '../Redux/Action/ActionSession';
@@ -236,7 +236,7 @@ function Header(props) {
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-3 col-md-4">
-                            <li><span>Telephone Enquiry:</span><a href="#">(+123) 123 321 345</a></li>
+                            <li><span>Telephone Enquiry:</span><a href="#">(+84) 392 136 898</a></li>
                         </div>
                         <div className="col-lg-9 col-md-8">
                             <ul className="d-flex justify-content-end" >
@@ -283,11 +283,11 @@ function Header(props) {
                         <div className="col-lg-3">
                             <div className="logo pb-sm-30 pb-xs-30">
                                 <Link to="/">
-                                    <img src={logo} style={{ width: '13rem' }} />
+                                    <img src={logo} style={{ width: '10rem' }} />
                                 </Link>
                             </div>
                         </div>
-                        <div className="col-lg-9 pl-0 ml-sm-15 ml-xs-15 d-flex justify-content-between">
+                        <div className="col-lg-9 pl-0 ml-sm-15 ml-xs-15 d-flex justify-content-between align-items-center">
                             <form action="/search" className="hm-searchbox" onSubmit={handler_search}>
                                 <input type="text" placeholder="Enter your search key ..." value={keyword_search} onChange={(e) => set_keyword_search(e.target.value)} />
                                 <button className="li-btn" type="submit"><i className="fa fa-search"></i></button>
