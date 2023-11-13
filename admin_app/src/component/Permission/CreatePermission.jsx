@@ -3,11 +3,13 @@ import { useForm } from "react-hook-form";
 import queryString from 'query-string'
 import isEmpty from 'validator/lib/isEmpty'
 import permissionAPI from '../Api/permissionAPI'
+import { useHistory } from 'react-router-dom';
 
 function CreatePermission(props) {
     const [name, setName] = useState('');
     const [validationMsg, setValidationMsg] = useState('');
     const { handleSubmit } = useForm();
+    let history = useHistory();
 
     const validateAll = () => {
         let msg = {}
@@ -32,6 +34,7 @@ function CreatePermission(props) {
         const query = '?' + queryString.stringify({ name: name })
         const response = await permissionAPI.create(query)
         if (response.msg === "Bạn đã thêm thành công") {
+            history.push("/permission");
             setName('');
         }
         setValidationMsg({ api: response.msg })

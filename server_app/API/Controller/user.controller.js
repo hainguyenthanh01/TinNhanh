@@ -28,7 +28,6 @@ module.exports.detail = async (req, res) => {
     const query = [{ username: username }, { email: username }]
 
     const user = await Users.findOne({ $or: query })
-
     if (user === null) {
         res.send("Khong Tìm Thấy User")
     } else {

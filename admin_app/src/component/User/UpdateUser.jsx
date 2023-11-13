@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useForm } from "react-hook-form";
 import queryString from 'query-string'
 import isEmpty from 'validator/lib/isEmpty'
-
+import { useHistory } from 'react-router-dom';
 import userApi from '../Api/userAPI'
 import permissionAPI from '../Api/permissionAPI'
 
@@ -16,6 +16,7 @@ function UpdateUser(props) {
     const [permissionChoose, setPermissionChoose] = useState('');
     const [validationMsg, setValidationMsg] = useState('');
     const { handleSubmit } = useForm();
+    let history = useHistory();
 
     useEffect(() => {
         const fetchAllData = async () => {
@@ -68,6 +69,7 @@ function UpdateUser(props) {
         const response = await userApi.update(query)
 
         if (response.msg === "Bạn đã update thành công") {
+            history.push("/user");
             window.scrollTo(0, 0)
             setPassword('');
         }
@@ -145,7 +147,7 @@ function UpdateUser(props) {
                 </div>
             </div>
             <footer className="footer text-center text-muted">
-                All Rights Reserved by Adminmart. Designed and Developed by <a href="https://wrappixel.com">WrapPixel</a>.
+                All Rights Reserved by Adminmart. Designed and Developed by <a href="https://wrappixel.com">Hải Nguyễn</a>.
     </footer>
         </div>
     );

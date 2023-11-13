@@ -3,12 +3,13 @@ import { useForm } from "react-hook-form";
 import queryString from 'query-string'
 import isEmpty from 'validator/lib/isEmpty'
 import permissionAPI from '../Api/permissionAPI'
+import { useHistory } from 'react-router-dom/cjs/react-router-dom';
 function UpdatePermission(props) {
     const [id] = useState(props.match.params.id)
     const [name, setName] = useState('');
     const [validationMsg, setValidationMsg] = useState('');
     const { handleSubmit } = useForm();
-
+    let history = useHistory();
     useEffect(() => {
         const fetchAllData = async () => {
             const ct = await permissionAPI.details(id)

@@ -104,7 +104,6 @@ function Product() {
                                                         <td>
                                                             <div className="d-flex">
                                                                 <Link to={"/product/update/" + value._id} className="btn btn-success mr-1">Update</Link>
-
                                                                 <button type="button" style={{ cursor: 'pointer', color: 'white' }} onClick={() => handleDelete(value._id)} className="btn btn-danger" >Delete</button>
                                                             </div>
                                                         </td>

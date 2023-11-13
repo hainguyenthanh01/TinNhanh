@@ -114,7 +114,7 @@ function Category(props) {
             </div>
             <footer className="footer text-center text-muted">
                 All Rights Reserved by Adminmart. Designed and Developed by <a
-                    href="https://www.facebook.com/KimTien.9920/">Tiền Kim</a>.
+                    href="https://www.facebook.com/KimTien.9920/">Hải Nguyễn</a>.
         </footer>
         </div>
     );

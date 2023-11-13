@@ -6,6 +6,7 @@ import isEmail from 'validator/lib/isEmail'
 
 import userApi from '../Api/userAPI'
 import permissionAPI from '../Api/permissionAPI'
+import { useHistory } from 'react-router-dom';
 
 function CreateUser(props) {
     const [permission, setPermission] = useState([])
@@ -16,6 +17,7 @@ function CreateUser(props) {
     const [permissionChoose, setPermissionChoose] = useState('');
     const [validationMsg, setValidationMsg] = useState('');
     const { handleSubmit } = useForm();
+    let history = useHistory();
 
     useEffect(() => {
         const fetchAllData = async () => {
@@ -78,6 +80,8 @@ function CreateUser(props) {
         const response = await userApi.create(query)
 
         if (response.msg === "Bạn đã thêm thành công") {
+            // window.location.href = "/user"
+            history.push("/user");
             window.scrollTo(0, 0)
             setName('');
             setUserName('');
@@ -160,7 +164,7 @@ function CreateUser(props) {
                 </div>
             </div>
             <footer className="footer text-center text-muted">
-                All Rights Reserved by Adminmart. Designed and Developed by <a href="https://wrappixel.com">WrapPixel</a>.
+                All Rights Reserved by Adminmart. Designed and Developed by <a href="https://wrappixel.com">Hải Nguyễn</a>.
     </footer>
         </div>
     );

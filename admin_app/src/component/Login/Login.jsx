@@ -58,10 +58,8 @@ function Login(props) {
             setValidationMsg({ api: response.msg })
     }
 
-    if (jwt && user && user.id_permission.permission === "Nhân Viên") {
+    if (jwt && user && user.id_permission.permission === "Admin") {
         return <Redirect to="/customer" />
-    } else if (jwt && user && user.id_permission.permission === "Admin") {
-        return <Redirect to="/user" />
     }
 
     return (

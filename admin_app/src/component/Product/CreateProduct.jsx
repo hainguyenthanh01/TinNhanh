@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import categoryAPI from '../Api/categoryAPI';
 import isEmpty from 'validator/lib/isEmpty'
 import productAPI from '../Api/productAPI';
+import { useHistory } from 'react-router-dom';
 
 function CreateProduct(props) {
     const [category, setCategory] = useState([])
@@ -17,7 +18,7 @@ function CreateProduct(props) {
     const [fileName, setFileName] = useState("");
     const [validationMsg, setValidationMsg] = useState('');
     const { handleSubmit } = useForm();
-
+    let history = useHistory();
 
     useEffect(() => {
         const fetchAllData = async () => {
@@ -98,6 +99,7 @@ function CreateProduct(props) {
         const response = await productAPI.create(formData)
 
         if (response.msg === "Bạn đã thêm thành công") {
+            history.push("/product")
             setName('');
             setPrice('');
             setDescription('');

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form'
 import { useParams } from 'react-router';
 import CouponAPI from '../Api/CouponAPI';
+import { useHistory } from 'react-router-dom';
 
 const defaultValues = {
     code: '',
@@ -20,7 +21,7 @@ function UpdateCoupon(props) {
     const [count, setCount] = useState('')
     const [promotion, setPromotion] = useState('')
     const [describe, setDescribe] = useState('')
-
+    let history = useHistory();
     const { register, handleSubmit, formState: { errors }, reset } = useForm({ defaultValues });
     const onSubmit = async (data) => {
 
