@@ -13,7 +13,7 @@ import Detail_OrderAPI from '../API/Detail_OrderAPI';
 import CouponAPI from '../API/CouponAPI';
 import MoMo from './MoMo.jsx'
 
-const socket = io('https://hieusuper20hcm.herokuapp.com/', {
+const socket = io('http://localhost:8000', {
     transports: ['websocket'], jsonp: false
 });
 socket.connect();
@@ -270,7 +270,7 @@ function Checkout(props) {
 
     const [error_address, set_error_address] = useState(false)
 
-    const [from, set_from] = useState('155 Sư Vạn Hạnh, Phường 13, District 10, Ho Chi Minh City, Vietnam')
+    const [from, set_from] = useState('122 Triều Khúc - Thanh Xuân - Hà Nội')
 
     // Khoảng cách
     const [distance, set_distance] = useState('')
@@ -380,7 +380,7 @@ function Checkout(props) {
                                                     value={information.address}
                                                     onChange={onChangeAddress} />
                                                 {error_address && <span style={{ color: 'red' }}>* Address is required</span>}
-                                                <input id="destination" type="text" name="destination" required="" type="hidden" />
+                                                <input id="destination" type="text" name="destination" required="" />
                                             </div>
                                         </div>
                                         <div className="col-md-12">

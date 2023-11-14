@@ -85,8 +85,8 @@ function Product() {
                                                 <th>Price</th>
                                                 <th>Image</th>
                                                 <th>Describe</th>
-                                                {/* <th>Producer</th> */}
                                                 <th>Category</th>
+                                                <th>Gender</th>
                                                 <th>Edit</th>
                                             </tr>
                                         </thead>
@@ -101,6 +101,7 @@ function Product() {
                                                         <td><img src={value.image} alt="" style={{ width: '70px' }} /></td>
                                                         <td className="name" style={{ width: '40px' }}>{value.describe}</td>
                                                         <td>{value.id_category ? value.id_category.category : ""}</td>
+                                                        <td>{value?.gender || ""}</td>
                                                         <td>
                                                             <div className="d-flex">
                                                                 <Link to={"/product/update/" + value._id} className="btn btn-success mr-1">Update</Link>

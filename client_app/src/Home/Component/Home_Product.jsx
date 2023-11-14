@@ -67,14 +67,15 @@ function Home_Product(props) {
         const fetchData = async () => {
 
             const params = {
-                id_category: category
+                gender: gender.toLowerCase()
             }
 
             const query = '?' + queryString.stringify(params)
 
             const response = await Product.Get_Category_Product(query)
 
-            set_products(response.splice(0, 7))
+            set_products(response)
+            // set_products(response.splice(0, 7))
 
         }
 

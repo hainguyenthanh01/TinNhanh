@@ -25,11 +25,14 @@ module.exports.gender = async (req, res) => {
 module.exports.category = async (req, res) => {
 
     const id_category = req.query.id_category
+    const gender =  req.query.gender || null
 
     let products_category
 
     if (id_category === 'all'){
         products_category = await Products.find()
+    }else if(gender){
+        products_category = await Products.find({gender:gender})
     }else{
         products_category = await Products.find({ id_category: id_category })
     }

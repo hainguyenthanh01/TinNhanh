@@ -5,6 +5,21 @@ import isEmpty from 'validator/lib/isEmpty'
 import productAPI from '../Api/productAPI';
 import { useHistory } from 'react-router-dom';
 
+const listGender = [
+    {
+        id:"male",
+        name:"Male"
+    },
+    {
+        id:"female",
+        name:"Female"
+    },
+    {
+        id:"unisex",
+        name:"Unisex"
+    }
+]
+
 function CreateProduct(props) {
     const [category, setCategory] = useState([])
     const [gender] = useState(["Unisex", "Male", "Female"])
@@ -13,7 +28,7 @@ function CreateProduct(props) {
     const [description, setDescription] = useState('');
     const [number, setNumber] = useState('');
     const [categoryChoose, setCategoryChoose] = useState('');
-    const [genderChoose, setGenderChoose] = useState('Unisex');
+    const [genderChoose, setGenderChoose] = useState('');
     const [file, setFile] = useState();
     const [fileName, setFileName] = useState("");
     const [validationMsg, setValidationMsg] = useState('');
@@ -105,7 +120,7 @@ function CreateProduct(props) {
             setDescription('');
             // setNumber('')
             setCategoryChoose('')
-            setGenderChoose('Unisex')
+            setGenderChoose('')
             setFile('')
             setFileName('')
             window.scrollTo(0, 0)
@@ -163,12 +178,27 @@ function CreateProduct(props) {
 
                                     <div className="form-group w-50">
                                         {/* <label htmlFor="categories" className="mr-2">Chọn loại:</label> */}
-                                        <label htmlFor="categories" className="mr-2">Chọn nhà sản xuất:</label>
+                                        <label htmlFor="categories" className="mr-2">Chọn danh mục:</label>
                                         <select name="categories" id="categories" value={categoryChoose} onChange={(e) => setCategoryChoose(e.target.value)}>
                                             <option >Chọn loại</option>
                                             {
                                                 category && category.map((item, index) => (
                                                     <option value={item._id} key={index} >{item.category}</option>
+                                                ))
+                                            }
+
+                                        </select>
+                                        <p className="form-text text-danger">{validationMsg.category}</p>
+                                    </div>
+
+                                    <div className="form-group w-50">
+                                        {/* <label htmlFor="categories" className="mr-2">Chọn loại:</label> */}
+                                        <label htmlFor="categories" className="mr-2">Chọn giới tính:</label>
+                                        <select name="categories" id="categories" value={genderChoose} onChange={(e) => setGenderChoose(e.target.value)}>
+                                            <option >Chọn loại</option>
+                                            {
+                                                 listGender.map((item, index) => (
+                                                    <option value={item.id} key={index} >{item.name}</option>
                                                 ))
                                             }
 
