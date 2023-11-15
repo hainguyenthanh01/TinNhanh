@@ -293,8 +293,8 @@ function Header(props) {
                   value={keyword_search}
                   onChange={(e) => set_keyword_search(e.target.value)}
                 />
-                <button className="li-btn" type="submit">
-                  <i className="fa fa-search"></i>
+                <button type="submit" class="btn btn-primary">
+                  <i class="fa fa-search"></i>
                 </button>
                 {keyword_search && (
                   <div className="show_search_product">

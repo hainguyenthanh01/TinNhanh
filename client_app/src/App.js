@@ -142,11 +142,8 @@ function App() {
             <Route path="/cart" component={Cart} />
             <Route path="/checkout" component={Checkout} />
             <Route path="/favorite" component={Favorite} />
-
             <Route exact path="/event" component={Event} />
             <Route path="/event/:id" component={DetailEvent} />
-
-
             <Route path="/contact" component={Contact} />
             <Route path="/signin" component={SignIn} />
             <Route path="/signup" component={SignUp} />

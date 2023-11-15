@@ -64,6 +64,7 @@
 	font-family: 'Poppins', sans-serif;
 	font-family: 'Rubik', sans-serif;
 */
+@import '~mdb-ui-kit/css/mdb.min.css';
 @import url("https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Rubik:300,300i,400,400i,500,500i,700,700i,900,900i");
 /*----------------------------------------*/
 /*  01. Dfault Style
@@ -327,6 +328,23 @@ button.li-btn {
   top: -1px;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
+}
+button.btn-primary{
+  --mdb-btn-bg: #fed700;
+  --mdb-btn-color: #fff;
+  --mdb-btn-box-shadow: 0 4px 9px -4px #fed700;
+  --mdb-btn-hover-bg: #f0cf13;
+  --mdb-btn-hover-color: #fff;
+  --mdb-btn-focus-bg: #f0cf13;
+  --mdb-btn-focus-color: #fff;
+  --mdb-btn-active-bg: #f0cf13;
+  --mdb-btn-active-color: #fff;
+  --mdb-btn-box-shadow-state: 0 8px 9px -4px rgba(202, 200, 59, 0.3),0 4px 18px 0 rgba(202, 200, 59, 0.3);
+}
+.btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle{
+  color: #fff;
+  background-color: #f0cf13;
+  border-color: #f0cf13;
 }
 button.li-btn:hover {
   background: #333333;
@@ -2541,6 +2559,12 @@ textarea:focus {
 .add-actions-link li.add-cart > a i {
   font-size: 16px;
   line-height: 22px;
+}
+.wishlist i{
+  padding-right: 5px;
+}
+.quick-view i{
+  padding-right: 5px;
 }
 .add-actions {
   bottom: -15px;
