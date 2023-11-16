@@ -77,7 +77,7 @@ function Home(props) {
             <div>
               <div className="carousel-inner">
                 <div
-                  className="single-slide align-center-left animation-style-01 bg-1"
+                  className=" single-slide align-center-left animation-style-01 bg-1"
                   style={{
                     backgroundImage: `url(https://cdn.shopify.com/s/files/1/2598/6284/files/3rd_Banner_5_1600x.jpg?v=1593522251)`,
                   }}

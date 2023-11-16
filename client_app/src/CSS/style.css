@@ -2745,6 +2745,7 @@ textarea:focus {
   display: block;
   overflow: hidden;
   position: relative;
+  cursor: default;
 }
 .li-banner > a::before,
 .single-banner > a::before {
@@ -5225,11 +5226,13 @@ span.required {
   font-weight: 400;
   margin: 40px 0 0;
   padding: 9px;
-  .row {
+  .pagination-box{
+    display: flex;
     align-items: center;
     justify-content: center;
   }
 }
+
 .paginatoin-area p {
   margin: 0;
 }

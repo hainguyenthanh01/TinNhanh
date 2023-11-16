@@ -94,7 +94,7 @@ function CreateUserCus(props) {
                     <div className="col-12">
                         <div className="card">
                             <div className="card-body">
-                                <h4 className="card-title">Create User</h4>
+                                <h4 className="card-title">Create Customer</h4>
                                 {
                                     validationMsg.api === "Bạn đã thêm thành công" ?
                                         (

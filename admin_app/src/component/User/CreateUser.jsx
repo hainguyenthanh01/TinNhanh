@@ -80,7 +80,6 @@ function CreateUser(props) {
         const response = await userApi.create(query)
 
         if (response.msg === "Bạn đã thêm thành công") {
-            // window.location.href = "/user"
             history.push("/user");
             window.scrollTo(0, 0)
             setName('');

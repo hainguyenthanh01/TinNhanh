@@ -166,7 +166,10 @@ function Search(props) {
                                 </h4>
                                 <div className="price-box">
                                   <span className="new-price">
-                                    ${value.price_product}
+                                  {new Intl.NumberFormat("vi-VN", {
+                                      style: "decimal",
+                                      decimal: "VND",
+                                    }).format(value.price_product) + " VNĐ"}
                                   </span>
                                 </div>
                                 <p>
@@ -271,7 +274,10 @@ function Search(props) {
                             </div>
                             <div className="price-box pt-20">
                               <span className="new-price new-price-2">
-                                ${value.price_product}
+                              {new Intl.NumberFormat("vi-VN", {
+                                      style: "decimal",
+                                      decimal: "VND",
+                                    }).format(value.price_product) + " VNĐ"}
                               </span>
                             </div>
                             <div className="product-desc">

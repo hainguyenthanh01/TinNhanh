@@ -68,7 +68,7 @@ function UserCus(props) {
                     <div className="col-12">
                         <div className="card">
                             <div className="card-body">
-                                <h4 className="card-title">Users</h4>
+                                <h4 className="card-title">Customer</h4>
                                 <Search handlerSearch={handlerSearch} />
 
                                 <Link to="/customer/create" className="btn btn-primary my-3">New create</Link>

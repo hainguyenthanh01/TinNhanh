@@ -80,7 +80,7 @@ function Product() {
                                     <table className="table table-striped table-bordered no-wrap">
                                         <thead>
                                             <tr>
-                                                <th>ID</th>
+                                                {/* <th>ID</th> */}
                                                 <th>Name</th>
                                                 <th>Price</th>
                                                 <th>Image</th>
@@ -95,7 +95,7 @@ function Product() {
                                             {
                                                 products && products.map((value, index) => (
                                                     <tr key={index}>
-                                                        <td className="name">{value._id}</td>
+                                                        {/* <td className="name">{value._id}</td> */}
                                                         <td className="name">{value.name_product}</td>
                                                         <td>{new Intl.NumberFormat('vi-VN',{style: 'decimal',decimal: 'VND'}).format(value.price_product)+ ' VNĐ'}</td>
                                                         <td><img src={value.image} alt="" style={{ width: '70px' }} /></td>

@@ -80,7 +80,7 @@ function UpdateUserCus(props) {
                     <div className="col-12">
                         <div className="card">
                             <div className="card-body">
-                                <h4 className="card-title">Update User</h4>
+                                <h4 className="card-title">Update Customer</h4>
                                 {
                                     validationMsg.api === "Bạn đã update thành công" ?
                                         (

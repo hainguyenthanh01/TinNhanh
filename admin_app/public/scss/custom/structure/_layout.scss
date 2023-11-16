@@ -95,7 +95,7 @@
     /*sidebar type*/
     &[data-sidebartype="full"] {
         .page-wrapper {
-            margin-left: $sidebar-width-full;
+            // margin-left: $sidebar-width-full;
         }
     }
 
@@ -157,7 +157,7 @@
         /*Sidebar position*/
         &[data-sidebar-position="fixed"][data-sidebartype="full"] {
             .topbar .top-navbar .navbar-collapse {
-                margin-left: $sidebar-width-full;
+                // margin-left: $sidebar-width-full;
             }
         }
 
@@ -191,7 +191,7 @@
             }
 
             .page-wrapper {
-                margin-left: $sidebar-width-mini;
+                // margin-left: $sidebar-width-mini;
             }
 
             .sidebar-nav {

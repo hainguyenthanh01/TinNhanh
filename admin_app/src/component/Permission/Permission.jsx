@@ -74,7 +74,7 @@ function Permission(props) {
                                     <table className="table table-striped table-bordered no-wrap">
                                         <thead>
                                             <tr>
-                                                <th>ID</th>
+                                                {/* <th>ID</th> */}
                                                 <th>Name</th>
                                                 <th>Action</th>
                                             </tr>
@@ -84,7 +84,7 @@ function Permission(props) {
                                             {
                                                 permission && permission.map((value, index) => (
                                                     <tr key={index}>
-                                                        <td className="name">{value._id}</td>
+                                                        {/* <td className="name">{value._id}</td> */}
                                                         <td className="name">{value.permission}</td>
                                                         <td>
                                                             <div className="d-flex">

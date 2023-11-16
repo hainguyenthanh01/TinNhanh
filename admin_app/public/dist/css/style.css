@@ -9549,7 +9549,7 @@ a.text-purple:hover, a.text-purple:focus {
   width: calc(100% - 260px);
   min-height: calc(100vh - 64px);
   overflow: auto;
-  margin-left: 260px;
+  /* margin-left: 260px; */
 }
 
 .reverse-mode .left-part {
@@ -9584,7 +9584,7 @@ a.text-purple:hover, a.text-purple:focus {
 }
 
 #main-wrapper[data-layout="vertical"][data-sidebartype="full"] .page-wrapper {
-  margin-left: 260px;
+  /* margin-left: 260px; */
 }
 
 #main-wrapper[data-layout="vertical"][data-sidebar-position="fixed"] .topbar .top-navbar .navbar-header {
@@ -9602,7 +9602,7 @@ a.text-purple:hover, a.text-purple:focus {
 }
 
 #main-wrapper[data-layout="vertical"][data-header-position="fixed"] .page-wrapper {
-  padding-top: 80px;
+  /* padding-top: 80px; */
 }
 
 #main-wrapper[data-layout="vertical"][data-boxed-layout="boxed"] {
@@ -9630,7 +9630,7 @@ a.text-purple:hover, a.text-purple:focus {
     width: 260px;
   }
   #main-wrapper[data-layout="vertical"][data-sidebar-position="fixed"][data-sidebartype="full"] .topbar .top-navbar .navbar-collapse {
-    margin-left: 260px;
+    /* margin-left: 260px; */
   }
   #main-wrapper[data-layout="vertical"][data-sidebar-position="fixed"][data-sidebartype="mini-sidebar"] .topbar .top-navbar .navbar-collapse {
     margin-left: 65px;
@@ -9996,7 +9996,7 @@ Main sidebar
   height: 100%;
   top: 0px;
   z-index: 10;
-  padding-top: 80px;
+  /* padding-top: 80px; */
   background: transparent;
   transition: 0.2s ease-in;
   box-shadow: 0 3px 9px 0 rgba(169, 184, 200, 0.15);

@@ -13,10 +13,9 @@ function Header(props) {
                     (<header className="topbar" data-navbarbg="skin6">
                         <nav className="navbar top-navbar navbar-expand-md">
                             <div className="navbar-header" data-logobg="skin6">
-                                <a className="nav-toggler waves-effect waves-light d-block d-md-none" href="#"><i
-                                    className="ti-menu ti-close"></i></a>
+                                <a className="nav-toggler waves-effect waves-light d-block d-md-none" href="#"></a>
                                 <div className="navbar-brand">
-                                    <a href="index.html">
+                                    <a href="/customer">
                                         <b className="logo-icon">
                                             <img src={Logoicon} alt="homepage" className="dark-logo" />
                                             <img src={Logoicon} alt="homepage" className="light-logo" />
