@@ -11,6 +11,10 @@ import queryString from "query-string";
 import Product from "../API/Product";
 import { addSearch } from "../Redux/Action/ActionSearch";
 import CartsLocal from "./CartsLocal";
+import { FaUserCircle } from "react-icons/fa";
+import { useHistory } from "react-router-dom/cjs/react-router-dom";
+
+
 
 function Header(props) {
   // State count of cart
@@ -127,7 +131,7 @@ function Header(props) {
     const action_change_count = changeCount(count);
     dispatch(action_change_count);
   };
-
+  let history = useHistory();
   const [male, set_male] = useState([]);
   const [female, set_female] = useState([]);
 
@@ -218,12 +222,14 @@ function Header(props) {
               <ul className="d-flex justify-content-end">
                 <li>
                   <div className="ht-setting-trigger">
+                    <FaUserCircle  style={{ marginRight:"5px", marginTop: "-2px"}}/>
                     {active_user ? (
                       <span
                         data-toggle="collapse"
                         data-target="#collapseExample"
                         aria-expanded="false"
                         aria-controls="collapseExample"
+                        style={{fontWeight: "bold"}}
                       >
                         {user.fullname}
                       </span>
@@ -233,8 +239,9 @@ function Header(props) {
                         data-target="#collapseExample"
                         aria-expanded="false"
                         aria-controls="collapseExample"
+                        style={{fontWeight: "bold"}}
                       >
-                        Setting
+                        Profile
                       </span>
                     )}
                   </div>
@@ -252,7 +259,9 @@ function Header(props) {
                           <Link to="/history">Order Status</Link>
                         </li>
                         <li className="li_setting">
-                          <a onClick={handler_logout} href="#">
+                          <a onClick= {() =>{handler_logout();
+                          history.push("/");
+                          }}  href="#">
                             Log Out
                           </a>
                         </li>
