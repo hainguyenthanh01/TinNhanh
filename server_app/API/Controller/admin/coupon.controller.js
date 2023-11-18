@@ -38,7 +38,7 @@ module.exports.create = async (req, res) => {
 
     await Coupon.create(req.body)
 
-    res.json({ msg: "Bạn đã thêm thành công"})
+    res.json({ msg: "Bạn đã thêm thành công" })
 
 }
 
@@ -55,7 +55,7 @@ module.exports.update = async (req, res) => {
 
     coupon.save()
 
-    res.json({ msg: "Bạn đã cập nhật thành công"})
+    res.json({ msg: "Bạn đã cập nhật thành công" })
 
 }
 
@@ -86,18 +86,21 @@ module.exports.checking = async (req, res) => {
     const id_user = req.query.id_user
 
     const coupon = await Coupon.findOne({ code })
+    console.log(coupon);
 
-    if (!coupon){
+    if (!coupon) {
         res.json({ msg: "Không tìm thấy" })
+    } else {
+        const checkCoupon = await Order.findOne({ id_user: id_user, id_coupon: coupon._id })
+
+        if (checkCoupon) {
+            res.json({ msg: "Bạn đã sử dụng mã này rồi" })
+        } else res.json({ msg: "Thành công", coupon: coupon });
+
+
     }
 
-    const checkCoupon = await Order.findOne({ id_user: id_user, id_coupon: coupon._id })
 
-    if (checkCoupon){
-        res.json({ msg: "Bạn đã sử dụng mã này rồi"})
-    }
-
-    res.json({ msg: "Thành công", coupon: coupon })
 
 }
 
