@@ -29,7 +29,7 @@ function Profile(props) {
 
         const fetchData = async () => {
 
-            const response = await User.Get_User(sessionStorage.getItem('id_user'))
+            const response = await User.Get_User(localStorage.getItem('id_user'))
 
             set_user(response)
 
@@ -57,9 +57,9 @@ function Profile(props) {
     const [compare_password, set_compare_password] = useState('')
 
     const handler_update = async () => {
-        
+
         const data = {
-            _id: sessionStorage.getItem('id_user'),
+            _id: localStorage.getItem('id_user'),
             fullname: name,
             username: username,
             password: compare_password
@@ -72,7 +72,7 @@ function Profile(props) {
     }
 
     return (
-        <div className="container mt-5 pt-4" style={{ paddingBottom: '4rem'}}>
+        <div className="container mt-5 pt-4" style={{ paddingBottom: '4rem' }}>
             <div className="group_profile">
                 <div className="group_setting mt-3">
                     <div className="setting_left">

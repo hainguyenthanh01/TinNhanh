@@ -64,7 +64,7 @@
 	font-family: 'Poppins', sans-serif;
 	font-family: 'Rubik', sans-serif;
 */
-@import '~mdb-ui-kit/css/mdb.min.css';
+@import "~mdb-ui-kit/css/mdb.min.css";
 @import url("https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i|Rubik:300,300i,400,400i,500,500i,700,700i,900,900i");
 /*----------------------------------------*/
 /*  01. Dfault Style
@@ -329,7 +329,7 @@ button.li-btn {
   transition: all 0.3s ease-in-out;
   cursor: pointer;
 }
-button.btn-primary{
+button.btn-primary {
   --mdb-btn-bg: #fed700;
   --mdb-btn-color: #fff;
   --mdb-btn-box-shadow: 0 4px 9px -4px #fed700;
@@ -339,9 +339,12 @@ button.btn-primary{
   --mdb-btn-focus-color: #fff;
   --mdb-btn-active-bg: #f0cf13;
   --mdb-btn-active-color: #fff;
-  --mdb-btn-box-shadow-state: 0 8px 9px -4px rgba(202, 200, 59, 0.3),0 4px 18px 0 rgba(202, 200, 59, 0.3);
+  --mdb-btn-box-shadow-state: 0 8px 9px -4px rgba(202, 200, 59, 0.3),
+    0 4px 18px 0 rgba(202, 200, 59, 0.3);
 }
-.btn-primary:not(:disabled):not(.disabled).active, .btn-primary:not(:disabled):not(.disabled):active, .show>.btn-primary.dropdown-toggle{
+.btn-primary:not(:disabled):not(.disabled).active,
+.btn-primary:not(:disabled):not(.disabled):active,
+.show > .btn-primary.dropdown-toggle {
   color: #fff;
   background-color: #f0cf13;
   border-color: #f0cf13;
@@ -1906,6 +1909,32 @@ textarea:focus {
 .hb-menu > nav > ul {
   position: relative;
 }
+.hb-menu > nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.hb-menu > nav > .header-cart {
+  position: relative;
+}
+.hb-menu > nav > .header-cart:hover {
+  cursor: pointer;
+}
+.hb-menu > nav > .header-cart > svg {
+  font-size: 30px;
+}
+.hb-menu > nav > .header-cart > .number {
+  position: absolute;
+  top: -8px;
+  right: -4px;
+  background-color: red;
+  color: #fff;
+  width: 20px;
+  text-align: center;
+  display: inline-block;
+  font-size: 12px;
+  border-radius: 50%;
+}
 .hb-menu nav > ul > li {
   display: inline-block;
   position: relative;
@@ -1920,6 +1949,9 @@ textarea:focus {
   line-height: 35px;
   font-weight: 500;
   padding: 8px 0;
+}
+.hb-menu nav > ul > li > a.active {
+  color: #fff;
 }
 .hb-menu-2 nav > ul > li > a {
   display: flex;
@@ -2560,10 +2592,10 @@ textarea:focus {
   font-size: 16px;
   line-height: 22px;
 }
-.wishlist i{
+.wishlist i {
   padding-right: 5px;
 }
-.quick-view i{
+.quick-view i {
   padding-right: 5px;
 }
 .add-actions {
@@ -5226,7 +5258,7 @@ span.required {
   font-weight: 400;
   margin: 40px 0 0;
   padding: 9px;
-  .pagination-box{
+  .pagination-box {
     display: flex;
     align-items: center;
     justify-content: center;

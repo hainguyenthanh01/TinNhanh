@@ -51,17 +51,16 @@ function OrderMomo(props) {
             }
             if (errorCode == 0) {
 
-                if (!information)
-                {
+                if (!information) {
                     window.location.href = '/'
                     return
                 }
 
-                if (localStorage.getItem("id_coupon")){
+                if (localStorage.getItem("id_coupon")) {
 
                     const responseUpdate = await CouponAPI.updateCoupon(localStorage.getItem("id_coupon"))
                     console.log(responseUpdate)
-        
+
                 }
 
                 // data Note
@@ -75,7 +74,7 @@ function OrderMomo(props) {
 
                 // data Order
                 const data_order = {
-                    id_user: sessionStorage.getItem('id_user'),
+                    id_user: localStorage.getItem('id_user'),
                     address: information.address,
                     total: total,
                     status: '1',

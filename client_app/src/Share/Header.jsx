@@ -4,7 +4,7 @@ import { Link, Redirect } from "react-router-dom";
 import Cart from "../API/CartAPI";
 import User from "../API/User";
 import logo from "../Image/biglogo.svg";
-import { addUser, deleteCart } from "../Redux/Action/ActionCart";
+import { addCart, addUser, deleteCart } from "../Redux/Action/ActionCart";
 import { changeCount } from "../Redux/Action/ActionCount";
 import { addSession, deleteSession } from "../Redux/Action/ActionSession";
 import queryString from "query-string";
@@ -13,6 +13,8 @@ import { addSearch } from "../Redux/Action/ActionSearch";
 import CartsLocal from "./CartsLocal";
 import { FaUserCircle } from "react-icons/fa";
 import { useHistory } from "react-router-dom/cjs/react-router-dom";
+import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
+import { TiShoppingCart } from "react-icons/ti";
 
 
 
@@ -23,15 +25,22 @@ function Header(props) {
   const [total_price, set_total_price] = useState(0);
 
   const [carts_mini, set_carts_mini] = useState([]);
+  const location = useLocation()
+  const listCard = useSelector((state) => state.Cart.listCart);
+  const [countCart, setCountCart] = useState(0)
+
+  const id_user = useSelector((state) => state.Session.idUser);
+
 
   // Hàm này để khởi tạo localStorage dùng để lưu trữ giỏ hàng
   // Và nó sẽ chạy lần đầu
-  useEffect(() => {
+  useEffect(async () => {
     if (localStorage.getItem("carts") !== null) {
       set_carts_mini(JSON.parse(localStorage.getItem("carts")));
     } else {
       localStorage.setItem("carts", JSON.stringify([]));
     }
+
   }, []);
 
   // Xử lý thanh navigation
@@ -53,13 +62,11 @@ function Header(props) {
 
   //Sau khi F5 nó sẽ kiểm tra nếu phiên làm việc của Session vẫn còn thì nó sẽ tiếp tục
   // đưa dữ liệu vào Redux
-  if (sessionStorage.getItem("id_user")) {
-    const action = addSession(sessionStorage.getItem("id_user"));
+  if (localStorage.getItem("id_user")) {
+    const action = addSession(localStorage.getItem("id_user"));
     dispatch(action);
   }
 
-  //Get IdUser từ redux khi user đã đăng nhập
-  var id_user = useSelector((state) => state.Session.idUser);
 
   // Get carts từ redux khi user chưa đăng nhập
   // const carts = useSelector(state => state.Cart.listCart)
@@ -69,7 +76,7 @@ function Header(props) {
   const [user, set_user] = useState({});
 
   // Hàm này dùng để hiện thị
-  useEffect(() => {
+  useEffect(async () => {
     if (!id_user) {
       // user chưa đăng nhâp
 
@@ -78,13 +85,17 @@ function Header(props) {
       // user đã đăng nhâp
 
       const fetchData = async () => {
-        const response = await User.Get_User(sessionStorage.getItem("id_user"));
+        const response = await User.Get_User(localStorage.getItem("id_user"));
         set_user(response);
       };
 
       fetchData();
 
       set_active_user(true);
+      const dataRes = await Cart.Get_Cart({ id_user: id_user })
+      if (dataRes.code == 200) {
+        dispatch(addCart(dataRes.data))
+      }
     }
   }, [id_user]);
 
@@ -109,6 +120,12 @@ function Header(props) {
       dispatch(action);
     }
   }, [count]);
+  useEffect(() => {
+    if (listCard) {
+      const numberProduct = listCard.reduce((numprev, item) => numprev + item.count, 0);
+      setCountCart(numberProduct)
+    }
+  }, [listCard])
 
   // Hàm này là hàm con chia ra để xử lý
   function showData(carts, sum, price) {
@@ -222,14 +239,14 @@ function Header(props) {
               <ul className="d-flex justify-content-end">
                 <li>
                   <div className="ht-setting-trigger">
-                    <FaUserCircle  style={{ marginRight:"5px", marginTop: "-2px"}}/>
+                    <FaUserCircle style={{ marginRight: "5px", marginTop: "-2px" }} />
                     {active_user ? (
                       <span
                         data-toggle="collapse"
                         data-target="#collapseExample"
                         aria-expanded="false"
                         aria-controls="collapseExample"
-                        style={{fontWeight: "bold"}}
+                        style={{ fontWeight: "bold" }}
                       >
                         {user.fullname}
                       </span>
@@ -239,7 +256,7 @@ function Header(props) {
                         data-target="#collapseExample"
                         aria-expanded="false"
                         aria-controls="collapseExample"
-                        style={{fontWeight: "bold"}}
+                        style={{ fontWeight: "bold" }}
                       >
                         Profile
                       </span>
@@ -250,7 +267,7 @@ function Header(props) {
                       <ul className="setting_ul collapse" id="collapseExample">
                         <li className="li_setting">
                           <Link
-                            to={`/profile/${sessionStorage.getItem("id_user")}`}
+                            to={`/profile/${localStorage.getItem("id_user")}`}
                           >
                             Profile
                           </Link>
@@ -259,9 +276,10 @@ function Header(props) {
                           <Link to="/history">Order Status</Link>
                         </li>
                         <li className="li_setting">
-                          <a onClick= {() =>{handler_logout();
-                          history.push("/");
-                          }}  href="#">
+                          <a onClick={() => {
+                            handler_logout();
+                            history.push("/");
+                          }} href="#">
                             Log Out
                           </a>
                         </li>
@@ -343,84 +361,7 @@ function Header(props) {
                   </div>
                 )}
               </form>
-              <div className="header-middle-right">
-                <ul className="hm-menu">
-                  <li className="hm-wishlist d-flex">
-                    <li className="hm-minicart">
-                      <div
-                        className="hm-minicart-trigger"
-                        data-toggle="collapse"
-                        data-target="#collapse_carts"
-                        aria-expanded="false"
-                        aria-controls="collapse_carts"
-                      >
-                        <span className="item-icon"></span>
-                        <span className="item-text">
-                          {new Intl.NumberFormat("vi-VN", {
-                            style: "decimal",
-                            decimal: "VND",
-                          }).format(total_price) + " VNĐ"}
-                          <span className="cart-item-count">{count_cart}</span>
-                        </span>
-                      </div>
-                      <span></span>
-                      <div className="minicart collapse" id="collapse_carts">
-                        <ul className="minicart-product-list">
-                          {carts_mini &&
-                            carts_mini.map((value, index) => (
-                              <li key={index}>
-                                <Link
-                                  to={`/detail/${value.id_product}`}
-                                  className="minicart-product-image"
-                                >
-                                  <img src={value.image} alt="cart products" />
-                                </Link>
-                                <div className="minicart-product-details">
-                                  <h6>
-                                    <a>{value.name_product}</a>
-                                  </h6>
-                                  <span>
-                                    {new Intl.NumberFormat("vi-VN", {
-                                      style: "decimal",
-                                      decimal: "VND",
-                                    }).format(value.price_product) +
-                                      " VNĐ"}{" "}
-                                    x {value.count}, {value.size}
-                                  </span>
-                                </div>
-                                <a
-                                  className="close"
-                                  onClick={() =>
-                                    handler_delete_mini(value.id_cart)
-                                  }
-                                >
-                                  <i className="fa fa-close"></i>
-                                </a>
-                              </li>
-                            ))}
-                        </ul>
-                        <p className="minicart-total">
-                          SUBTOTAL:{" "}
-                          <span>
-                            {new Intl.NumberFormat("vi-VN", {
-                              style: "decimal",
-                              decimal: "VND",
-                            }).format(total_price) + " VNĐ"}
-                          </span>
-                        </p>
-                        <div className="minicart-button">
-                          <Link
-                            to="/cart"
-                            className="li-button li-button-fullwidth li-button-dark"
-                          >
-                            <span>View Full Cart</span>
-                          </Link>
-                        </div>
-                      </div>
-                    </li>
-                  </li>
-                </ul>
-              </div>
+
             </div>
           </div>
         </div>
@@ -432,10 +373,10 @@ function Header(props) {
                   <nav>
                     <ul>
                       <li className="dropdown-holder">
-                        <Link to="/">Home</Link>
+                        <Link className={`${location.pathname === "/" ? "active" : ""}`} to="/">Home</Link>
                       </li>
                       <li className="megamenu-holder">
-                        <Link to="/shop/all">Menu</Link>
+                        <Link className={`${location.pathname.includes("/shop") ? "active" : ""}`} to="/shop/all">Menu</Link>
                         <ul class="megamenu hb-megamenu">
                           <li>
                             <Link to="/shop/all">Male</Link>
@@ -472,12 +413,16 @@ function Header(props) {
                         </ul>
                       </li>
                       <li>
-                        <Link to="/event">Event</Link>
+                        <Link className={`${location.pathname.includes("/event") ? "active" : ""}`} to="/event">Event</Link>
                       </li>
                       <li>
-                        <Link to="/contact">Contact</Link>
+                        <Link className={`${location.pathname.includes("/contact") ? "active" : ""}`} to="/contact">Contact</Link>
                       </li>
                     </ul>
+                    <div className="header-cart" onClick={() => { history.push("/cart") }}>
+                      <TiShoppingCart />
+                      <div className='number'>{countCart}</div>
+                    </div>
                   </nav>
                 </div>
               </div>

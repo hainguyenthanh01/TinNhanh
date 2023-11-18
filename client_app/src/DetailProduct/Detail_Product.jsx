@@ -22,7 +22,7 @@ function Detail_Product(props) {
   const dispatch = useDispatch();
 
   //id_user được lấy từ redux
-  const id_user = useSelector((state) => state.Cart.id_user);
+  const id_user = useSelector((state) => state.Session.idUser);
 
   // Get count từ redux khi user chưa đăng nhập
   const count_change = useSelector((state) => state.Count.isLoad);
@@ -53,33 +53,24 @@ function Detail_Product(props) {
   const [size, set_size] = useState("S");
 
   // Hàm này dùng để thêm vào giỏ hàng
-  const handler_addcart = (e) => {
+  const handler_addcart = async (e) => {
     e.preventDefault();
-
     const data = {
-      id_cart: Math.random().toString(),
+      id_user: id_user,
       id_product: id,
-      name_product: product.name_product,
-      price_product: sale
-        ? parseInt(sale.id_product.price_product) -
-          (parseInt(sale.id_product.price_product) * parseInt(sale.promotion)) /
-            100
-        : product.price_product,
       count: count,
-      image: product.image,
       size: size,
     };
-
-    CartsLocal.addProduct(data);
-
-    const action_count_change = changeCount(count_change);
-    dispatch(action_count_change);
-
     set_show_success(true);
-
+    const dataRes = await Cart.Post_Cart(data)
+    if (dataRes.code == 200) {
+      dispatch(addCart(dataRes.data))
+    }
     setTimeout(() => {
       set_show_success(false);
-    }, 1000);
+    }, 1000)
+
+
   };
 
   // Hàm này dùng để giảm số lượng
@@ -115,7 +106,7 @@ function Detail_Product(props) {
 
   // Hàm này dùng để gọi API post comment sản phẩm của user
   const handler_Comment = () => {
-    if (!sessionStorage.getItem("id_user")) {
+    if (!localStorage.getItem("id_user")) {
       // Khi khách hàng chưa đăng nhập
 
       set_error_comment(true);
@@ -128,7 +119,7 @@ function Detail_Product(props) {
       }
 
       const data = {
-        id_user: sessionStorage.getItem("id_user"),
+        id_user: localStorage.getItem("id_user"),
         content: comment,
         star: star,
       };
@@ -262,9 +253,9 @@ function Detail_Product(props) {
                           decimal: "VND",
                         }).format(
                           parseInt(sale.id_product.price_product) -
-                            (parseInt(sale.id_product.price_product) *
-                              parseInt(sale.promotion)) /
-                              100
+                          (parseInt(sale.id_product.price_product) *
+                            parseInt(sale.promotion)) /
+                          100
                         ) + " VNĐ"}
                       </span>
                     )}

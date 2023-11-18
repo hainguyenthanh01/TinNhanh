@@ -9,7 +9,7 @@ import Cart from '../API/CartAPI';
 import { changeCount } from '../Redux/Action/ActionCount';
 
 SignIn.propTypes = {
-    
+
 };
 
 function SignIn(props) {
@@ -45,21 +45,22 @@ function SignIn(props) {
 
             const response = await User.Get_Detail_User(query)
 
-            if (response === "Khong Tìm Thấy User"){
+            if (response === "Khong Tìm Thấy User") {
                 set_error_username(true)
-            }else{
-                if (response === "Sai Mat Khau"){
+            } else {
+                if (response === "Sai Mat Khau") {
                     set_error_username(false)
                     set_error_password(true)
-                }else{
+                } else {
 
-                   console.log(response)
+                    console.log(response)
 
                     const action = addSession(response._id)
                     dispatch(action)
+                    console.log(response._id);
+                    // sessionStorage.setItem('id_user', response._id)
+                    localStorage.setItem('id_user', response._id)
 
-                    sessionStorage.setItem('id_user', response._id)
-                    
                     const action_count_change = changeCount(count_change)
                     dispatch(action_count_change)
 
@@ -120,7 +121,7 @@ function SignIn(props) {
                                             {
                                                 redirect && <Redirect to="/" />
                                             }
-                                            <button className="register-button mt-0" style={{ cursor: 'pointer'}} onClick={handler_signin}>Login</button>
+                                            <button className="register-button mt-0" style={{ cursor: 'pointer' }} onClick={handler_signin}>Login</button>
                                         </div>
                                     </div>
                                 </div>

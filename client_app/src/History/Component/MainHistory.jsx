@@ -18,7 +18,7 @@ function MainHistory(props) {
 
         const fetchData = async () => {
 
-            const response = await OrderAPI.get_order(sessionStorage.getItem('id_user'))
+            const response = await OrderAPI.get_order(localStorage.getItem('id_user'))
 
             console.log(response)
 
@@ -34,7 +34,7 @@ function MainHistory(props) {
 
     const deleteOrder = async (id, pay) => {
 
-        if (pay === true){
+        if (pay === true) {
             set_show_error(true)
 
             setTimeout(() => {
@@ -43,17 +43,17 @@ function MainHistory(props) {
             return
         }
 
-        if (!show_error){
+        if (!show_error) {
             const params = {
                 id: id
             }
-    
+
             const query = '?' + queryString.stringify(params)
-    
+
             const response = await OrderAPI.cancel_order(query)
-    
+
             console.log(response)
-    
+
             setIsLoad(!isLoad)
         }
     }
@@ -72,7 +72,7 @@ function MainHistory(props) {
                     </div>
                 </div>
             }
-            
+
             <div className="breadcrumb-area">
                 <div className="container">
                     <div className="breadcrumb-content">
@@ -112,7 +112,7 @@ function MainHistory(props) {
                                                         <td className="li-product-price"><span className="amount">{value.id_note.phone}</span></td>
                                                         <td className="li-product-price"><span className="amount">{value.address}</span></td>
 
-                                                        <td className="li-product-price"><span className="amount">{new Intl.NumberFormat('vi-VN',{style: 'decimal',decimal: 'VND'}).format(value.total) + ' VNĐ'}</span></td>
+                                                        <td className="li-product-price"><span className="amount">{new Intl.NumberFormat('vi-VN', { style: 'decimal', decimal: 'VND' }).format(value.total) + ' VNĐ'}</span></td>
                                                         <td className="li-product-price"><span className="amount" style={value.pay ? { color: 'green' } : { color: 'red' }}>{value.pay ? 'Paid' : 'Unpaid'}</span></td>
                                                         <td className="li-product-price"><span className="amount" >
                                                             {
@@ -123,20 +123,20 @@ function MainHistory(props) {
                                                         </span>
                                                         </td>
                                                         <td className="li-product-price">
-                                                        {(() => {
-                                                            switch(value.status) {
-                                                                case '1' || '2':
-                                                                    return <span onClick={() => deleteOrder(value._id, value.pay)} className="text-danger" style={{ cursor: 'pointer' }}>X</span>
-                                                                case '2':
-                                                                    return <span onClick={() => deleteOrder(value._id, value.pay)} className="text-danger" style={{ cursor: 'pointer' }}>X</span>
-                                                                case '3':
-                                                                    return <i className="fa fa-check text-success" style={{ fontSize: '25px' }}></i>
-                                                                case '4':
-                                                                    return <i className="fa fa-check text-success" style={{ fontSize: '25px' }}></i>
-                                                                default:
-                                                                    return <span className="text-danger">Cancelled</span>
-                                                            }
-                                                        })()}
+                                                            {(() => {
+                                                                switch (value.status) {
+                                                                    case '1' || '2':
+                                                                        return <span onClick={() => deleteOrder(value._id, value.pay)} className="text-danger" style={{ cursor: 'pointer' }}>X</span>
+                                                                    case '2':
+                                                                        return <span onClick={() => deleteOrder(value._id, value.pay)} className="text-danger" style={{ cursor: 'pointer' }}>X</span>
+                                                                    case '3':
+                                                                        return <i className="fa fa-check text-success" style={{ fontSize: '25px' }}></i>
+                                                                    case '4':
+                                                                        return <i className="fa fa-check text-success" style={{ fontSize: '25px' }}></i>
+                                                                    default:
+                                                                        return <span className="text-danger">Cancelled</span>
+                                                                }
+                                                            })()}
                                                         </td>
                                                     </tr>
                                                 ))

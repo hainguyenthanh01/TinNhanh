@@ -69,11 +69,11 @@ function Paypal(props) {
 
                 Change_Load_Order(true)
 
-                if (localStorage.getItem("id_coupon")){
+                if (localStorage.getItem("id_coupon")) {
 
                     const responseUpdate = await CouponAPI.updateCoupon(localStorage.getItem("id_coupon"))
                     console.log(responseUpdate)
-        
+
                 }
 
                 // data Note
@@ -87,7 +87,7 @@ function Paypal(props) {
 
                 // data Order
                 const data_order = {
-                    id_user: sessionStorage.getItem('id_user'),
+                    id_user: localStorage.getItem('id_user'),
                     address: information.address,
                     total: total,
                     status: '1',
@@ -136,7 +136,7 @@ function Paypal(props) {
 
                 // const send_mail = await OrderAPI.post_email(data_email)
                 // console.log(send_mail)
-                
+
                 localStorage.removeItem('information')
                 localStorage.removeItem('total_price')
                 localStorage.removeItem('price')

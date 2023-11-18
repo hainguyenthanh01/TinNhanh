@@ -34,24 +34,24 @@ function Search(props) {
 
   useEffect(() => {
     const fetchData = async () => {
-        const params = {
-          page: page,
-          count: "6",
-          search: sessionStorage.getItem("search"),
-        };
-
-        const query = "?" + queryString.stringify(params);
-
-        const response = await Product.get_search_list(query);
-
-        if (response.length < 1) {
-          set_show_load(false);
-        }
-
-        set_products((prev) => [...prev, ...response]);
+      const params = {
+        page: page,
+        count: "6",
+        search: localStorage.getItem("search"),
       };
 
-      fetchData();
+      const query = "?" + queryString.stringify(params);
+
+      const response = await Product.get_search_list(query);
+
+      if (response.length < 1) {
+        set_show_load(false);
+      }
+
+      set_products((prev) => [...prev, ...response]);
+    };
+
+    fetchData();
   }, [page]);
   const handler_addcart = (e) => {
     e.preventDefault();
@@ -98,7 +98,7 @@ function Search(props) {
                     next={() => set_page(page + 1)}
                     hasMore={true}
                     loader={
-                        <h4
+                      <h4
                         className="text-center"
                         style={{ paddingTop: "3rem", color: "#FED700" }}
                       >
@@ -128,10 +128,10 @@ function Search(props) {
                               <div className="product_desc_info">
                                 <div className="product-review">
                                   <h5 className="manufacturer">
-                                  <Link to={`/detail/${value._id}`}>
-                                    
+                                    <Link to={`/detail/${value._id}`}>
+
                                       {value.name_product}
-                                    
+
                                     </Link>
                                   </h5>
                                   <div className="rating-box">
@@ -155,18 +155,18 @@ function Search(props) {
                                   </div>
                                 </div>
                                 <h4>
-                                <Link to={`/detail/${value._id}`}>
-                                  <a
-                                    className="product_name"
-                                    href=""
-                                  >
-                                    {value.name_product}
-                                  </a>
+                                  <Link to={`/detail/${value._id}`}>
+                                    <a
+                                      className="product_name"
+                                      href=""
+                                    >
+                                      {value.name_product}
+                                    </a>
                                   </Link>
                                 </h4>
                                 <div className="price-box">
                                   <span className="new-price">
-                                  {new Intl.NumberFormat("vi-VN", {
+                                    {new Intl.NumberFormat("vi-VN", {
                                       style: "decimal",
                                       decimal: "VND",
                                     }).format(value.price_product) + " VNĐ"}
@@ -274,10 +274,10 @@ function Search(props) {
                             </div>
                             <div className="price-box pt-20">
                               <span className="new-price new-price-2">
-                              {new Intl.NumberFormat("vi-VN", {
-                                      style: "decimal",
-                                      decimal: "VND",
-                                    }).format(value.price_product) + " VNĐ"}
+                                {new Intl.NumberFormat("vi-VN", {
+                                  style: "decimal",
+                                  decimal: "VND",
+                                }).format(value.price_product) + " VNĐ"}
                               </span>
                             </div>
                             <div className="product-desc">
