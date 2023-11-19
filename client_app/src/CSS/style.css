@@ -1559,6 +1559,9 @@ textarea:focus {
   cursor: pointer;
   transition: all 0.3s ease-in-out;
 }
+.ht-setting-trigger {
+  font-size: 18px;
+}
 .ht-currency-trigger:hover,
 .ht-language-trigger:hover {
   color: #fed700;
