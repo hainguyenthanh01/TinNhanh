@@ -122,7 +122,7 @@ const LeftMenu = () => {
         />
         <Content
           style={{
-            margin: "0 16px",
+            marginTop: "17px",
           }}
         >
             {/* {getComponentByKey(key)} */}
@@ -170,7 +170,7 @@ const LeftMenu = () => {
             <Route path='/sale/:id' component={UpdateSale} />
 
             <Route component={NotFound} />
-          </Switch>;
+          </Switch>
 
         </Content>
       </Layout>

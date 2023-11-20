@@ -117,8 +117,8 @@ function UserCus(props) {
 
             </div>
             <footer className="footer text-center text-muted">
-                All Rights Reserved by Adminmart. Designed and Developed by <a
-                    href="https://www.facebook.com/KimTien.9920/">Hải Nguyễn</a>.
+                All Rights Reserved by BULI. Designed and Developed by <a
+                    href="https://www.facebook.com/NguyenThanhHai.2k1">Hải Nguyễn</a>.
             </footer>
         </div>
     );
