@@ -418,8 +418,8 @@ a.review-links:hover {
 /*  1.6 Input
 /*----------------------------------------*/
 input {
-  background: #eceff8;
-  border: 2px solid #eceff8;
+  background-color: none;
+  border: 1px solid #eceff8;
   height: 45px;
   box-shadow: none;
   padding-left: 10px;
@@ -443,22 +443,19 @@ option {
   padding-left: 10px;
   font-size: 14px;
 }
-input:focus {
-  background: transparent;
-  border: none;
-  outline: none;
-}
+
+
 textarea {
   resize: vertical;
   background: #eceff8;
-  border: 2px solid #eceff8;
+  border: 1px solid #eceff8;
   padding: 10px;
   width: 100%;
   font-size: 14px;
 }
 textarea:focus {
   background: transparent;
-  border: 2px solid #4fc1f0;
+  border: 1px solid #fed800c9;
   outline: none;
 }
 ::-moz-placeholder {
@@ -1656,9 +1653,15 @@ textarea:focus {
   color: #a5a5a5;
   height: 45px;
   background: transparent;
-  border: none;
+  border: 1px solid #e1e1e1;
   width: 100%;
   padding: 0 60px 0 33px;
+  &:hover{
+    border: 1px solid #fed800c9;
+  }
+  &:focus{
+    border: 1px solid #fed800c9;
+  }
 }
 /*Header Middle Right*/
 .header-middle-right {
@@ -2345,7 +2348,7 @@ textarea:focus {
 }
 .single-product-wrap:hover {
   margin: 0 0 -75px;
-  padding: 0 0 10px;
+  padding: 0 0 2px;
   z-index: 9;
 }
 .single-product-wrap.mt-40:hover {
@@ -2374,8 +2377,9 @@ textarea:focus {
   visibility: visible;
 }
 .product-image > a {
-  display: block;
+  display: flex;
   position: relative;
+  justify-content: center;
 }
 .single-product-wrap:hover .secondary-image {
   opacity: 1;
@@ -3155,6 +3159,12 @@ textarea:focus {
   background: transparent;
   border: 1px solid #e1e1e1;
   padding: 0 135px 0 10px;
+  &:hover{
+    border: 1px solid #fed800c9;
+  }
+  &:focus{
+    border: 1px solid #fed800c9;
+  }
 }
 .footer-newsletter .form-group .btn {
   position: absolute;
@@ -4391,6 +4401,12 @@ thead {
   float: left;
   text-transform: capitalize;
   background: #ffffff;
+  &:hover{
+    border: 1px solid #fed800c9;
+  }
+  &:focus{
+    border: 1px solid #fed800c9;
+  }
 }
 .li-sidebar-search-form .li-search-btn {
   width: 50px;
@@ -4851,6 +4867,12 @@ span.required {
   outline: none;
   border: 1px solid #e0e0e0;
   padding-left: 20px;
+  &:hover{
+    border: 1px solid #fed800c9;
+  }
+  &:focus{
+    border: 1px solid #fed800c9;
+  }
 }
 .contact-form textarea {
   background-color: #ffffff;
@@ -4860,6 +4882,12 @@ span.required {
   padding-left: 20px;
   line-height: 50px;
   height: 200px;
+  &:hover{
+    border: 1px solid #fed800c9;
+  }
+  &:focus{
+    border: 1px solid #fed800c9;
+  }
 }
 .contact-form .li-btn-3 {
   background: #f2f2f2;

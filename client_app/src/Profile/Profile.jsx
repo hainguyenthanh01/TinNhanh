@@ -146,7 +146,7 @@ function Profile(props) {
                                             <span style={{ fontWeight: '600' }}>Email</span>
                                         </div>
                                         <div>
-                                            <input className="txt_input_edit" type="text" disabled={true} value={email}
+                                            <input className="txt_input_edit input_email" type="text" disabled={true} value={email}
                                                 onChange={(e) => set_email(e.target.value)} />
                                         </div>
                                     </div>

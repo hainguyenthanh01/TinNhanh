@@ -92,8 +92,23 @@
     border: 1px solid rgb(211, 211, 211);
     border-radius: .2rem;
     padding: .2rem .6rem;
+    height: 45px;
+    &:hover{
+        border: 1px solid #fed800c9;
+    }
+    &:focus{
+        border: 1px solid #fed800c9;
+    }
 }
 
+   
+
+.input_email {
+    background-color: #eceff8;
+    &:hover{
+      border: 1px solid rgb(211, 211, 211);;
+    }
+  }
 .btn_follow_profile{
     background-color: rgb(0, 110, 255);
     color: #fff !important;

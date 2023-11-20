@@ -55,7 +55,7 @@ function Products(props) {
                                             </ul>
                                         </div>
                                     </div>
-                                    <h4><a className="product_name" href="single-product.html">Accusantium dolorem1</a></h4>
+                                    {/* <h4><a className="product_name" href="single-product.html">Accusantium dolorem1</a></h4> */}
                                     <div className="price-box">
                                         <span className="new-price">{new Intl.NumberFormat('vi-VN',{style: 'decimal',decimal: 'VND'}).format(value.price_product)+ ' VNĐ'}</span>
                                     </div>

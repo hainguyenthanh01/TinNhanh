@@ -291,7 +291,7 @@ function Cart(props) {
                                                             </Link>
                                                         </td>
                                                         <td className="li-product-name">
-                                                            <a href="#">{value.name_product}</a>
+                                                            <span>{value.name_product}</span>
                                                         </td>
                                                         <td className="li-product-price">
                                                             <span className="amount">
@@ -305,14 +305,9 @@ function Cart(props) {
                                                             <span className="amount">{value.size}</span>
                                                         </td>
                                                         <td className="quantity">
-                                                            <label>Quantity</label>
+                                                            {/* <label>Quantity</label> */}
                                                             <div className="cart-plus-minus">
-                                                                <input
-                                                                    className="cart-plus-minus-box"
-                                                                    value={value.count}
-                                                                    type="text"
-                                                                />
-                                                                <div
+                                                            <div
                                                                     className="dec qtybutton"
                                                                     onClick={() =>
                                                                         downCount(value.count, value._id)
@@ -320,6 +315,11 @@ function Cart(props) {
                                                                 >
                                                                     <i className="fa fa-angle-down"></i>
                                                                 </div>
+                                                                <input
+                                                                    className="cart-plus-minus-box"
+                                                                    value={value.count}
+                                                                    type="text"
+                                                                />
                                                                 <div
                                                                     className="inc qtybutton"
                                                                     onClick={() =>

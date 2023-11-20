@@ -261,7 +261,7 @@ function Header(props) {
                   value={keyword_search}
                   onChange={(e) => set_keyword_search(e.target.value)}
                 />
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" style={{height: "45px"}} class="btn btn-primary">
                   <i class="fa fa-search"></i>
                 </button>
                 {keyword_search && (
@@ -305,7 +305,7 @@ function Header(props) {
               <li>
                 <div className="ht-setting-trigger">
                   <FaUserCircle
-                    style={{ marginRight: "5px", marginTop: "-2px" }}
+                    style={{ marginRight: "5px", marginTop: "-4px" }}
                   />
                   {active_user ? (
                     <span
