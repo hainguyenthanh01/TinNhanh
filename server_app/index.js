@@ -21,6 +21,7 @@ const CommentAPI = require("./API/Router/comment.router");
 const CategoryAPI = require("./API/Router/category.router");
 const CartAPI = require("./API/Router/carts.router");
 const NoteAPI = require("./API/Router/note.router");
+const EmailReceiveNotificationAPI = require("./API/Router/email_receive_notification.router");
 
 const ProductAdmin = require("./API/Router/admin/product.router");
 const CategoryAdmin = require("./API/Router/admin/category.router");
@@ -69,6 +70,7 @@ app.use("/api/Note", NoteAPI);
 app.use("/api/DetailOrder", Detail_OrderAPI);
 app.use("/api/Category", CategoryAPI);
 app.use("/api/cart", CartAPI);
+app.use("/api/email-receive-notification", EmailReceiveNotificationAPI);
 
 app.use("/api/admin/Product", ProductAdmin);
 app.use("/api/admin/Category", CategoryAdmin);

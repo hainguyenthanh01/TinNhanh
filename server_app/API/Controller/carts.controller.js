@@ -1,6 +1,7 @@
 
 const Carts = require('../../Models/cart')
 const Product = require('../../Models/product')
+const Sale = require('../../Models/sale')
 
 // Gọi API hiện thị list comment của sản phẩm 
 // Phương thức GET
@@ -11,9 +12,20 @@ module.exports.index = async (req, res) => {
 
         let listCarts = await Carts.find({ id_user: id_user })
         const dataProduct = await Product.find()
+        const dataSale = await Sale.find()
 
         const data = listCarts.map((it) => {
             const product = dataProduct.find(_it => _it._id == it.id_product);
+            let checkSale = null
+            if (product) {
+                itemSale = dataSale.find(_it => _it.id_product == product._id)
+                let nowTime = new Date()
+                if (itemSale) {
+                    if (itemSale.start.getTime() < nowTime.getTime() && nowTime.getTime() < itemSale.end.getTime())
+                        checkSale = itemSale;
+
+                }
+            }
             const data = {
                 _id: it._id,
                 id_product: it.id_product,
@@ -21,7 +33,7 @@ module.exports.index = async (req, res) => {
                 count: it.count,
                 size: it.size,
                 image: product.image,
-                price_product: product.price_product,
+                price_product: checkSale ? product.price_product * ((100 - checkSale.promotion) / 100) : product.price_product,
                 name_product: product.name_product,
             }
             return data;
