@@ -12,7 +12,7 @@ import Product from "../API/Product";
 import { changeCount } from "../Redux/Action/ActionCount";
 import { useDispatch, useSelector } from "react-redux";
 import CartsLocal from "../Share/CartsLocal";
-import SaleAPI from "../API/SaleAPI";
+
 
 Home.propTypes = {};
 
@@ -21,11 +21,9 @@ function Home(props) {
   const [id_modal, set_id_modal] = useState("");
 
   const [product_detail, set_product_detail] = useState([]);
-
   const dispatch = useDispatch();
 
   const [priceSale, setPriceSale] = useState(0);
-
   const GET_id_modal = (value, price) => {
     set_id_modal(value);
 

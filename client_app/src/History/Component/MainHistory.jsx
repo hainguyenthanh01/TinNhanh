@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import queryString from 'query-string'
 import OrderAPI from '../../API/OrderAPI';
+import { getUserCookie } from '../../helper';
 
 MainHistory.propTypes = {
 
@@ -18,7 +19,7 @@ function MainHistory(props) {
 
         const fetchData = async () => {
 
-            const response = await OrderAPI.get_order(localStorage.getItem('id_user'))
+            const response = await OrderAPI.get_order(getUserCookie())
 
             console.log(response)
 

@@ -11,6 +11,7 @@ import Cart from "../API/CartAPI";
 import CommentAPI from "../API/CommentAPI";
 import CartsLocal from "../Share/CartsLocal";
 import SaleAPI from "../API/SaleAPI";
+import { getUserCookie } from '../helper';
 
 Detail_Product.propTypes = {};
 
@@ -106,7 +107,7 @@ function Detail_Product(props) {
 
   // Hàm này dùng để gọi API post comment sản phẩm của user
   const handler_Comment = () => {
-    if (!localStorage.getItem("id_user")) {
+    if (!getUserCookie()) {
       // Khi khách hàng chưa đăng nhập
 
       set_error_comment(true);
@@ -119,7 +120,7 @@ function Detail_Product(props) {
       }
 
       const data = {
-        id_user: localStorage.getItem("id_user"),
+        id_user: getUserCookie(),
         content: comment,
         star: star,
       };

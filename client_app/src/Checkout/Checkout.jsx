@@ -12,6 +12,7 @@ import NoteAPI from '../API/NoteAPI';
 import Detail_OrderAPI from '../API/Detail_OrderAPI';
 import CouponAPI from '../API/CouponAPI';
 import MoMo from './MoMo.jsx'
+import { getUserCookie } from '../helper.js';
 
 const socket = io('http://localhost:8000', {
     transports: ['websocket'], jsonp: false
@@ -191,7 +192,7 @@ function Checkout(props) {
 
         // data Order
         const data_order = {
-            id_user: localStorage.getItem('id_user'),
+            id_user: getUserCookie(),
             address: information.address,
             total: total_price,
             status: "1",

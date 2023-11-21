@@ -6,6 +6,7 @@ import CouponAPI from '../API/CouponAPI';
 import NoteAPI from '../API/NoteAPI';
 import OrderAPI from '../API/OrderAPI';
 import Detail_OrderAPI from '../API/Detail_OrderAPI';
+import { getUserCookie } from '../helper';
 
 function OrderMomo(props) {
     const { search } = window.location;
@@ -74,7 +75,7 @@ function OrderMomo(props) {
 
                 // data Order
                 const data_order = {
-                    id_user: localStorage.getItem('id_user'),
+                    id_user: getUserCookie(),
                     address: information.address,
                     total: total,
                     status: '1',

@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addSession } from '../Redux/Action/ActionSession';
 import Cart from '../API/CartAPI';
 import { changeCount } from '../Redux/Action/ActionCount';
+import { setUserCookie } from '../helper';
 
 SignIn.propTypes = {
 
@@ -53,13 +54,9 @@ function SignIn(props) {
                     set_error_password(true)
                 } else {
 
-                    console.log(response)
-
                     const action = addSession(response._id)
                     dispatch(action)
-                    console.log(response._id);
-                    // sessionStorage.setItem('id_user', response._id)
-                    localStorage.setItem('id_user', response._id)
+                    setUserCookie(response._id)
 
                     const action_count_change = changeCount(count_change)
                     dispatch(action_count_change)

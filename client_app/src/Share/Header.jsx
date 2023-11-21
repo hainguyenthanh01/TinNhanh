@@ -15,7 +15,8 @@ import { FaUserCircle } from "react-icons/fa";
 import { useHistory } from "react-router-dom/cjs/react-router-dom";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import { TiShoppingCart } from "react-icons/ti";
-import { FaFacebook,FaInstagram  } from "react-icons/fa";
+import { FaFacebook, FaInstagram } from "react-icons/fa";
+import { getUrlParamsFromJson, getUserCookie } from '../helper';
 
 function Header(props) {
   // State count of cart
@@ -59,8 +60,8 @@ function Header(props) {
 
   //Sau khi F5 nó sẽ kiểm tra nếu phiên làm việc của Session vẫn còn thì nó sẽ tiếp tục
   // đưa dữ liệu vào Redux
-  if (localStorage.getItem("id_user")) {
-    const action = addSession(localStorage.getItem("id_user"));
+  if (getUserCookie()) {
+    const action = addSession(getUserCookie());
     dispatch(action);
   }
 
@@ -81,7 +82,7 @@ function Header(props) {
       // user đã đăng nhâp
 
       const fetchData = async () => {
-        const response = await User.Get_User(localStorage.getItem("id_user"));
+        const response = await User.Get_User(getUserCookie());
         set_user(response);
       };
 
@@ -185,30 +186,11 @@ function Header(props) {
 
   const [products, set_products] = useState([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await Product.Get_All_Product();
-
-      set_products(response);
-    };
-
-    fetchData();
-  }, []);
 
   // Hàm này trả ra list product mà khách hàng tìm kiếm
   // sử dụng useMemo để performance hơn vì nếu mà dữ liệu mới giống với dữ liệu cũ thì nó sẽ lấy cái
   // Không cần gọi API để tạo mới data
-  const search_header = useMemo(() => {
-    const new_data = products.filter((value) => {
-      return (
-        value.name_product
-          .toUpperCase()
-          .indexOf(keyword_search.toUpperCase()) !== -1
-      );
-    });
 
-    return new_data;
-  }, [keyword_search]);
 
   const handler_search = (e) => {
     e.preventDefault();
@@ -217,11 +199,27 @@ function Header(props) {
     const action = addSearch(keyword_search);
     dispatch(action);
 
-    // set cho nó cái session
-    sessionStorage.setItem("search", keyword_search);
-
     window.location.replace("/search");
   };
+  useEffect(() => {
+    if (keyword_search) {
+      const queryParams = getUrlParamsFromJson({ name: keyword_search })
+      const url = `http://localhost:8000/api/Product/?${queryParams}`
+      if (keyword_search) {
+        fetch(url,
+          {
+            method: "GET", headers: {
+              "Content-Type": "application/json",
+            }
+          }).then(response => response.json())
+          .then(res => {
+            if (res.code === 200) {
+              set_products(res.data);
+            }
+          })
+      }
+    }
+  }, [keyword_search])
 
   return (
     <header>
@@ -236,16 +234,16 @@ function Header(props) {
             </div>
             <div className="col-lg-9 col-md-8">
               <ul className="d-flex align-items-center" >
-              <li>
-                <a href="" style={{fontSize:"14px"}}>
-                  <FaFacebook/>
-                </a>
-              </li>
-              <li>
-                <a href="" style={{fontSize:"14px"}}>
-                  <FaInstagram />
-                </a>
-              </li>
+                <li>
+                  <a href="" style={{ fontSize: "14px" }}>
+                    <FaFacebook />
+                  </a>
+                </li>
+                <li>
+                  <a href="" style={{ fontSize: "14px" }}>
+                    <FaInstagram />
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
@@ -273,13 +271,13 @@ function Header(props) {
                   value={keyword_search}
                   onChange={(e) => set_keyword_search(e.target.value)}
                 />
-                <button type="submit" style={{height: "45px"}} class="btn btn-primary">
+                <button type="submit" style={{ height: "45px" }} class="btn btn-primary">
                   <i class="fa fa-search"></i>
                 </button>
                 {keyword_search && (
                   <div className="show_search_product">
-                    {search_header &&
-                      search_header.map((value) => (
+                    {products &&
+                      products.map((value) => (
                         <div
                           className="hover_box_search d-flex"
                           key={value._id}
@@ -346,7 +344,7 @@ function Header(props) {
                     <ul className="setting_ul collapse" id="collapseExample">
                       <li className="li_setting">
                         <Link
-                          to={`/profile/${localStorage.getItem("id_user")}`}
+                          to={`/profile/${getUserCookie()}`}
                         >
                           Profile
                         </Link>
@@ -387,9 +385,8 @@ function Header(props) {
                     <ul>
                       <li className="dropdown-holder">
                         <Link
-                          className={`${
-                            location.pathname === "/" ? "active" : ""
-                          }`}
+                          className={`${location.pathname === "/" ? "active" : ""
+                            }`}
                           to="/"
                         >
                           Home
@@ -397,9 +394,8 @@ function Header(props) {
                       </li>
                       <li className="megamenu-holder">
                         <Link
-                          className={`${
-                            location.pathname.includes("/shop") ? "active" : ""
-                          }`}
+                          className={`${location.pathname.includes("/shop") ? "active" : ""
+                            }`}
                           to="/shop/all"
                         >
                           Menu
@@ -441,9 +437,8 @@ function Header(props) {
                       </li>
                       <li>
                         <Link
-                          className={`${
-                            location.pathname.includes("/event") ? "active" : ""
-                          }`}
+                          className={`${location.pathname.includes("/event") ? "active" : ""
+                            }`}
                           to="/event"
                         >
                           Event
@@ -451,11 +446,10 @@ function Header(props) {
                       </li>
                       <li>
                         <Link
-                          className={`${
-                            location.pathname.includes("/contact")
-                              ? "active"
-                              : ""
-                          }`}
+                          className={`${location.pathname.includes("/contact")
+                            ? "active"
+                            : ""
+                            }`}
                           to="/contact"
                         >
                           Contact

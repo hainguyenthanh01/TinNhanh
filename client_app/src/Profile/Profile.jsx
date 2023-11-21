@@ -5,6 +5,7 @@ import avt from './avt.jpg'
 import User from '../API/User';
 import { addSession } from '../Redux/Action/ActionSession';
 import { useDispatch } from 'react-redux';
+import { getUserCookie } from '../helper';
 
 Profile.propTypes = {
 
@@ -29,7 +30,7 @@ function Profile(props) {
 
         const fetchData = async () => {
 
-            const response = await User.Get_User(localStorage.getItem('id_user'))
+            const response = await User.Get_User(getUserCookie())
 
             set_user(response)
 
@@ -59,7 +60,7 @@ function Profile(props) {
     const handler_update = async () => {
 
         const data = {
-            _id: localStorage.getItem('id_user'),
+            _id: getUserCookie(),
             fullname: name,
             username: username,
             password: compare_password

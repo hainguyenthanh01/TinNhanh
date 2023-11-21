@@ -8,6 +8,7 @@ import CartAPI from "../API/CartAPI";
 import queryString from "query-string";
 import CartsLocal from "../Share/CartsLocal";
 import CouponAPI from "../API/CouponAPI";
+import { getUserCookie } from '../helper';
 Cart.propTypes = {};
 
 function Cart(props) {
@@ -32,6 +33,7 @@ function Cart(props) {
     const count_change = useSelector((state) => state.Count.isLoad);
 
     const [total_price, set_total_price] = useState(0);
+
 
     // Hàm này dùng để tăng số lượng
     const upCount = async (count, id_cart) => {
@@ -86,7 +88,7 @@ function Cart(props) {
     const [show_null_cart, set_show_null_cart] = useState(false);
 
     const handler_checkout = () => {
-        if (localStorage.getItem("id_user")) {
+        if (getUserCookie()) {
             if (listCard.length < 1) {
                 set_show_null_cart(true);
             } else {
@@ -123,11 +125,11 @@ function Cart(props) {
     const handlerCoupon = async (e) => {
         e.preventDefault();
 
-        if (!localStorage.getItem("id_user")) {
+        if (!getUserCookie()) {
             set_show_error(true);
         } else {
             const params = {
-                id_user: localStorage.getItem("id_user"),
+                id_user: getUserCookie(),
                 code: coupon,
             };
 
@@ -307,7 +309,7 @@ function Cart(props) {
                                                         <td className="quantity">
                                                             {/* <label>Quantity</label> */}
                                                             <div className="cart-plus-minus">
-                                                            <div
+                                                                <div
                                                                     className="dec qtybutton"
                                                                     onClick={() =>
                                                                         downCount(value.count, value._id)

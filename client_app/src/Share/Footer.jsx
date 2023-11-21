@@ -1,10 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Global from "../Image/Global";
 
 Footer.propTypes = {};
 
 function Footer(props) {
+  const [email, setEmail] = useState('')
+  const handleNotiEmail = (e) => {
+    e.preventDefault()
+    const data = { email }
+    fetch("http://localhost:8000/api/email-receive-notification",
+      {
+        method: "POST", headers: {
+          "Content-Type": "application/json",
+        }, body: JSON.stringify(data),
+      })
+
+  }
   return (
     <div className="footer">
       {/* <div className="footer-static-top">
@@ -134,8 +146,6 @@ function Footer(props) {
                 <div className="footer-newsletter">
                   <h4>Sign up to newsletter</h4>
                   <form
-                    action="#"
-                    method="post"
                     id="mc-embedded-subscribe-form"
                     name="mc-embedded-subscribe-form"
                     className="footer-subscribe-form validate"
@@ -151,8 +161,10 @@ function Footer(props) {
                           type="email"
                           autoComplete="off"
                           placeholder="Enter your email"
+                          value={email}
+                          onChange={e => setEmail(e.target.value)}
                         />
-                        <button className="btn" id="mc-submit">
+                        <button onClick={handleNotiEmail} className="btn" >
                           Subscribe
                         </button>
                       </div>

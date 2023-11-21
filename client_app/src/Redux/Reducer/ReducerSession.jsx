@@ -1,5 +1,7 @@
+import { getUserCookie } from '../../helper'
+
 const initialState = {
-    idUser: localStorage.getItem("id_user") || ""
+    idUser: getUserCookie() || ""
 }
 
 const ReducerSession = (state = initialState, action) => {
