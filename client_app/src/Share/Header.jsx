@@ -15,6 +15,7 @@ import { FaUserCircle } from "react-icons/fa";
 import { useHistory } from "react-router-dom/cjs/react-router-dom";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import { TiShoppingCart } from "react-icons/ti";
+import { FaFacebook,FaInstagram  } from "react-icons/fa";
 
 function Header(props) {
   // State count of cart
@@ -234,7 +235,18 @@ function Header(props) {
               </li>
             </div>
             <div className="col-lg-9 col-md-8">
-              <ul className="d-flex justify-content-end"></ul>
+              <ul className="d-flex align-items-center" >
+              <li>
+                <a href="" style={{fontSize:"14px"}}>
+                  <FaFacebook/>
+                </a>
+              </li>
+              <li>
+                <a href="" style={{fontSize:"14px"}}>
+                  <FaInstagram />
+                </a>
+              </li>
+              </ul>
             </div>
           </div>
         </div>
