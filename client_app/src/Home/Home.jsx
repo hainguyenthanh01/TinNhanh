@@ -12,6 +12,7 @@ import Product from "../API/Product";
 import { changeCount } from "../Redux/Action/ActionCount";
 import { useDispatch, useSelector } from "react-redux";
 import CartsLocal from "../Share/CartsLocal";
+import { Rate } from 'antd';
 
 
 Home.propTypes = {};
@@ -185,21 +186,7 @@ function Home(props) {
                       <h2>{product_detail.name_product}</h2>
                       <div className="rating-box pt-20">
                         <ul className="rating rating-with-review-item">
-                          <li>
-                            <i className="fa fa-star-o"></i>
-                          </li>
-                          <li>
-                            <i className="fa fa-star-o"></i>
-                          </li>
-                          <li>
-                            <i className="fa fa-star-o"></i>
-                          </li>
-                          <li className="no-star">
-                            <i className="fa fa-star-o"></i>
-                          </li>
-                          <li className="no-star">
-                            <i className="fa fa-star-o"></i>
-                          </li>
+                          <Rate style={{fontSize: "14px"}} disabled defaultValue={0} />
                         </ul>
                       </div>
                       <div className="price-box pt-20">

@@ -348,13 +348,13 @@ function Cart(props) {
                                         </tbody>
                                     </table>
                                 </div>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="coupon-all">
-                                            <div class="coupon">
+                                <div className="row">
+                                    <div className="col-12">
+                                        <div className="coupon-all">
+                                            <div className="coupon">
                                                 <input
                                                     id="coupon_code"
-                                                    class="input-text"
+                                                    className="input-text"
                                                     onChange={(e) => set_coupon(e.target.value)}
                                                     value={coupon}
                                                     placeholder="Coupon code"
@@ -362,7 +362,7 @@ function Cart(props) {
                                                 />{" "}
                                                 &nbsp;
                                                 <input
-                                                    class="button"
+                                                    className="button"
                                                     value="Apply coupon"
                                                     type="submit"
                                                     onClick={handlerCoupon}

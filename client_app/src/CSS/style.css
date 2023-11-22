@@ -2401,6 +2401,8 @@ textarea:focus {
   font-size: 11px;
 }
 .product-review {
+  display: flex;
+  justify-content: space-between;
   border-bottom: 1px solid #ebebeb;
 }
 .manufacturer {

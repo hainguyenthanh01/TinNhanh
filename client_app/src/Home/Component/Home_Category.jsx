@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { Rate } from "antd";
 import SaleAPI from "../../API/SaleAPI";
 import _ from "lodash";
 
@@ -106,27 +107,17 @@ function Home_Category(props) {
                     <div className="product_desc_info">
                       <div className="product-review">
                         <h5 className="manufacturer">
-                          <a href="shop-left-sidebar.html">
+                          <Link to={`/detail/${value.id_product?._id}`}>
                             {value.id_product?.name_product}
-                          </a>
+                          </Link>
                         </h5>
                         <div className="rating-box">
                           <ul className="rating">
-                            <li>
-                              <i className="fa fa-star-o"></i>
-                            </li>
-                            <li>
-                              <i className="fa fa-star-o"></i>
-                            </li>
-                            <li>
-                              <i className="fa fa-star-o"></i>
-                            </li>
-                            <li className="no-star">
-                              <i className="fa fa-star-o"></i>
-                            </li>
-                            <li className="no-star">
-                              <i className="fa fa-star-o"></i>
-                            </li>
+                            <Rate
+                              style={{ fontSize: "14px" }}
+                              disabled
+                              defaultValue={0}
+                            />
                           </ul>
                         </div>
                       </div>

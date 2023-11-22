@@ -106,38 +106,13 @@ function Footer(props) {
               </div>
               <div className="col-lg-2 col-md-3 col-sm-6">
                 <div className="footer-block">
-                  <h3 className="footer-block-title">Product</h3>
-                  <ul>
-                    <li>
-                      <a href="#">Prices drop</a>
-                    </li>
-                    <li>
-                      <a href="#">New products</a>
-                    </li>
-                    <li>
-                      <a href="#">Best sales</a>
-                    </li>
-                    <li>
-                      <a href="#">Contact us</a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div className="col-lg-2 col-md-3 col-sm-6">
-                <div className="footer-block">
                   <h3 className="footer-block-title">Our company</h3>
                   <ul>
-                    <li>
-                      <a href="#">Delivery</a>
-                    </li>
-                    <li>
-                      <a href="#">Legal Notice</a>
-                    </li>
                     <li>
                       <a href="#">About us</a>
                     </li>
                     <li>
-                      <a href="#">Contact us</a>
+                      <a href="/contact">Contact us</a>
                     </li>
                   </ul>
                 </div>
