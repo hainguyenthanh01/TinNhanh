@@ -8,13 +8,13 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom';
 function UpdateProduct(props) {
     const [id] = useState(props.match.params.id)
     const [category, setCategory] = useState([])
-    const [gender] = useState(["Unisex", "Male", "Female"])
+    const [gender, setGender] = useState([])
     const [name, setName] = useState('');
     const [price, setPrice] = useState('');
     const [description, setDescription] = useState('');
     const [number, setNumber] = useState('');
     const [categoryChoose, setCategoryChoose] = useState('');
-    const [genderChoose, setGenderChoose] = useState('Unisex');
+    const [genderChoose, setGenderChoose] = useState('');
     const [file, setFile] = useState();
     const [image, setImage] = useState();
     const [fileName, setFileName] = useState("");
@@ -34,6 +34,7 @@ function UpdateProduct(props) {
             setCategoryChoose(rs.id_category)
             setImage(rs.image)
             setCategory(ct)
+            setGenderChoose(rs.gender)
         }
         fetchAllData()
     }, [])
@@ -76,6 +77,9 @@ function UpdateProduct(props) {
         if (isEmpty(categoryChoose)) {
             msg.category = "Vui lòng chọn loại"
         }
+        if (isEmpty(genderChoose)) {
+            msg.category = "Vui lòng chọn giới tính"
+        }
 
         setValidationMsg(msg)
         if (Object.keys(msg).length > 0) return false;
@@ -91,6 +95,20 @@ function UpdateProduct(props) {
 
     }
 
+    const listGender = [
+        {
+            id:"male",
+            name:"Male"
+        },
+        {
+            id:"female",
+            name:"Female"
+        },
+        {
+            id:"unisex",
+            name:"Unisex"
+        }
+    ]
     const addProduct = async () => {
         const formData = new FormData();
         formData.append("id", id);
@@ -112,7 +130,6 @@ function UpdateProduct(props) {
         setValidationMsg({ api: response.msg })
 
     }
-
 
     return (
         <div className="page-wrapper">
@@ -163,12 +180,26 @@ function UpdateProduct(props) {
 
                                     <div className="form-group w-50">
                                         {/* <label htmlFor="categories" className="mr-2">Chọn loại:</label> */}
-                                        <label htmlFor="categories" className="mr-2">Chọn nhà sản xuất:</label>
+                                        <label htmlFor="categories" className="mr-2">Chọn danh mục:</label>
                                         <select name="categories" id="categories" value={categoryChoose} onChange={(e) => setCategoryChoose(e.target.value)}>
                                             <option >Chọn loại</option>
                                             {
                                                 category && category.map((item, index) => (
                                                     <option value={item._id} key={index} >{item.category}</option>
+                                                ))
+                                            }
+
+                                        </select>
+                                        <p className="form-text text-danger">{validationMsg.category}</p>
+                                    </div>
+                                    <div className="form-group w-50">
+                                        {/* <label htmlFor="categories" className="mr-2">Chọn loại:</label> */}
+                                        <label htmlFor="categories" className="mr-2">Chọn giới tính:</label>
+                                        <select name="categories" id="categories" value={genderChoose} onChange={(e) => setGenderChoose(e.target.value)}>
+                                            <option >Chọn loại</option>
+                                            {
+                                                listGender.map((item, index) => (
+                                                    <option value={item.id} key={index} >{item.name}</option>
                                                 ))
                                             }
 
