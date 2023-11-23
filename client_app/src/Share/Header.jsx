@@ -15,7 +15,10 @@ import { FaUserCircle } from "react-icons/fa";
 import { useHistory } from "react-router-dom/cjs/react-router-dom";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import { TiShoppingCart } from "react-icons/ti";
-import { FaFacebook, FaInstagram } from "react-icons/fa";
+import { FaFacebook, FaTiktok  } from "react-icons/fa";
+import { FaEarthAsia } from "react-icons/fa6";
+import { GrInstagram } from "react-icons/gr";
+import { SiShopee } from "react-icons/si";
 import { getUrlParamsFromJson, getUserCookie } from '../helper';
 
 function Header(props) {
@@ -226,7 +229,7 @@ function Header(props) {
       <div className="header-top">
         <div className="container">
           <div className="row">
-            <div className="col-lg-3 col-md-4">
+            <div className="col-lg-3 col-md-4" style={{width: "270px"}}>
               <li>
                 <span>Telephone Enquiry:</span>
                 <a href="#">(+84) 392 136 898</a>
@@ -234,14 +237,29 @@ function Header(props) {
             </div>
             <div className="col-lg-9 col-md-8">
               <ul className="d-flex align-items-center" >
-                <li>
-                  <a href="" style={{ fontSize: "14px" }}>
-                    <FaFacebook />
+                <li className="icon-contact">
+                  <a href="https://www.facebook.com/buli2019" style={{ fontSize: "14px" }} target="_blank">
+                    <FaFacebook/>
                   </a>
                 </li>
-                <li>
-                  <a href="" style={{ fontSize: "14px" }}>
-                    <FaInstagram />
+                <li className="icon-contact">
+                  <a href="https://www.instagram.com/buli_official/" style={{ fontSize: "14px" }} target="_blank">
+                    <GrInstagram/>
+                  </a>
+                </li>
+                <li className="icon-contact">
+                  <a href="https://www.tiktok.com/@bulishop" style={{ fontSize: "14px" }} target="_blank">
+                    <FaTiktok/>
+                  </a>
+                </li>
+                <li className="icon-contact">
+                  <a href="https://shopee.vn/bulishop" style={{ fontSize: "14px" }} target="_blank">
+                    <SiShopee/>
+                  </a>
+                </li>
+                <li className="icon-contact">
+                  <a href="https://buli.vn/" style={{ fontSize: "14px" }} target="_blank">
+                    <FaEarthAsia />
                   </a>
                 </li>
               </ul>
@@ -453,6 +471,17 @@ function Header(props) {
                           to="/contact"
                         >
                           Contact
+                        </Link>
+                      </li>
+                      <li>
+                        <Link
+                          className={`${location.pathname.includes("/about")
+                            ? "active"
+                            : ""
+                            }`}
+                          to="/about"
+                        >
+                          About Us
                         </Link>
                       </li>
                     </ul>

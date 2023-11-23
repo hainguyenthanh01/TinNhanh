@@ -29,6 +29,7 @@ import OrderFail from "./Order/OrderFail";
 // import Search from "./Search/Search";
 import { lazy, Suspense } from "react";
 import OrderMomo from "./Order/OrderMomo";
+// import About from "./Contact/About";
 // import DetailEvent from "./About/DetailEvent";
 
 const Home = lazy(() => {
@@ -114,6 +115,11 @@ const Search = lazy(() => {
     setTimeout(() => resolve(import("./Search/Search")), 2000);
   });
 });
+const About = lazy(() => {
+  return new Promise((resolve) => {
+    setTimeout(() => resolve(import("./Contact/About")), 2000);
+  });
+});
 
 function App() {
   return (
@@ -153,6 +159,8 @@ function App() {
             <Route path="/history" component={History} />
             <Route path="/profile/:id" component={Profile} />
             <Route path="/search" component={Search} />
+            <Route path="/about" component={About} />
+
           </Switch>
         </Suspense>
         <Footer />
