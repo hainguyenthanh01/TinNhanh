@@ -1349,36 +1349,32 @@ textarea:focus {
   color: #ffffff;
 }
 .cart-plus-minus {
-  float: left;
-  margin-right: 15px;
   position: relative;
-  width: 76px;
-  text-align: left;
+  display: flex;
+    justify-content: center;
+
 }
 .cart-plus-minus .cart-plus-minus-box {
   border: 1px solid #e1e1e1;
   color: #242424;
-  height: 46px;
   text-align: center;
-  width: 48px;
-  width: 48px;
-  width: 3rem;
+  width: 25px;
+  height: 25px;
   background: #fff;
+  padding: 0;
 }
 .cart-plus-minus .dec.qtybutton,
 .cart-plus-minus .inc.qtybutton {
-  border-bottom: 1px solid #e1e1e1;
-  border-right: 1px solid #e1e1e1;
-  border-top: 1px solid #e1e1e1;
+  border: 1px solid #e1e1e1;
   color: #333333;
   cursor: pointer;
-  height: 23px;
-  line-height: 20px;
-  position: absolute;
-  text-align: center;
+  height: 25px;
   -webkit-transition: all 0.3s ease-in-out 0s;
   transition: all 0.3s ease-in-out 0s;
-  width: 28px;
+  width: 25px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
 }
 .cart-plus-minus .dec.qtybutton:hover,
 .cart-plus-minus .inc.qtybutton:hover {
@@ -1389,7 +1385,6 @@ textarea:focus {
   right: 0;
 }
 .cart-plus-minus .inc.qtybutton {
-  border-bottom: none;
   top: 0;
   right: 0;
 }
@@ -2991,7 +2986,7 @@ textarea:focus {
 }
 .li-product-menu > li > a span::before,
 .li-product-menu > li > a.active span::before {
-  bottom: -12px;
+  bottom: -14px;
 }
 /*----------------------------------------*/
 /*  2.9 Footer

@@ -12,7 +12,30 @@ module.exports.index = async (req, res) => {
     let end = page * perPage;
 
     const sale = await Sale.find().populate('id_product');
-
+    // db.createView( "sales", "sale", [
+    //     {
+    //        $lookup:
+    //           {
+    //              from: "product",
+    //              localField: "id_product",
+    //              foreignField: "id_product",
+    //              as: "productDocs"
+    //           }
+    //     },
+    //     {
+    //        $project:
+    //           {
+    //             _id: 0,
+    //             name: "productDocs.name_product",
+    //             promotion: 1,
+    //             describe: 1,
+    //             start: 1,
+    //             end: 1,
+    //             status: 1,
+    //           }
+    //     },
+    //        { $unwind: "$name" }
+    //  ] )
     if (!keyWordSearch) {
         res.json({
             sale: sale.slice(start, end),
@@ -83,8 +106,12 @@ module.exports.update = async (req, res) => {
 module.exports.list = async (req, res) => {
 
     const sale = await Sale.find({ status: true }).populate('id_product')
+    let nowTime = new Date()
+   const dataSend = sale.filter(it =>{
+    return it.start.getTime() < nowTime.getTime() && nowTime.getTime() < it.end.getTime()
+   })
 
-    res.json(sale)
+    res.json(dataSend)
 
 }
 

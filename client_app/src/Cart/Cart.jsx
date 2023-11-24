@@ -9,6 +9,8 @@ import queryString from "query-string";
 import CartsLocal from "../Share/CartsLocal";
 import CouponAPI from "../API/CouponAPI";
 import { getUserCookie } from '../helper';
+import { TiPlus, TiMinus } from "react-icons/ti";
+
 Cart.propTypes = {};
 
 function Cart(props) {
@@ -315,7 +317,7 @@ function Cart(props) {
                                                                         downCount(value.count, value._id)
                                                                     }
                                                                 >
-                                                                    <i className="fa fa-angle-down"></i>
+                                                                    <TiMinus />
                                                                 </div>
                                                                 <input
                                                                     className="cart-plus-minus-box"
@@ -328,7 +330,8 @@ function Cart(props) {
                                                                         upCount(value.count, value._id)
                                                                     }
                                                                 >
-                                                                    <i className="fa fa-angle-up"></i>
+                                                                    <TiPlus />
+
                                                                 </div>
                                                             </div>
                                                         </td>

@@ -62,7 +62,6 @@ function Home_Category(props) {
   useEffect(() => {
     const fetchData = async () => {
       const response = await SaleAPI.getList();
-
       set_product_category(response);
     };
 
@@ -85,12 +84,97 @@ function Home_Category(props) {
             </div>
           </div>
         </div>
-        <Slider {...settings}>
-          {product_category &&
-            product_category.map((value = {}) => (
-              <div
-                className="col-lg-12 animate__animated animate__zoomIn col_product"
-                style={{ zIndex: "999", height: "30rem" }}
+        {product_category && product_category.length >=4 ? 
+          (<Slider {...settings}>
+            {product_category &&
+              product_category.map((value = {}) => (
+                <div
+                  className="col-lg-12 animate__animated animate__zoomIn col_product"
+                  style={{ zIndex: "999", height: "30rem" }}
+                  key={value._id}
+                >
+                  <div className="single-product-wrap">
+                    <div className="product-image">
+                      <Link to={`/detail/${value.id_product?._id}`}>
+                        <img
+                          src={value.id_product?.image}
+                          alt="Li's Product Image"
+                        />
+                      </Link>
+                      <span className="sticker">-{value.promotion}%</span>
+                    </div>
+                    <div className="product_desc">
+                      <div className="product_desc_info">
+                        <div className="product-review">
+                          <h5 className="manufacturer">
+                            <Link to={`/detail/${value.id_product?._id}`}>
+                              {value.id_product?.name_product}
+                            </Link>
+                          </h5>
+                          <div className="rating-box">
+                            <ul className="rating">
+                              <Rate
+                                style={{ fontSize: "14px" }}
+                                disabled
+                                defaultValue={0}
+                              />
+                            </ul>
+                          </div>
+                        </div>
+                        <div className="d-flex justify-content-between price-box">
+                          <del className="new-price">
+                            {new Intl.NumberFormat("vi-VN", {
+                              style: "decimal",
+                              decimal: "VND",
+                            }).format(value.id_product?.price_product) + " VNĐ"}
+                          </del>
+                          <span className="new-price" style={{ color: "red" }}>
+                            {new Intl.NumberFormat("vi-VN", {
+                              style: "decimal",
+                              decimal: "VND",
+                            }).format(
+                              parseInt(value.id_product?.price_product) -
+                                (parseInt(value.id_product?.price_product) *
+                                  parseInt(value.promotion)) /
+                                  100
+                            ) + " VNĐ"}
+                          </span>
+                        </div>
+                      </div>
+                      <div className="add_actions">
+                        <ul className="add-actions-link">
+                          <li>
+                            <a
+                              href="#"
+                              title="quick view"
+                              className="links-details"
+                              data-toggle="modal"
+                              data-target={`#${value.id_product?._id}`}
+                              onClick={() =>
+                                GET_id_modal(
+                                  `${value.id_product?._id}`,
+                                  parseInt(value.id_product.price_product) -
+                                    (parseInt(value.id_product.price_product) *
+                                      parseInt(value.promotion)) /
+                                      100
+                                )
+                              }
+                            >
+                              <i className="fa fa-eye"></i>
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+          </Slider>):(
+            <div className="row" style={{marginTop: "10px"}}>
+              {product_category &&
+              product_category.map((value)=>(  <div
+                className="col-lg-3 animate__animated animate__zoomIn col_product"
+                style={{minHeight:"320px"}}
                 key={value._id}
               >
                 <div className="single-product-wrap">
@@ -167,9 +251,11 @@ function Home_Category(props) {
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
-        </Slider>
+              </div>))}
+            </div>
+          )
+        }
+
       </div>
     </div>
   );
