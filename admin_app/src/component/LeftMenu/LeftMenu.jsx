@@ -1,11 +1,4 @@
 import React, { useState } from "react";
-import {
-  DesktopOutlined,
-  FileOutlined,
-  PieChartOutlined,
-  TeamOutlined,
-  UserOutlined,
-} from "@ant-design/icons";
 import { BiSolidDiscount   } from "react-icons/bi";
 import { FaUserCircle, FaUser } from "react-icons/fa";
 import { Breadcrumb, Layout, Menu, theme } from "antd";
@@ -102,7 +95,6 @@ const LeftMenu = () => {
         collapsed={collapsed}
         onCollapse={(value) => setCollapsed(value)}
       >
-        <div className="demo-logo-vertical" />
         <Menu
           onSelect={({ item, key }) => {
             history.push(item.props.link);

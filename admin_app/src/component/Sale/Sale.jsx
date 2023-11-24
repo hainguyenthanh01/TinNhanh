@@ -6,6 +6,7 @@ import permissionAPI from '../Api/permissionAPI';
 import Pagination from '../Shared/Pagination'
 import Search from '../Shared/Search'
 import SaleAPI from '../Api/SaleAPI';
+import moment from 'moment/moment';
 
 function Sale(props) {
     const [filter, setFilter] = useState({
@@ -45,7 +46,6 @@ function Sale(props) {
         })
     }
 
-
     return (
         <div className="page-wrapper">
             <div className="container-fluid">
@@ -80,8 +80,8 @@ function Sale(props) {
                                                         <td className="name">{value._id}</td>
                                                         <td className="name">{value.promotion}</td>
                                                         <td className="name">{value.describe}</td>
-                                                        <td className="name">{value.start}</td>
-                                                        <td className="name">{value.end}</td>
+                                                        <td className="name">{moment(value.start).format("DD/MM/YYYY")}</td>
+                                                        <td className="name">{moment(value.end).format("DD/MM/YYYY")}</td>
                                                         <td className="name">{value.status ? "Active" : "Disable"}</td>
                                                         <td>
                                                             <div className="d-flex">
