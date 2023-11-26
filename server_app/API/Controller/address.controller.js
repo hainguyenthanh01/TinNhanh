@@ -1,0 +1,46 @@
+const Province = require('../../Models/province')
+const District = require('../../Models/district')
+const Wards = require('../../Models/wards')
+
+
+module.exports.province = async (req, res) => {
+	try {
+		const province = await Province.find()
+		res.status(200).json({ message: 'Successfully!', data: province, code: 200 })
+	} catch (error) {
+		res.status(400).json({ error })
+	}
+
+}
+
+module.exports.district = async (req, res) => {
+	try {
+		const { province_id } = req.query
+		if (province_id) {
+			const district = await District.find({ province_id })
+			res.status(200).json({ message: 'Successfully!', data: district, code: 200 })
+		} else {
+			res.status(200).json({ message: 'Successfully!', data: [], code: 200 })
+		}
+
+	} catch (error) {
+		res.status(400).json({ error })
+	}
+}
+
+
+module.exports.wards = async (req, res) => {
+	try {
+		const { district_id } = req.query
+		if (district_id) {
+			const wards = await Wards.find({ district_id })
+			res.status(200).json({ message: 'Successfully!', data: wards, code: 200 })
+		} else {
+			res.status(200).json({ message: 'Successfully!', data: [], code: 200 })
+		}
+
+	} catch (error) {
+		res.status(400).json({ error })
+	}
+
+}
