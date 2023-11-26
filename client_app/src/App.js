@@ -29,6 +29,7 @@ import OrderFail from "./Order/OrderFail";
 // import Search from "./Search/Search";
 import { lazy, Suspense } from "react";
 import OrderMomo from "./Order/OrderMomo";
+import ConfirmPayment from './ConfirmPayment/ConfirmPayment';
 // import About from "./Contact/About";
 // import DetailEvent from "./About/DetailEvent";
 
@@ -146,7 +147,7 @@ function App() {
             <Route path="/shop/:id" component={Shop} />
             <Route path="/detail/:id" component={Detail_Product} />
             <Route path="/cart" component={Cart} />
-            <Route path="/checkout" component={Checkout} />
+            <Route path="/checkout" component={ConfirmPayment} />
             <Route path="/favorite" component={Favorite} />
             <Route exact path="/event" component={Event} />
             <Route path="/event/:id" component={DetailEvent} />
