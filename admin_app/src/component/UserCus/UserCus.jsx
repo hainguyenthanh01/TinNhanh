@@ -113,6 +113,8 @@ function UserCus(props) {
                   columns={columns}
                   dataSource={users}
                   totalPage={totalPage}
+                  filter={filter}
+                  setFilter={setFilter}
                 />
               </div>
             </div>
