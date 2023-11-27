@@ -95,6 +95,7 @@ const LeftMenu = () => {
         collapsed={collapsed}
         onCollapse={(value) => setCollapsed(value)}
       >
+        <div className="ant-layout-sider-children" style={{position:"fixed", width:"13.5%"}}>
         <Menu
           onSelect={({ item, key }) => {
             history.push(item.props.link);
@@ -104,6 +105,7 @@ const LeftMenu = () => {
           mode="inline"
           items={items}
         />
+        </div>
       </Sider>
       <Layout>
         <Header
