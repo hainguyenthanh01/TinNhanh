@@ -11,7 +11,7 @@ function UserCus(props) {
   const [filter, setFilter] = useState({
     permission: "6087dcb5f269113b3460fce4",
     page: "1",
-    limit: "4",
+    limit: "5",
     search: "",
     status: true,
   });
