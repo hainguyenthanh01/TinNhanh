@@ -42,12 +42,12 @@ function DetailHistory(props) {
             <div className="container" style={{ paddingTop: '3rem' }}>
                 <h1>Thông Tin Chi Tiết Đơn Hàng</h1>
                 <ul>
-                    <li style={{ fontSize: '1.1rem' }}>ID Invoice: <span>{order._id}</span></li>
-                    <li style={{ fontSize: '1.1rem' }}>Phone: <span>{order.id_note && order.id_note.phone}</span></li>
-                    <li style={{ fontSize: '1.1rem' }}>Fullname: <span>{order.id_note && order.id_note.fullname}</span></li>
-                    <li style={{ fontSize: '1.1rem' }}>Total: <span>{new Intl.NumberFormat('vi-VN',{style: 'decimal',decimal: 'VND'}).format(order.total) + ' VNĐ'}</span></li>
-                    <li style={{ fontSize: '1.1rem' }}>Feeship: <span>{new Intl.NumberFormat('vi-VN',{style: 'decimal',decimal: 'VND'}).format(order.feeship) + ' VNĐ'}</span></li>
-                    <li style={{ fontSize: '1.1rem' }}>Payment: <span>{order.id_payment && order.id_payment.pay_name}</span></li>
+                    <li style={{ fontSize: '1.1rem' }}>ID Đơn hàng: <span>{order._id}</span></li>
+                    <li style={{ fontSize: '1.1rem' }}>Điện thoại: <span>{order.id_note && order.id_note.phone}</span></li>
+                    <li style={{ fontSize: '1.1rem' }}>Tên: <span>{order.id_note && order.id_note.fullname}</span></li>
+                    <li style={{ fontSize: '1.1rem' }}>Tổng: <span>{new Intl.NumberFormat('vi-VN',{style: 'decimal',decimal: 'VND'}).format(order.total) + ' VNĐ'}</span></li>
+                    <li style={{ fontSize: '1.1rem' }}>Phí vận chuyển: <span>{new Intl.NumberFormat('vi-VN',{style: 'decimal',decimal: 'VND'}).format(order.feeship) + ' VNĐ'}</span></li>
+                    <li style={{ fontSize: '1.1rem' }}>Thanh toán: <span>{order.id_payment && order.id_payment.pay_name}</span></li>
                 </ul>
                 <div className="group_box_status" style={{ marginTop: '3rem' }}>
                     <div className="d-flex justify-content-center">
@@ -56,28 +56,28 @@ function DetailHistory(props) {
                                 <div className="w-100 d-flex justify-content-center">
                                     <div className={parseInt(order.status) > 0 && 'bg_status_delivery_active'}></div>
                                 </div>
-                                <a className="a_status_delivery">Processing</a>
+                                <a className="a_status_delivery">Đang xử lý</a>
                             </div>
 
                             <div className="detail_status_delivery">
                                 <div className="w-100 d-flex justify-content-center">
                                     <div className={parseInt(order.status) > 1 ? 'bg_status_delivery_active' : 'bg_status_delivery'}></div>
                                 </div>
-                                <a className="a_status_delivery">Confirmed</a>
+                                <a className="a_status_delivery">Đã xác nhận</a>
                             </div>
 
                             <div className="detail_status_delivery">
                                 <div className="w-100 d-flex justify-content-center">
                                     <div className={parseInt(order.status) > 2 ? 'bg_status_delivery_active' : 'bg_status_delivery'}></div>
                                 </div>
-                                <a className="a_status_delivery">Shipping</a>
+                                <a className="a_status_delivery">Đang vận chuyển</a>
                             </div>
 
                             <div className="detail_status_delivery">
                                 <div className="w-100 d-flex justify-content-center">
                                     <div className={parseInt(order.status) > 3 ? 'bg_status_delivery_active' : 'bg_status_delivery'}></div>
                                 </div>
-                                <a className="a_status_delivery">Finished</a>
+                                <a className="a_status_delivery">Đã hoàn thành</a>
                             </div>
                         </div>
                     </div>
@@ -96,10 +96,10 @@ function DetailHistory(props) {
                                     <table className="table">
                                         <thead>
                                             <tr>
-                                                <th className="li-product-remove">Image</th>
-                                                <th className="li-product-thumbnail">Name Product</th>
-                                                <th className="cart-product-name">Price</th>
-                                                <th className="li-product-price">Count</th>
+                                                <th className="li-product-remove">Ảnh</th>
+                                                <th className="li-product-thumbnail">Tên sản phẩm</th>
+                                                <th className="cart-product-name">Giá</th>
+                                                <th className="li-product-price">Số lượng</th>
                                                 <th className="li-product-price">Size</th>
                                             </tr>
                                         </thead>

@@ -19,7 +19,7 @@ import { FaFacebook, FaTiktok  } from "react-icons/fa";
 import { FaEarthAsia } from "react-icons/fa6";
 import { GrInstagram } from "react-icons/gr";
 import { SiShopee } from "react-icons/si";
-import { getUrlParamsFromJson, getUserCookie } from '../helper';
+import { getUrlParamsFromJson, getUserCookie, removeUserCookie } from '../helper';
 
 function Header(props) {
   // State count of cart
@@ -103,8 +103,8 @@ function Header(props) {
   const handler_logout = () => {
     const action = deleteSession("");
     dispatch(action);
-
-    sessionStorage.clear();
+    removeUserCookie()
+    
   };
 
   // Get trạng thái từ redux khi user chưa đăng nhập
@@ -231,8 +231,8 @@ function Header(props) {
           <div className="row">
             <div className="col-lg-3 col-md-4" style={{width: "270px"}}>
               <li>
-                <span>Telephone Enquiry:</span>
-                <a href="#">(+84) 392 136 898</a>
+                <span>Điện thoại: </span>
+                <a href="#">(+84) 869 666 218</a>
               </li>
             </div>
             <div className="col-lg-9 col-md-8">
@@ -285,7 +285,7 @@ function Header(props) {
               >
                 <input
                   type="text"
-                  placeholder="Enter your search key ..."
+                  placeholder="Tìm kiếm ..."
                   value={keyword_search}
                   onChange={(e) => set_keyword_search(e.target.value)}
                 />
@@ -353,7 +353,7 @@ function Header(props) {
                       aria-controls="collapseExample"
                       style={{ fontWeight: "bold" }}
                     >
-                      Profile
+                      Tài khoản
                     </span>
                   )}
                 </div>
@@ -364,11 +364,11 @@ function Header(props) {
                         <Link
                           to={`/profile/${getUserCookie()}`}
                         >
-                          Profile
+                          Tài khoản
                         </Link>
                       </li>
                       <li className="li_setting">
-                        <Link to="/history">Order Status</Link>
+                        <Link to="/history">Đơn hàng</Link>
                       </li>
                       <li className="li_setting">
                         <a
@@ -378,14 +378,14 @@ function Header(props) {
                           }}
                           href="#"
                         >
-                          Log Out
+                          Đăng xuất
                         </a>
                       </li>
                     </ul>
                   ) : (
                     <ul className="setting_ul collapse" id="collapseExample">
                       <li className="li_setting">
-                        <Link to="/signin">Sign In</Link>
+                        <Link to="/signin">Đăng nhập</Link>
                       </li>
                     </ul>
                   )}
@@ -407,7 +407,7 @@ function Header(props) {
                             }`}
                           to="/"
                         >
-                          Home
+                          Trang Chủ
                         </Link>
                       </li>
                       <li className="megamenu-holder">
@@ -459,7 +459,7 @@ function Header(props) {
                             }`}
                           to="/event"
                         >
-                          Event
+                          Khuyến mãi
                         </Link>
                       </li>
                       <li>
@@ -470,7 +470,7 @@ function Header(props) {
                             }`}
                           to="/contact"
                         >
-                          Contact
+                          Liên hệ
                         </Link>
                       </li>
                       <li>
@@ -481,7 +481,7 @@ function Header(props) {
                             }`}
                           to="/about"
                         >
-                          About Us
+                          Về chúng tôi
                         </Link>
                       </li>
                     </ul>

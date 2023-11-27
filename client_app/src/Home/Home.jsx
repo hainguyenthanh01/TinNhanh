@@ -148,13 +148,11 @@ function Home(props) {
 
       <Home_Product
         gender={`Male`}
-        category={"60615da34c9cac0448b4b9a4"}
         GET_id_modal={GET_id_modal}
       />
 
       <Home_Product
         gender={`Female`}
-        category={"60615da34c9cac0448b4b9a8"}
         GET_id_modal={GET_id_modal}
       />
 
@@ -230,11 +228,10 @@ function Home(props) {
                       </div>
                       <div className="single-add-to-cart">
                         <form
-                          onSubmit={handler_addcart}
                           className="cart-quantity"
                         >
-                          <button className="add-to-cart" type="submit">
-                            Add to cart
+                          <button onSubmit={handler_addcart} className="add-to-cart" type="submit">
+                            Thêm vào giỏ hàng
                           </button>
                         </form>
                       </div>

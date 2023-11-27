@@ -150,9 +150,9 @@ function Shop(props) {
           <div className="breadcrumb-content">
             <ul>
               <li>
-                <a href="index.html">Home</a>
+                <a href="/">Trang chủ</a>
               </li>
-              <li className="active">Shop</li>
+              <li className="active">Cửa hàng</li>
             </ul>
           </div>
         </div>
@@ -169,7 +169,7 @@ function Shop(props) {
                   </div>
                 </div>
                 <div className="li-blog-sidebar pt-25">
-                  <h4 className="li-blog-sidebar-title">All Product</h4>
+                  <h4 className="li-blog-sidebar-title">Tất cả sản phẩm</h4>
                   <ul className="li-blog-archive">
                     <li>
                       <Link
@@ -180,13 +180,13 @@ function Shop(props) {
                             : { cursor: "pointer" }
                         }
                       >
-                        All
+                        Tất cả
                       </Link>
                     </li>
                   </ul>
                 </div>
                 <div className="li-blog-sidebar pt-25">
-                  <h4 className="li-blog-sidebar-title">Male</h4>
+                  <h4 className="li-blog-sidebar-title">Nam</h4>
                   <ul className="li-blog-archive">
                     {male &&
                       male.map((value) => (
@@ -206,7 +206,7 @@ function Shop(props) {
                   </ul>
                 </div>
                 <div className="li-blog-sidebar">
-                  <h4 className="li-blog-sidebar-title">Female</h4>
+                  <h4 className="li-blog-sidebar-title">Nữ</h4>
                   <ul className="li-blog-archive">
                     {female &&
                       female.map((value) => (
@@ -231,11 +231,11 @@ function Shop(props) {
               <div className="shop-top-bar">
                 <div className="product-select-box">
                   <div className="product-short">
-                    <p>Sort By:</p>
+                    <p>Sắp xếp:</p>
                     <select className="nice-select">
-                      <option value="trending">Relevance</option>
-                      <option value="rating">Price (Low &gt; High)</option>
-                      <option value="rating">Price (High &gt; Low)</option>
+                      <option value="trending">Mức độ</option>
+                      <option value="rating">Giá (Thấp &gt; Cao)</option>
+                      <option value="rating">Giá (Cao &gt; Thấp)</option>
                     </select>
                   </div>
                 </div>

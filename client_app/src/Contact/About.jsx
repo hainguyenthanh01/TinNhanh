@@ -9,9 +9,9 @@ function About(props) {
           <div className="breadcrumb-content">
             <ul>
               <li>
-                <a href="index.html">Home</a>
+                <a href="/">Trang chủ</a>
               </li>
-              <li className="active">About </li>
+              <li className="active">Về chúng tôi</li>
             </ul>
           </div>
         </div>
@@ -21,7 +21,7 @@ function About(props) {
           <div className="row">
             <div className="col-lg-6 col-md-12 order-2 order-lg-1">
               <div className="contact-form-content pt-sm-55 pt-xs-55">
-                <h3 className="contact-page-title">BULI</h3>
+                <h3 className="contact-page-title">𝐁𝐔𝐋𝐈</h3>
                 <div className="contact-form">
                   <div className="form-group">
                     <label>
@@ -68,7 +68,6 @@ function About(props) {
                     ▪️ 𝐀𝐝𝐝𝟏: 122 Triều Khúc - Thanh Xuân - HN <br />
                     ▪️ 𝐀𝐝𝐝𝟐: 27 Hồ Tùng Mậu - Cầu Giấy - HN <br />
                     ▪️ 𝐇𝐨𝐭𝐥𝐢𝐧𝐞: 0869.666.218 - 0812.666.218 <br />
-                    #BULI #BST #Nam #clothes #27HoTungMau #122TrieuKhuc #Thời_trang <br />
                     </label>
                   </div>
                 </div>

@@ -40,9 +40,9 @@ function Event(props) {
           <div className="breadcrumb-content">
             <ul>
               <li>
-                <a href="index.html">Home</a>
+                <a href="/">Trang chủ</a>
               </li>
-              <li className="active">Event</li>
+              <li className="active">Khuyến mãi</li>
             </ul>
           </div>
         </div>
@@ -62,9 +62,9 @@ function Event(props) {
                   </div>
                   <div style={{ padding: "1rem 1.2rem" }}>
                     <h4 className="h4_event">{value.describe}</h4>
-                    <div style={{ marginTop: "20px" }}>
+                    {/* <div style={{ marginTop: "20px" }}>
                       <a className="a_event">Khuyến mãi</a>
-                    </div>
+                    </div> */}
                     <div style={{ marginTop: "20px" }}>
                       <span style={{ fontSize: "1rem", color: "gray" }}>
                         Còn lại:{" "}

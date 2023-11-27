@@ -78,8 +78,8 @@ function MainHistory(props) {
                 <div className="container">
                     <div className="breadcrumb-content">
                         <ul>
-                            <li><Link to="/">Home</Link></li>
-                            <li className="active">History</li>
+                            <li><Link to="/">Trang chủ</Link></li>
+                            <li className="active">Lịch sử</li>
                         </ul>
                     </div>
                 </div>
@@ -94,21 +94,21 @@ function MainHistory(props) {
                                     <table className="table">
                                         <thead>
                                             <tr>
-                                                <th className="li-product-remove">ID Invoice</th>
-                                                <th className="li-product-thumbnail">Name</th>
-                                                <th className="cart-product-name">Phone</th>
-                                                <th className="li-product-price">Address</th>
-                                                <th className="li-product-quantity">Total</th>
-                                                <th className="li-product-subtotal">Payment</th>
-                                                <th className="li-product-subtotal">Status</th>
-                                                <th className="li-product-subtotal">Cancel</th>
+                                                <th className="li-product-remove">ID Đơn hàng</th>
+                                                <th className="li-product-thumbnail">Tên</th>
+                                                <th className="cart-product-name">Điện thoại</th>
+                                                <th className="li-product-price">Địa chỉ</th>
+                                                <th className="li-product-quantity">Tổng</th>
+                                                <th className="li-product-subtotal">Thanh toán</th>
+                                                <th className="li-product-subtotal">Trạng thái</th>
+                                                <th className="li-product-subtotal">Hủy</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             {
                                                 history && history.map(value => (
                                                     <tr key={value._id}>
-                                                        <td className="li-product-price"><span className="amount"><Link to={`/history/${value._id}`}>View</Link></span></td>
+                                                        <td className="li-product-price"><span className="amount"><Link to={`/history/${value._id}`}>Xem</Link></span></td>
                                                         <td className="li-product-price"><span className="amount">{value.id_note.fullname}</span></td>
                                                         <td className="li-product-price"><span className="amount">{value.id_note.phone}</span></td>
                                                         <td className="li-product-price"><span className="amount">{value.address}</span></td>
@@ -135,7 +135,7 @@ function MainHistory(props) {
                                                                     case '4':
                                                                         return <i className="fa fa-check text-success" style={{ fontSize: '25px' }}></i>
                                                                     default:
-                                                                        return <span className="text-danger">Cancelled</span>
+                                                                        return <span className="text-danger">Đã hủy</span>
                                                                 }
                                                             })()}
                                                         </td>

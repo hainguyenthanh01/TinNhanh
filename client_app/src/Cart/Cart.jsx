@@ -181,7 +181,7 @@ function Cart(props) {
                             ></i>
                         </div>
                         <h4 className="text-center p-3" style={{ color: "#fff" }}>
-                            Vui Lòng Kiểm Tra Lại Mã Code!
+                            Vui Lòng Kiểm Tra Lại Mã!
                         </h4>
                     </div>
                 </div>
@@ -196,7 +196,7 @@ function Cart(props) {
                             ></i>
                         </div>
                         <h4 className="text-center p-3" style={{ color: "#fff" }}>
-                            Áp Dụng Mã Code Thành Công!
+                            Áp Dụng Mã Thành Công!
                         </h4>
                     </div>
                 </div>
@@ -245,9 +245,9 @@ function Cart(props) {
                     <div className="breadcrumb-content">
                         <ul>
                             <li>
-                                <Link to="/">Home</Link>
+                                <Link to="/">Trang Chủ</Link>
                             </li>
-                            <li className="active">Shopping Cart</li>
+                            <li className="active">Giỏ hàng</li>
                         </ul>
                     </div>
                 </div>
@@ -262,13 +262,13 @@ function Cart(props) {
                                     <table className="table">
                                         <thead>
                                             <tr>
-                                                <th className="li-product-remove">remove</th>
-                                                <th className="li-product-thumbnail">images</th>
-                                                <th className="cart-product-name">Product</th>
-                                                <th className="li-product-price">Price</th>
+                                                <th className="li-product-remove">Xóa</th>
+                                                <th className="li-product-thumbnail">Ảnh</th>
+                                                <th className="cart-product-name">Sản phẩm</th>
+                                                <th className="li-product-price">Giá</th>
                                                 <th className="li-product-price">Size</th>
-                                                <th className="li-product-quantity">Quantity</th>
-                                                <th className="li-product-subtotal">Total</th>
+                                                <th className="li-product-quantity">Số lượng </th>
+                                                <th className="li-product-subtotal">Tổng</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -310,7 +310,7 @@ function Cart(props) {
                                                         </td>
                                                         <td className="quantity">
                                                             {/* <label>Quantity</label> */}
-                                                            <div className="cart-plus-minus">
+                                                            <div className="cart-plus-minus" style={{justifyContent: "center"}}>
                                                                 <div
                                                                     className="dec qtybutton"
                                                                     onClick={() =>
@@ -360,13 +360,13 @@ function Cart(props) {
                                                     className="input-text"
                                                     onChange={(e) => set_coupon(e.target.value)}
                                                     value={coupon}
-                                                    placeholder="Coupon code"
+                                                    placeholder="Mã giảm giá"
                                                     type="text"
                                                 />{" "}
                                                 &nbsp;
                                                 <input
                                                     className="button"
-                                                    value="Apply coupon"
+                                                    value="Áp dụng"
                                                     type="submit"
                                                     onClick={handlerCoupon}
                                                 />
@@ -377,10 +377,10 @@ function Cart(props) {
                                 <div className="row">
                                     <div className="col-md-5 ml-auto">
                                         <div className="cart-page-total">
-                                            <h2>Cart totals</h2>
+                                            <h2>Tổng giỏ hàng</h2>
                                             <ul>
                                                 <li>
-                                                    Sub Total{" "}
+                                                    Tạm tính{" "}
                                                     <span>
                                                         {new Intl.NumberFormat("vi-VN", {
                                                             style: "decimal",
@@ -389,7 +389,7 @@ function Cart(props) {
                                                     </span>
                                                 </li>
                                                 <li>
-                                                    Discount{" "}
+                                                    Giảm giá{" "}
                                                     <span>
                                                         {new Intl.NumberFormat("vi-VN", {
                                                             style: "decimal",
@@ -398,7 +398,7 @@ function Cart(props) {
                                                     </span>
                                                 </li>
                                                 <li>
-                                                    Total{" "}
+                                                    Tổng{" "}
                                                     <span>
                                                         {new Intl.NumberFormat("vi-VN", {
                                                             style: "decimal",
@@ -415,7 +415,7 @@ function Cart(props) {
                                                 }}
                                                 onClick={handler_checkout}
                                             >
-                                                Proceed to checkout
+                                               Tiến hành đặt hàng
                                             </a>
                                         </div>
                                     </div>

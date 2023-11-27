@@ -8,6 +8,8 @@ import { Link } from "react-router-dom";
 import CartsLocal from "../Share/CartsLocal";
 import { changeCount } from "../Redux/Action/ActionCount";
 import { useDispatch, useSelector } from "react-redux";
+import { TiMinus, TiPlus } from "react-icons/ti";
+import { Rate } from "antd";
 
 Search.propTypes = {};
 
@@ -80,11 +82,11 @@ function Search(props) {
             <div className="shop-top-bar">
               <div className="product-select-box">
                 <div className="product-short">
-                  <p>Sort By:</p>
+                  <p>Sắp xếp theo:</p>
                   <select className="nice-select">
-                    <option value="trending">Relevance</option>
-                    <option value="rating">Price (Low &gt; High)</option>
-                    <option value="rating">Price (High &gt; Low)</option>
+                    <option value="trending">Mức độ</option>
+                    <option value="rating">Giá (Thấp &gt; Cao)</option>
+                    <option value="rating">Giá (Cao &gt; Thấp)</option>
                   </select>
                 </div>
               </div>
@@ -102,7 +104,7 @@ function Search(props) {
                         className="text-center"
                         style={{ paddingTop: "3rem", color: "#FED700" }}
                       >
-                        Yay! You have seen it all
+                        Bạn đã xem hết sản phẩm
                       </h4>
                     }
                   >
@@ -120,7 +122,7 @@ function Search(props) {
                                   alt="Li's Product Image"
                                 />
                               </Link>
-                              <span className="sticker">New</span>
+                              <span className="sticker">Mới</span>
                             </div>
                           </div>
                           <div className="col-lg-5 col-md-7">
@@ -129,37 +131,22 @@ function Search(props) {
                                 <div className="product-review">
                                   <h5 className="manufacturer">
                                     <Link to={`/detail/${value._id}`}>
-
                                       {value.name_product}
-
                                     </Link>
                                   </h5>
                                   <div className="rating-box">
                                     <ul className="rating">
-                                      <li>
-                                        <i className="fa fa-star" />
-                                      </li>
-                                      <li>
-                                        <i className="fa fa-star" />
-                                      </li>
-                                      <li>
-                                        <i className="fa fa-star" />
-                                      </li>
-                                      <li>
-                                        <i className="fa fa-star" />
-                                      </li>
-                                      <li>
-                                        <i className="fa fa-star" />
-                                      </li>
+                                      <Rate
+                                        style={{ fontSize: "14px" }}
+                                        disabled
+                                        defaultValue={0}
+                                      />
                                     </ul>
                                   </div>
                                 </div>
                                 <h4>
                                   <Link to={`/detail/${value._id}`}>
-                                    <a
-                                      className="product_name"
-                                      href=""
-                                    >
+                                    <a className="product_name" href="">
                                       {value.name_product}
                                     </a>
                                   </Link>
@@ -186,12 +173,8 @@ function Search(props) {
                             <div className="shop-add-action mb-xs-30">
                               <ul className="add-actions-link">
                                 <li className="add-cart">
-                                  <a onClick={handler_addcart} href="#">Add to cart</a>
-                                </li>
-                                <li className="wishlist">
-                                  <a href="/favorite">
-                                    <i className="fa fa-heart-o" />
-                                    Add to wishlist
+                                  <a onClick={handler_addcart} href="#">
+                                    Thêm vào giỏ hàng
                                   </a>
                                 </li>
                                 <li>
@@ -202,7 +185,7 @@ function Search(props) {
                                     href="#"
                                   >
                                     <i className="fa fa-eye" />
-                                    Quick view
+                                    Xem sản phẩm
                                   </a>
                                 </li>
                               </ul>
@@ -255,21 +238,11 @@ function Search(props) {
                             <h2>{value.name_product}</h2>
                             <div className="rating-box pt-20">
                               <ul className="rating rating-with-review-item">
-                                <li>
-                                  <i className="fa fa-star-o"></i>
-                                </li>
-                                <li>
-                                  <i className="fa fa-star-o"></i>
-                                </li>
-                                <li>
-                                  <i className="fa fa-star-o"></i>
-                                </li>
-                                <li className="no-star">
-                                  <i className="fa fa-star-o"></i>
-                                </li>
-                                <li className="no-star">
-                                  <i className="fa fa-star-o"></i>
-                                </li>
+                              <Rate
+                              style={{ fontSize: "14px" }}
+                              disabled
+                              defaultValue={0}
+                            />
                               </ul>
                             </div>
                             <div className="price-box pt-20">
@@ -292,7 +265,7 @@ function Search(props) {
                                 </span>
                               </p>
                             </div>
-                            <div className="single-add-to-cart">
+                            {/* <div className="single-add-to-cart">
                               <form
                                 onSubmit={handler_addcart}
                                 action="#"
@@ -301,16 +274,16 @@ function Search(props) {
                                 <div className="quantity">
                                   <label>Quantity</label>
                                   <div className="cart-plus-minus">
+                                  <div className="dec qtybutton">
+                                    <TiMinus />
+                                    </div>
                                     <input
                                       className="cart-plus-minus-box"
                                       value="1"
                                       type="text"
                                     />
-                                    <div className="dec qtybutton">
-                                      <i className="fa fa-angle-down"></i>
-                                    </div>
                                     <div className="inc qtybutton">
-                                      <i className="fa fa-angle-up"></i>
+                                    <TiPlus />
                                     </div>
                                   </div>
                                 </div>
@@ -318,7 +291,7 @@ function Search(props) {
                                   Add to cart
                                 </button>
                               </form>
-                            </div>
+                            </div> */}
                           </div>
                         </div>
                       </div>

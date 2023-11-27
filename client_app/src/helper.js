@@ -16,3 +16,7 @@ export function getUserCookie() {
 	const cookies = new Cookies()
 	return cookies.get('id_user') || null
 }
+export function removeUserCookie() {
+	const cookies = new Cookies()
+	return cookies.remove('id_user') || null
+}

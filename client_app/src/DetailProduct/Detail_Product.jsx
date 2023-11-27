@@ -12,6 +12,7 @@ import CommentAPI from "../API/CommentAPI";
 import CartsLocal from "../Share/CartsLocal";
 import SaleAPI from "../API/SaleAPI";
 import { getUserCookie } from '../helper';
+import { TiMinus, TiPlus } from "react-icons/ti";
 
 Detail_Product.propTypes = {};
 
@@ -202,9 +203,9 @@ function Detail_Product(props) {
           <div className="breadcrumb-content">
             <ul>
               <li>
-                <Link to="/">Home</Link>
+                <Link to="/">Trang chủ</Link>
               </li>
-              <li className="active">Detail</li>
+              <li className="active">Sản phẩm</li>
             </ul>
           </div>
         </div>
@@ -286,26 +287,27 @@ function Detail_Product(props) {
                     </div>
                   </div>
                   <div className="single-add-to-cart">
-                    <form action="#" className="cart-quantity">
-                      <div className="quantity">
-                        <label>Quantity</label>
+                    <form action="#" className="cart-quantity" style={{marginTop: "15px"}}>
+                      <div className="quantity" style={{marginBottom: "18px"}}>
+                        <label>Số lượng</label>
                         <div className="cart-plus-minus">
+                        
+                          <div className="dec qtybutton" onClick={downCount}>
+                            <TiMinus />
+                          </div>
                           <input
                             className="cart-plus-minus-box"
                             value={count}
                             type="text"
                             onChange={(e) => set_count(e.target.value)}
                           />
-                          <div className="dec qtybutton" onClick={downCount}>
-                            <i className="fa fa-angle-down"></i>
-                          </div>
                           <div className="inc qtybutton" onClick={upCount}>
-                            <i className="fa fa-angle-up"></i>
+                            <TiPlus />
                           </div>
                         </div>
                       </div>
                       <a href="#" onClick={handler_addcart} className="add-to-cart" type="submit">
-                        Add to cart
+                        Thêm vào giỏ hàng
                       </a>
                     </form>
                   </div>
@@ -324,12 +326,12 @@ function Detail_Product(props) {
                 <ul className="nav li-product-menu">
                   <li>
                     <a className="active" data-toggle="tab" href="#description">
-                      <span>Description</span>
+                      <span>Mô tả</span>
                     </a>
                   </li>
                   <li>
                     <a data-toggle="tab" href="#reviews">
-                      <span>Reviews</span>
+                      <span>Đánh giá</span>
                     </a>
                   </li>
                 </ul>
@@ -414,7 +416,7 @@ function Detail_Product(props) {
                       style={{ cursor: "pointer", color: "#fff" }}
                       onClick={() => set_modal(true)}
                     >
-                      Write Your Review!
+                      Đánh giá
                     </a>
                   </div>
                   <Modal
@@ -429,7 +431,7 @@ function Detail_Product(props) {
                       <div className="modal-content">
                         <div className="modal-body">
                           <h3 className="review-page-title">
-                            Write Your Review
+                          Đánh giá của bạn
                           </h3>
                           <div className="modal-inner-area row">
                             <div className="col-lg-6">
@@ -462,11 +464,11 @@ function Detail_Product(props) {
                                 <div className="feedback-area">
                                   <div className="feedback">
                                     <h3 className="feedback-title">
-                                      Our Feedback
+                                      Phản hồi
                                     </h3>
                                     <form action="#">
                                       <p className="your-opinion">
-                                        <label>Your Rating</label>
+                                        <label>Đánh giá</label>
                                         <span>
                                           <select
                                             className="star-rating"
@@ -484,7 +486,7 @@ function Detail_Product(props) {
                                       </p>
                                       <p className="feedback-form">
                                         <label htmlFor="feedback">
-                                          Your Review
+                                          Đánh giá của bạn
                                         </label>
                                         <textarea
                                           id="feedback"
@@ -498,7 +500,7 @@ function Detail_Product(props) {
                                         ></textarea>
                                         {validation_comment && (
                                           <span style={{ color: "red" }}>
-                                            * This is required!
+                                            * Bắt buộc!
                                           </span>
                                         )}
                                       </p>
@@ -508,13 +510,13 @@ function Detail_Product(props) {
                                             className="close"
                                             onClick={() => set_modal(false)}
                                           >
-                                            Close
+                                            Đóng
                                           </a>
                                           <a
-                                            style={{ cursor: "pointer" }}
+                                            style={{ cursor: "pointer", fontWeight: "500" }}
                                             onClick={handler_Comment}
                                           >
-                                            Submit
+                                            Đồng ý
                                           </a>
                                         </div>
                                       </div>

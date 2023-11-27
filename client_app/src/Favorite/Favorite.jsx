@@ -12,8 +12,8 @@ function Favorite(props) {
                 <div className="container">
                     <div className="breadcrumb-content">
                         <ul>
-                            <li><a href="index.html">Home</a></li>
-                            <li className="active">Wishlist</li>
+                            <li><a href="/">Trang chủ</a></li>
+                            <li className="active">Yêu thích</li>
                         </ul>
                     </div>
                 </div>
@@ -27,9 +27,9 @@ function Favorite(props) {
                                     <table className="table">
                                         <thead>
                                             <tr>
-                                                <th className="li-product-remove">remove</th>
-                                                <th className="li-product-thumbnail">images</th>
-                                                <th className="cart-product-name">Product</th>
+                                                <th className="li-product-remove">Xóa</th>
+                                                <th className="li-product-thumbnail">Ảnh</th>
+                                                <th className="cart-product-name">Sản Phẩm</th>
                                                 <th className="li-product-price">Unit Price</th>
                                                 <th className="li-product-stock-status">Stock Status</th>
                                                 <th className="li-product-add-cart">add to cart</th>
