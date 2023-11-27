@@ -100,7 +100,7 @@ function ConfirmPayment() {
         </div>
       </div>
       <div className="container" style={{ marginBottom: "20px" }}>
-        <h2 style={{ fontSize: "20px", fontWeight: "500" }}>
+        <h2 style={{ fontSize: "20px", fontWeight: "500", marginTop: "30px" }}>
           Thông tin giao hàng
         </h2>
         <div>
@@ -125,9 +125,9 @@ function ConfirmPayment() {
                 </Col>
                 <Col span={6}>
                   <Input
-                    value={state.email}
+                    value={state.phoneNumber}
                     onChange={(e) =>
-                      handleChangeValue("address", e.target.value)
+                      handleChangeValue("phoneNumber", e.target.value)
                     }
                     placeholder="Số điện thoại"
                   />
@@ -322,12 +322,9 @@ function ConfirmPayment() {
                   style={{ border: "1px solid #e98811", padding: "10px" }}
                   span={24}
                 >
-                  Chào Anh/Chị X, đơn hàng của Anh/Chị đang trong quá trình vận
-                  chuyển nhưng sẽ chậm trễ hơn thời gian dự kiến. Chúng tôi
-                  thành thật xin lỗi về sự cố này. Đơn hàng sẽ được giao cho
-                  Anh/Chị vào thời gian ước tính là “ngày giao hàng”. Nếu có bất
-                  kỳ thắc mắc hay vấn đề cần được giải đáp, hãy liên hệ với
-                  chúng tôi qua đường dây nóng: “Số điện thoại”.
+                  BULI sẽ xác nhận đơn hàng bằng cách gọi điện thoại. Bạn vui
+                  lòng để ý điện thoại khi đặt hàng thành công và chờ nhận hàng.
+                  Cảm ơn bạn !
                 </Col>
                 <Col span={24}>
                   <Row>
