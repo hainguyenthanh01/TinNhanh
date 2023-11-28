@@ -50,7 +50,7 @@ function UserCus(props) {
       key: "permission",
     },
     {
-      title: "Action",
+      title: "Hành động",
       key: "action",
       render: (_, value) => {
         return (
@@ -103,11 +103,11 @@ function UserCus(props) {
           <div className="col-12">
             <div className="card">
               <div className="card-body">
-                <h4 className="card-title">Customer</h4>
+                <h4 className="card-title">Khách hàng</h4>
                 <Search handlerSearch={handlerSearch} />
 
                 <Link to="/customer/create" className="btn btn-primary my-3">
-                  New create
+                  Tạo mới
                 </Link>
                 <CustomTable
                   columns={columns}

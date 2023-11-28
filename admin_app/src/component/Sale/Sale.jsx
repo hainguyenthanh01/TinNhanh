@@ -24,8 +24,8 @@ function Sale(props) {
     const query = "?" + queryString.stringify(filter);
 
     const fetchAllData = async () => {
-      const response = await SaleAPI.getAll(query);
-      const newArray = response.sale.map((it) => {
+      const ct = await SaleAPI.getAll(query);
+      const newArray = ct.sale.map((it) => {
         it.name_product = it.id_product.name_product;
         it.statusText = it.status ? "Active" : "Disable";
         it.start = moment(it.start).format("DD/MM/YYYY");
@@ -33,18 +33,12 @@ function Sale(props) {
         return it;
       });
       setSale(newArray);
-      setTotalPage(response.totalPage);
+      setTotalPage(ct.totalPage);
     };
 
     fetchAllData();
   }, [filter]);
 
-  const onPageChange = (value) => {
-    setFilter({
-      ...filter,
-      page: value,
-    });
-  };
 
   const handlerSearch = (value) => {
     setFilter({
@@ -86,13 +80,13 @@ function Sale(props) {
     },
 
     {
-      title: "Action",
+      title: "Hành động",
       key: "action",
       render: (_, value) => {
         return (
           <div className="d-flex">
             <Link to={"/sale/" + value._id} className="btn btn-success mr-1">
-              Update
+              Cập nhật
             </Link>
           </div>
         );
@@ -107,11 +101,11 @@ function Sale(props) {
           <div className="col-12">
             <div className="card">
               <div className="card-body">
-                <h4 className="card-title">Sale</h4>
+                <h4 className="card-title">Giảm giá</h4>
                 <Search handlerSearch={handlerSearch} />
 
                 <Link to="/sale/create" className="btn btn-primary my-3">
-                  New create
+                  Tạo mới
                 </Link>
 
                 <CustomTable

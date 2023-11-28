@@ -55,8 +55,7 @@ function User(props) {
   };
   const columns = [
     {
-      title: "Name",
-
+      title: "Tên",
       dataIndex: "fullname",
       key: "name",
     },
@@ -66,12 +65,12 @@ function User(props) {
       key: "email",
     },
     {
-      title: "Permission",
+      title: "Quyền",
       dataIndex: "permission",
       key: "permission",
     },
     {
-      title: "Action",
+      title: "Hành động",
       key: "action",
       render: (_, value) => {
         return (
@@ -80,7 +79,7 @@ function User(props) {
               to={"user/update/" + value._id}
               className="btn btn-success mr-1"
             >
-              Update
+              Cập nhật
             </Link>
 
             <button
@@ -89,7 +88,7 @@ function User(props) {
               onClick={() => handleDelete(value)}
               className="btn btn-danger"
             >
-              Delete
+              Xóa
             </button>
           </div>
         );
@@ -104,11 +103,11 @@ function User(props) {
           <div className="col-12">
             <div className="card">
               <div className="card-body">
-                <h4 className="card-title">Users</h4>
+                <h4 className="card-title">Tài khoản</h4>
                 <Search handlerSearch={handlerSearch} />
 
                 <Link to="/user/create" className="btn btn-primary my-3">
-                  New create
+                  Tạo mới
                 </Link>
                 <CustomTable
                   columns={columns}

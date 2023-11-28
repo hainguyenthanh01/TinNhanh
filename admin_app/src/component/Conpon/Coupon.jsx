@@ -66,13 +66,13 @@ function Coupon(props) {
       key: "describe",
     },
     {
-      title: "Action",
+      title: "Hành động",
       key: "action",
       render: (_, value) => {
         return (
           <div className="d-flex">
             <Link to={"/coupon/" + value._id} className="btn btn-success mr-1">
-              Update
+              Cập nhật
             </Link>
 
             <button
@@ -81,7 +81,7 @@ function Coupon(props) {
               onClick={() => handleDelete(value._id)}
               className="btn btn-danger"
             >
-              Delete
+              Xóa
             </button>
           </div>
         );
@@ -96,11 +96,11 @@ function Coupon(props) {
           <div className="col-12">
             <div className="card">
               <div className="card-body">
-                <h4 className="card-title">Coupons</h4>
+                <h4 className="card-title">Mã giảm giá</h4>
                 <Search handlerSearch={handlerSearch} />
 
                 <Link to="/coupon/create" className="btn btn-primary my-3">
-                  New create
+                  Tạo mới
                 </Link>
 
                 <CustomTable

@@ -62,8 +62,6 @@ function App() {
           <Header />
           <LeftMenu />
           {/* <Menu /> */}
-
-        
       </div>
 
       </Router>

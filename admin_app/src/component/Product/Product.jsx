@@ -37,7 +37,12 @@ function Product() {
     };
     fetchAllData();
   }, [filter]);
-
+  const onPageChange = (value) => {
+    setFilter({
+      ...filter,
+      page: value,
+    });
+  };
   const handlerSearch = (value) => {
     setFilter({
       ...filter,
@@ -76,7 +81,7 @@ function Product() {
       title: "Ảnh",
       key: "image",
       render: (_, value) => (
-        <img src={value.image} alt="" style={{ width: "60px" }} />
+        <img src={value.image} alt="" style={{ width: "60px", height: "60px"}} />
       ),
     },
     {
@@ -95,7 +100,7 @@ function Product() {
       key: "gender",
     },
     {
-      title: "Action",
+      title: "Hành động",
       key: "action",
       render: (_, value) => {
         return (
@@ -104,7 +109,7 @@ function Product() {
               to={"/product/update/" + value._id}
               className="btn btn-success mr-1"
             >
-              Update
+              Cập nhật
             </Link>
             <button
               type="button"
@@ -112,7 +117,7 @@ function Product() {
               onClick={() => handleDelete(value._id)}
               className="btn btn-danger"
             >
-              Delete
+              Xóa
             </button>
           </div>
         );
@@ -126,11 +131,11 @@ function Product() {
           <div className="col-12">
             <div className="card">
               <div className="card-body">
-                <h4 className="card-title">Products</h4>
+                <h4 className="card-title">Sản phẩm</h4>
                 <Search handlerSearch={handlerSearch} />
 
                 <Link to="/product/create" className="btn btn-primary my-3">
-                  New create
+                  Tạo mới
                 </Link>
 
                 <CustomTable

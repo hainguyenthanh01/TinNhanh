@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom'
 import categoryAPI from '../Api/categoryAPI';
 import Pagination from '../Shared/Pagination'
 import Search from '../Shared/Search'
-import ModalCategory from './ModalCategory'
 
 function DetailCategory(props) {
     const [category] = useState(props.match.params.id)

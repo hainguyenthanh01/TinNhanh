@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { BiSolidDiscount   } from "react-icons/bi";
 import { FaUserCircle, FaUser } from "react-icons/fa";
 import { Breadcrumb, Layout, Menu, theme } from "antd";
@@ -9,6 +9,7 @@ import { GiStabbedNote } from "react-icons/gi";
 import { ImTruck } from "react-icons/im";
 import { FiUsers } from "react-icons/fi";
 import { FaUserGroup } from "react-icons/fa6";
+import { AuthContext } from "../context/Auth";
 
 
 import { Route, Switch, useHistory } from "react-router-dom/cjs/react-router-dom.min";
@@ -53,26 +54,25 @@ function getItem(label, key, icon, link, children) {
     link,
   };
 }
-
 const items = [
-  getItem("Customer", "1", <FaUserCircle />, "/customer"),
-  getItem("Coupon ", "2", <BiSolidDiscount/>, "/coupon"),
-  getItem("Product ", "3", <HiShoppingCart />, "/product"),
+  getItem("Khách hàng", "1", <FaUserCircle />, "/customer"),
+  getItem("Mã giảm giá ", "2", <BiSolidDiscount/>, "/coupon"),
+  getItem("Sản phẩm ", "3", <HiShoppingCart />, "/product"),
   getItem("Sale ", "4", <ImFire />, "/sale"),
-  getItem("Category ", "5", <BiSolidCategory  />, "/category"),
-  getItem("Order ", "6", <GiStabbedNote  />, "/order", [
-    getItem("Order", "children_oder_1", null, "/order"),
-    getItem("ConfirmOrder", "children_oder_2", null, "/confirmorder"),
-    getItem("CompletedOrder", "children_oder_3", null, "/completedorder"),
-    getItem("CancelOrder", "children_oder_4", null, "/cancelorder"),
+  getItem("Thể loại ", "5", <BiSolidCategory  />, "/category"),
+  getItem("Đơn hàng ", "6", <GiStabbedNote  />, "/order", [
+    getItem("Đơn hàng", "children_oder_1", null, "/order"),
+    getItem("Xác nhận đơn hàng", "children_oder_2", null, "/confirmorder"),
+    getItem("Đơn hàng đã hoàn thành", "children_oder_3", null, "/completedorder"),
+    getItem("Đơn hàng đã hủy", "children_oder_4", null, "/cancelorder"),
   ]),
-  getItem("Delivery ", "7", <ImTruck/>, "/delivery", [
-    getItem("Delivery", "children_delivery_1", null, "/delivery"),
-    getItem("ConfirmDelivery", "children_delivery_2", null, "/confirmdelivery"),
+  getItem("Vận chuyển ", "7", <ImTruck/>, "/delivery", [
+    getItem("Vận chuyển", "children_delivery_1", null, "/delivery"),
+    getItem("Xác nhận vận chuyển", "children_delivery_2", null, "/confirmdelivery"),
   ]),
-  getItem("User", "sub1", <FaUser />, "/user"),
+  getItem("Tài khoản", "sub1", <FaUser />, "/user"),
 
-  getItem("Permission", "sub2", <FaUserGroup  />, "/permission"),
+  getItem("Quyền", "sub2", <FaUserGroup  />, "/permission"),
 ];
 const LeftMenu = () => {
   const [collapsed, setCollapsed] = useState(false);
@@ -80,7 +80,7 @@ const LeftMenu = () => {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
-
+  const { user, jwt } = useContext(AuthContext);
   return (
     <Layout
       style={{
@@ -119,7 +119,6 @@ const LeftMenu = () => {
             marginTop: "17px",
           }}
         >
-            {/* {getComponentByKey(key)} */}
 
             <Switch>
             <Route exact path='/' component={Login} />

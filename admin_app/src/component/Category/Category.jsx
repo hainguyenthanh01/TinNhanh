@@ -64,7 +64,7 @@ function Category(props) {
       key: "category",
     },
     {
-      title: "Action",
+      title: "Hành động",
       key: "action",
       render: (_, value) => {
         return (
@@ -73,13 +73,13 @@ function Category(props) {
               to={"/category/" + value.category}
               className="btn btn-info mr-1"
             >
-              Detail
+              Chi tiết
             </Link>
             <Link
               to={"/category/update/" + value._id}
               className="btn btn-success mr-1"
             >
-              Update
+              Cập nhật
             </Link>
             {/* <Link to={"/producer/" + value.category} className="btn btn-info mr-1">Detail</Link>
                                             <Link to={"/producer/update/" + value._id} className="btn btn-success mr-1">Update</Link> */}
@@ -90,7 +90,7 @@ function Category(props) {
               style={{ cursor: "pointer", color: "white" }}
               className="btn btn-danger"
             >
-              Delete
+              Xóa
             </button>
           </div>
         );
@@ -104,14 +104,14 @@ function Category(props) {
           <div className="col-12">
             <div className="card">
               <div className="card-body">
-                <h4 className="card-title">Category</h4>
+                <h4 className="card-title">Thể loại</h4>
                 {/* <h4 className="card-title">Producer</h4> */}
                 <Search handlerSearch={handlerSearch} />
 
                 <Link to="/category/create" className="btn btn-primary my-3">
-                  New create
+                  Tạo mới
                 </Link>
-                {/* <Link to="/producer/create" className="btn btn-primary my-3">New create</Link> */}
+                {/* <Link to="/producer/create" className="btn btn-primary my-3">Tạo mới</Link> */}
 
                 <CustomTable
                   columns={columns}
