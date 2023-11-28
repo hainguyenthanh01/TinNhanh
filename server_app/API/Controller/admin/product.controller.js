@@ -4,7 +4,7 @@ module.exports.index = async (req, res) => {
     let page = parseInt(req.query.page) || 1;
     const keyWordSearch = req.query.search;
 
-    const perPage = parseInt(req.query.limit) || 8;
+    const perPage = parseInt(req.query.limit) || 5;
     const totalPage = Math.ceil(await Product.countDocuments() / perPage);
 
     let start = (page - 1) * perPage;
