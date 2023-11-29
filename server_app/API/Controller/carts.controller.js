@@ -84,13 +84,13 @@ module.exports.postCart = async (req, res) => {
 
 }
 module.exports.deleteCart = async (req, res) => {
-    const { _id } = req.query
+    const { id_user } = req.query
     console.log(req.query);
-    await Carts.deleteOne({ _id: _id }, (err, result) => {
+    await Carts.deleteMany({ id_user: id_user }, (err, result) => {
         if (err) {
             res.status(500).json({ message: 'error!', data: err, code: 500 })
         } else {
-            res.status(200).json({ message: 'Successfully!', data: result, code: 200 })
+            res.status(200).json({ message: 'Successfully!', data: [], code: 200 })
         }
     })
 }
