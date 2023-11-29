@@ -36,6 +36,7 @@ function DetailOrder(props) {
     const fetchAllData = async () => {
       const od = await orderAPI.detailOrder(idDetail, query);
       const newArray = od.products.map((it) => {
+        it.name_product = it.id_product.name_product
         it.price_product =
           new Intl.NumberFormat("vi-VN", {
             style: "decimal",
@@ -45,11 +46,10 @@ function DetailOrder(props) {
             style: "decimal",
             decimal: "VND",
           }).format(
-            it.id_order.count * Number(it.id_product.price_product)
+            it.id_order.count * Number(it.price_product)
           ) + " VNĐ";
-          it.name_product = it.id_product.name_product
-          it.image = it.id_product.image
           it.count = it.id_order.count
+          it.image = it.id_product.image
         return it;
 
       });
@@ -94,8 +94,8 @@ function DetailOrder(props) {
     },
     {
       title: "Số lượng",
-      dataIndex: "number",
-      key: "number",
+      dataIndex: "count",
+      key: "count",
       width: "150px"
     },
     {
