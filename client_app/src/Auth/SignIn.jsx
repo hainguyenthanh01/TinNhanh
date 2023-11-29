@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link, Redirect } from 'react-router-dom';
 import queryString from 'query-string'
@@ -30,7 +30,6 @@ function SignIn(props) {
 
     // Get isLoad từ redux để load lại phần header
     const count_change = useSelector(state => state.Count.isLoad)
-
     const handler_signin = (e) => {
 
         e.preventDefault()

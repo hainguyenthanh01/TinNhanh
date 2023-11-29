@@ -11,7 +11,7 @@ function UserCus(props) {
   const [filter, setFilter] = useState({
     permission: "6087dcb5f269113b3460fce4",
     page: "1",
-    limit: "4",
+    limit: "5",
     search: "",
     status: true,
   });
@@ -50,7 +50,7 @@ function UserCus(props) {
       key: "permission",
     },
     {
-      title: "Action",
+      title: "Hành động",
       key: "action",
       render: (_, value) => {
         return (
@@ -59,7 +59,7 @@ function UserCus(props) {
               to={"user/update/" + value._id}
               className="btn btn-success mr-1"
             >
-              Update
+              Cập nhật
             </Link>
 
             <button
@@ -68,7 +68,7 @@ function UserCus(props) {
               onClick={() => handleDelete(value)}
               className="btn btn-danger"
             >
-              Delete
+              Xóa
             </button>
           </div>
         );
@@ -103,11 +103,11 @@ function UserCus(props) {
           <div className="col-12">
             <div className="card">
               <div className="card-body">
-                <h4 className="card-title">Customer</h4>
+                <h4 className="card-title">Khách hàng</h4>
                 <Search handlerSearch={handlerSearch} />
 
                 <Link to="/customer/create" className="btn btn-primary my-3">
-                  New create
+                  Tạo mới
                 </Link>
                 <CustomTable
                   columns={columns}

@@ -1,171 +1,201 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
-import { Link } from 'react-router-dom';
-import queryString from 'query-string'
+import { Link } from "react-router-dom";
+import queryString from "query-string";
 
-import orderAPI from '../Api/orderAPI';
-import Pagination from '../Shared/Pagination'
-import Search from '../Shared/Search'
+import orderAPI from "../Api/orderAPI";
+import Pagination from "../Shared/Pagination";
+import Search from "../Shared/Search";
 
 import io from "socket.io-client";
+import CustomTable from "../CustomTable/CustomTable";
 
-const socket = io('http://localhost:8000/', {
-    transports: ['websocket'], jsonp: false
+const socket = io("http://localhost:8000/", {
+  transports: ["websocket"],
+  jsonp: false,
 });
 socket.connect();
 
 function ConfirmOrder(props) {
-    const [filter, setFilter] = useState({
-        page: '1',
-        limit: '4',
-        status: '1',
-        change: true
-    })
+  const [filter, setFilter] = useState({
+    page: "1",
+    limit: "5",
+    status: "1",
+    change: true,
+  });
 
-    const [order, setOrder] = useState([])
-    const [totalPage, setTotalPage] = useState()
-    const [note, setNote] = useState([])
+  const [order, setOrder] = useState([]);
+  const [totalPage, setTotalPage] = useState();
+  const [note, setNote] = useState([]);
 
-    useEffect(() => {
-        const query = '?' + queryString.stringify(filter)
+  useEffect(() => {
+    const query = "?" + queryString.stringify(filter);
 
-        const fetchAllData = async () => {
-            const od = await orderAPI.getAPI(query)
-            console.log(od)
-            setTotalPage(od.totalPage)
-            setOrder(od.orders)
+    const fetchAllData = async () => {
+      const od = await orderAPI.getAPI(query);
+      const newArray = od.orders.map((it) => {
+        it.email = it.id_user?.email || "";
+        it.status = (() => {
+          switch (it.status) {
+            case "1":
+              return "Đang xử lý";
+            case "2":
+              return "Đã xác nhận";
+            case "3":
+              return "Đang giao";
+            case "4":
+              return "Hoàn thành";
+            default:
+              return "Đơn bị hủy";
+          }
+        })();
+        it.pay = it.pay === true ? "Đã thanh toán" : "Chưa thanh toán";
+        it.total =
+          new Intl.NumberFormat("vi-VN", {
+            style: "decimal",
+            decimal: "VND",
+          }).format(it.total) + " VNĐ";
+        return it;
+      });
+      setTotalPage(od.totalPage);
+      setOrder(newArray);
+    };
 
+    fetchAllData();
+  }, [filter]);
 
-        }
+  //Hàm này dùng để nhận socket từ server gửi lên
+  useEffect(() => {
+    //Nhận dữ liệu từ server gửi lên thông qua socket với key receive_order
+    socket.on("receive_order", (data) => {
+      setNote(data);
+    });
+  }, []);
 
-        fetchAllData()
-    }, [filter])
+  const handleConfirm = async (value) => {
+    const query = "?" + queryString.stringify({ id: value._id });
 
-    const onPageChange = (value) => {
-        setFilter({
-            ...filter,
-            page: value
-        })
+    const response = await orderAPI.confirmOrder(query);
+
+    if (response.msg === "Thanh Cong") {
+      setFilter({
+        ...filter,
+        change: !filter.change,
+      });
     }
+  };
 
-    //Hàm này dùng để nhận socket từ server gửi lên
-    useEffect(() => {
+  const handleCancel = async (value) => {
+    const query = "?" + queryString.stringify({ id: value._id });
 
-        //Nhận dữ liệu từ server gửi lên thông qua socket với key receive_order
-        socket.on('receive_order', (data) => {
-            setNote(data)
-        })
+    const response = await orderAPI.cancelOrder(query);
 
-    }, [])
-
-    const handleConfirm = async (value) => {
-        const query = '?' + queryString.stringify({ id: value._id })
-
-        const response = await orderAPI.confirmOrder(query)
-
-        if (response.msg === "Thanh Cong") {
-            setFilter({
-                ...filter,
-                change: !filter.change
-            })
-        }
+    if (response.msg === "Thanh Cong") {
+      setFilter({
+        ...filter,
+        change: !filter.change,
+      });
     }
+  };
+  const columns = [
+    {
+      title: "Tên",
+      dataIndex: "fullname",
+      key: "fullname",
+    },
+    {
+      title: "Email",
+      dataIndex: "email",
+      key: "email",
+    },
+    {
+      title: "Điện thoại",
+      dataIndex: "phone",
+      key: "phone",
+    },
+    {
+      title: "Địa chỉ",
+      dataIndex: "address",
+      key: "address",
+    },
+    {
+      title: "Trạng thái",
+      dataIndex: "status",
+      key: "status",
+    },
+    {
+      title: "Tổng tiền",
+      dataIndex: "total",
+      key: "total",
+    },
+    {
+      title: "Trạng thái thanh toán",
+      dataIndex: "pay",
+      key: "pay",
+    },
+    {
+      title: "Hành động",
+      key: "action",
+      render: (_, value) => {
+        return (
+          <div className="d-flex">
+            <Link
+              to={"/order/detail/" + value._id}
+              className="btn btn-info mr-1"
+            >
+              Chi tiết
+            </Link>
 
-    const handleCancel = async (value) => {
-        const query = '?' + queryString.stringify({ id: value._id })
-
-        const response = await orderAPI.cancelOrder(query)
-
-        if (response.msg === "Thanh Cong") {
-            setFilter({
-                ...filter,
-                change: !filter.change
-            })
-        }
-    }
-
-    return (
-        <div className="page-wrapper">
-
-            <div className="container-fluid">
-                <div className="row">
-                    <div className="col-12">
-                        <div className="card">
-                            <div className="card-body">
-                                <h4 className="card-title">Confirm Order</h4>
-                                {
-                                    note ? (<h5>{note}</h5>) : (<div></div>)
-                                }
-                                <div className="table-responsive mt-3">
-                                    <table className="table table-striped table-bordered no-wrap">
-                                        <thead>
-                                            <tr>
-                                                <th>Action</th>
-                                                <th>ID</th>
-                                                <th>Name</th>
-                                                <th>Email</th>
-                                                <th>Phone</th>
-                                                <th>Address</th>
-                                                <th>Status</th>
-                                                <th>Code</th>
-                                                <th>Total Money</th>
-                                                <th>Payment</th>
-
-                                            </tr>
-                                        </thead>
-
-                                        <tbody>
-                                            {
-                                                order && order.map((value, index) => (
-                                                    <tr key={index}>
-                                                        <td>
-                                                            <div className="d-flex">
-                                                                <Link to={"/order/detail/" + value._id} className="btn btn-info mr-1">Detail</Link>
-
-                                                                <button type="button" style={{ cursor: 'pointer', color: 'white' }} onClick={() => handleConfirm(value)} className="btn btn-success mr-1" >Xác nhận</button>
-                                                                {
-                                                                    !value.pay && <button type="button" style={{ cursor: 'pointer', color: 'white' }} onClick={() => handleCancel(value)} className="btn btn-danger" >Hủy bỏ</button>
-                                                                }       
-                                                            </div>
-                                                        </td>
-                                                        <td className="name">{value._id}</td>
-                                                        <td className="name">{value.id_note.fullname}</td>
-                                                        <td className="name">{value.id_user?.email || ''}</td>
-                                                        <td className="name">{value.id_note.phone}</td>
-                                                        <td className="name">{value.address}</td>
-                                                        <td>
-                                                            {(() => {
-                                                                switch (value.status) {
-                                                                    case "1": return "Đang xử lý";
-                                                                    case "2": return "Đã xác nhận";
-                                                                    case "3": return "Đang giao";
-                                                                    case "4": return "Hoàn thành";
-                                                                    default: return "Đơn bị hủy";
-                                                                }
-                                                            })()}
-                                                        </td>
-                                                        <th clasName="name">{value.id_coupon}</th>
-                                                        <td className="name">{new Intl.NumberFormat('vi-VN',{style: 'decimal',decimal: 'VND'}).format(value.total)+ ' VNĐ'}</td>
-                                                        <td className="name">{value.pay === true ? "Đã thanh toán" : "Chưa thanh toán"}</td>
-
-                                                    </tr>
-                                                ))
-                                            }
-                                        </tbody>
-                                    </table>
-                                    <Pagination filter={filter} onPageChange={onPageChange} totalPage={totalPage} />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <button
+              type="button"
+              style={{ cursor: "pointer", color: "white" }}
+              onClick={() => handleConfirm(value)}
+              className="btn btn-success mr-1"
+            >
+              Xác nhận
+            </button>
+            {!value.pay && (
+              <button
+                type="button"
+                style={{ cursor: "pointer", color: "white" }}
+                onClick={() => handleCancel(value)}
+                className="btn btn-danger"
+              >
+                Hủy bỏ
+              </button>
+            )}
+          </div>
+        );
+      },
+    },
+  ];
+  return (
+    <div className="page-wrapper">
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-12">
+            <div className="card">
+              <div className="card-body">
+                <h4 className="card-title">Xác nhận đơn hàng</h4>
+                {/* {note ? <h5>{note}</h5> : <div></div>} */}
+                <CustomTable
+                  columns={columns}
+                  dataSource={order}
+                  totalPage={totalPage}
+                  filter={filter}
+                  setFilter={setFilter}
+                />
+              </div>
             </div>
-            <footer className="footer text-center text-muted">
-                All Rights Reserved by BULI. Designed and Developed by
-            <a href="https://www.facebook.com/NguyenThanhHai.2k1">Hải Nguyễn</a>.
-        </footer>
+          </div>
         </div>
-    );
+      </div>
+      <footer className="footer text-center text-muted">
+        All Rights Reserved by BULI. Designed and Developed by
+        <a href="https://www.facebook.com/NguyenThanhHai.2k1">Hải Nguyễn</a>.
+      </footer>
+    </div>
+  );
 }
 
 export default ConfirmOrder;

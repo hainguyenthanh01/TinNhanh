@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 import Cart from "../API/CartAPI";
@@ -15,15 +15,20 @@ import { FaUserCircle } from "react-icons/fa";
 import { useHistory } from "react-router-dom/cjs/react-router-dom";
 import { useLocation } from "react-router-dom/cjs/react-router-dom.min";
 import { TiShoppingCart } from "react-icons/ti";
-import { FaFacebook, FaTiktok  } from "react-icons/fa";
+import { FaFacebook, FaTiktok } from "react-icons/fa";
 import { FaEarthAsia } from "react-icons/fa6";
 import { GrInstagram } from "react-icons/gr";
 import { SiShopee } from "react-icons/si";
-import { getUrlParamsFromJson, getUserCookie, removeUserCookie } from '../helper';
-
+import {
+  getUrlParamsFromJson,
+  getUserCookie,
+  removeUserCookie,
+} from "../helper";
 function Header(props) {
   // State count of cart
   const [count_cart, set_count_cart] = useState(0);
+const [isShowMenuUser , setIsShowMenuUser] = useState(false)
+const refMenu = useRef(null)
 
   const [total_price, set_total_price] = useState(0);
 
@@ -99,12 +104,12 @@ function Header(props) {
     }
   }, [id_user]);
 
+
   // Hàm này dùng để xử lý phần log out
   const handler_logout = () => {
     const action = deleteSession("");
     dispatch(action);
-    removeUserCookie()
-    
+    removeUserCookie();
   };
 
   // Get trạng thái từ redux khi user chưa đăng nhập
@@ -183,17 +188,26 @@ function Header(props) {
 
     fetchData();
   }, []);
-
+  useEffect(() => {
+    function handleClickOutside(event) {
+      console.log(refMenu.current && !refMenu.current.contains(event.target));
+      if(refMenu.current && !refMenu.current.contains(event.target)){
+        setIsShowMenuUser(false)
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
   // state keyword search
   const [keyword_search, set_keyword_search] = useState("");
 
   const [products, set_products] = useState([]);
 
-
   // Hàm này trả ra list product mà khách hàng tìm kiếm
   // sử dụng useMemo để performance hơn vì nếu mà dữ liệu mới giống với dữ liệu cũ thì nó sẽ lấy cái
   // Không cần gọi API để tạo mới data
-
 
   const handler_search = (e) => {
     e.preventDefault();
@@ -206,59 +220,80 @@ function Header(props) {
   };
   useEffect(() => {
     if (keyword_search) {
-      const queryParams = getUrlParamsFromJson({ name: keyword_search })
-      const url = `http://localhost:8000/api/Product/?${queryParams}`
+      const queryParams = getUrlParamsFromJson({ name: keyword_search });
+      const url = `http://localhost:8000/api/Product/?${queryParams}`;
       if (keyword_search) {
-        fetch(url,
-          {
-            method: "GET", headers: {
-              "Content-Type": "application/json",
-            }
-          }).then(response => response.json())
-          .then(res => {
+        fetch(url, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((response) => response.json())
+          .then((res) => {
             if (res.code === 200) {
               set_products(res.data);
             }
-          })
+          });
       }
     }
-  }, [keyword_search])
-
+  }, [keyword_search]);
+  console.log(isShowMenuUser);
   return (
     <header>
       <div className="header-top">
         <div className="container">
           <div className="row">
-            <div className="col-lg-3 col-md-4" style={{width: "270px"}}>
+            <div className="col-lg-3 col-md-4" style={{ width: "270px" }}>
               <li>
                 <span>Điện thoại: </span>
                 <a href="#">(+84) 869 666 218</a>
               </li>
             </div>
             <div className="col-lg-9 col-md-8">
-              <ul className="d-flex align-items-center" >
+              <ul className="d-flex align-items-center">
                 <li className="icon-contact">
-                  <a href="https://www.facebook.com/buli2019" style={{ fontSize: "14px" }} target="_blank">
-                    <FaFacebook/>
+                  <a
+                    href="https://www.facebook.com/buli2019"
+                    style={{ fontSize: "14px" }}
+                    target="_blank"
+                  >
+                    <FaFacebook />
                   </a>
                 </li>
                 <li className="icon-contact">
-                  <a href="https://www.instagram.com/buli_official/" style={{ fontSize: "14px" }} target="_blank">
-                    <GrInstagram/>
+                  <a
+                    href="https://www.instagram.com/buli_official/"
+                    style={{ fontSize: "14px" }}
+                    target="_blank"
+                  >
+                    <GrInstagram />
                   </a>
                 </li>
                 <li className="icon-contact">
-                  <a href="https://www.tiktok.com/@bulishop" style={{ fontSize: "14px" }} target="_blank">
-                    <FaTiktok/>
+                  <a
+                    href="https://www.tiktok.com/@bulishop"
+                    style={{ fontSize: "14px" }}
+                    target="_blank"
+                  >
+                    <FaTiktok />
                   </a>
                 </li>
                 <li className="icon-contact">
-                  <a href="https://shopee.vn/bulishop" style={{ fontSize: "14px" }} target="_blank">
-                    <SiShopee/>
+                  <a
+                    href="https://shopee.vn/bulishop"
+                    style={{ fontSize: "14px" }}
+                    target="_blank"
+                  >
+                    <SiShopee />
                   </a>
                 </li>
                 <li className="icon-contact">
-                  <a href="https://buli.vn/" style={{ fontSize: "14px" }} target="_blank">
+                  <a
+                    href="https://buli.vn/"
+                    style={{ fontSize: "14px" }}
+                    target="_blank"
+                  >
                     <FaEarthAsia />
                   </a>
                 </li>
@@ -289,7 +324,11 @@ function Header(props) {
                   value={keyword_search}
                   onChange={(e) => set_keyword_search(e.target.value)}
                 />
-                <button type="submit" style={{ height: "45px" }} class="btn btn-primary">
+                <button
+                  type="submit"
+                  style={{ height: "45px" }}
+                  class="btn btn-primary"
+                >
                   <i class="fa fa-search"></i>
                 </button>
                 {keyword_search && (
@@ -330,40 +369,40 @@ function Header(props) {
                   </div>
                 )}
               </form>
-              <li>
-                <div className="ht-setting-trigger">
+              <li >
+                <div ref={refMenu}>
+                <div className="ht-setting-trigger" onClick={()=>{setIsShowMenuUser(!isShowMenuUser)}} >
                   <FaUserCircle
                     style={{ marginRight: "5px", marginTop: "-4px" }}
                   />
                   {active_user ? (
                     <span
-                      data-toggle="collapse"
-                      data-target="#collapseExample"
-                      aria-expanded="false"
-                      aria-controls="collapseExample"
+                      // data-toggle="collapse"
+                      // data-target="#collapseExample"
+                      // aria-expanded="false"
+                      // aria-controls="collapseExample"
                       style={{ fontWeight: "bold" }}
                     >
                       {user.fullname}
                     </span>
                   ) : (
                     <span
-                      data-toggle="collapse"
-                      data-target="#collapseExample"
-                      aria-expanded="false"
-                      aria-controls="collapseExample"
+                      // data-toggle="collapse"
+                      // data-target="#collapseExample"
+                      // aria-expanded="false"
+                      // aria-controls="collapseExample"
                       style={{ fontWeight: "bold" }}
                     >
                       Tài khoản
                     </span>
                   )}
                 </div>
-                <div className="ul_setting">
+              {isShowMenuUser && (
+                  <div className="ul_setting" >
                   {active_user ? (
-                    <ul className="setting_ul collapse" id="collapseExample">
+                    <ul className="setting_ul" >
                       <li className="li_setting">
-                        <Link
-                          to={`/profile/${getUserCookie()}`}
-                        >
+                        <Link to={`/profile/${getUserCookie()}`}>
                           Tài khoản
                         </Link>
                       </li>
@@ -383,12 +422,14 @@ function Header(props) {
                       </li>
                     </ul>
                   ) : (
-                    <ul className="setting_ul collapse" id="collapseExample">
+                    <ul className="setting_ul ">
                       <li className="li_setting">
                         <Link to="/signin">Đăng nhập</Link>
                       </li>
                     </ul>
                   )}
+                </div>
+              )}
                 </div>
               </li>
             </div>
@@ -403,8 +444,9 @@ function Header(props) {
                     <ul>
                       <li className="dropdown-holder">
                         <Link
-                          className={`${location.pathname === "/" ? "active" : ""
-                            }`}
+                          className={`${
+                            location.pathname === "/" ? "active" : ""
+                          }`}
                           to="/"
                         >
                           Trang Chủ
@@ -412,8 +454,9 @@ function Header(props) {
                       </li>
                       <li className="megamenu-holder">
                         <Link
-                          className={`${location.pathname.includes("/shop") ? "active" : ""
-                            }`}
+                          className={`${
+                            location.pathname.includes("/shop") ? "active" : ""
+                          }`}
                           to="/shop/all"
                         >
                           Menu
@@ -455,8 +498,9 @@ function Header(props) {
                       </li>
                       <li>
                         <Link
-                          className={`${location.pathname.includes("/event") ? "active" : ""
-                            }`}
+                          className={`${
+                            location.pathname.includes("/event") ? "active" : ""
+                          }`}
                           to="/event"
                         >
                           Khuyến mãi
@@ -464,10 +508,11 @@ function Header(props) {
                       </li>
                       <li>
                         <Link
-                          className={`${location.pathname.includes("/contact")
-                            ? "active"
-                            : ""
-                            }`}
+                          className={`${
+                            location.pathname.includes("/contact")
+                              ? "active"
+                              : ""
+                          }`}
                           to="/contact"
                         >
                           Liên hệ
@@ -475,10 +520,9 @@ function Header(props) {
                       </li>
                       <li>
                         <Link
-                          className={`${location.pathname.includes("/about")
-                            ? "active"
-                            : ""
-                            }`}
+                          className={`${
+                            location.pathname.includes("/about") ? "active" : ""
+                          }`}
                           to="/about"
                         >
                           Về chúng tôi

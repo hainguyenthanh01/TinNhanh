@@ -59,7 +59,7 @@ function UpdateCoupon(props) {
                     <div className="col-12">
                         <div className="card">
                             <div className="card-body">
-                                <h4 className="card-title">Create Product</h4>
+                                <h4 className="card-title">Cập nhật mã giảm giá</h4>
                                 {
                                     showMessage === "Bạn đã cập nhật thành công" ?
                                         (
@@ -78,7 +78,7 @@ function UpdateCoupon(props) {
 
                                 <form onSubmit={handleSubmit(onSubmit)}>
                                     <div className="form-group w-50">
-                                        <label htmlFor="name">Mã Code</label>
+                                        <label htmlFor="name">Mã</label>
                                         <input type="text" className="form-control" id="code" 
                                         {...register('code')} 
                                         value={code} 
@@ -109,7 +109,7 @@ function UpdateCoupon(props) {
                                         onChange={(e) => setDescribe(e.target.value)} />
                                         {errors.describe && errors.describe.type === "required" && <p className="form-text text-danger">Mô tả không được để trống</p>}
                                     </div>
-                                    <button type="submit" className="btn btn-primary">Update Coupon</button>
+                                    <button type="submit" className="btn btn-primary">Cập nhật</button>
                                 </form>
                             </div>
                         </div>

@@ -94,7 +94,7 @@ function CreateUserCus(props) {
                     <div className="col-12">
                         <div className="card">
                             <div className="card-body">
-                                <h4 className="card-title">Create Customer</h4>
+                                <h4 className="card-title">Thêm khách hàng</h4>
                                 {
                                     validationMsg.api === "Bạn đã thêm thành công" ?
                                         (
@@ -113,13 +113,13 @@ function CreateUserCus(props) {
 
                                 <form onSubmit={handleSubmit(handleCreate)}>
                                     <div className="form-group w-50">
-                                        <label htmlFor="name">Name:</label>
+                                        <label htmlFor="name">Tên:</label>
                                         <input type="text" className="form-control" id="name" name="name" value={name} onChange={(e) => setName(e.target.value)} required />
                                         <p className="form-text text-danger">{validationMsg.name}</p>
                                     </div>
 
                                     <div className="form-group w-50">
-                                        <label htmlFor="username">Username:</label>
+                                        <label htmlFor="username">Tài khoản:</label>
                                         <input type="text" className="form-control" id="username" name="username" value={username} onChange={(e) => setUserName(e.target.value)} required />
                                         <p className="form-text text-danger">{validationMsg.username}</p>
                                     </div>
@@ -131,13 +131,13 @@ function CreateUserCus(props) {
                                     </div>
 
                                     <div className="form-group w-50">
-                                        <label htmlFor="password">Password:</label>
+                                        <label htmlFor="password">Mật khẩu:</label>
                                         <input type="password" className="form-control" id="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
                                         <p className="form-text text-danger">{validationMsg.password}</p>
                                     </div>
 
 
-                                    <button type="submit" className="btn btn-primary">Create</button>
+                                    <button type="submit" className="btn btn-primary">Thêm</button>
                                 </form>
                             </div>
                         </div>

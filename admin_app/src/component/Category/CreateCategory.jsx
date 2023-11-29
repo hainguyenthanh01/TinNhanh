@@ -45,7 +45,7 @@ function CreateCategory(props) {
                     <div className="col-12">
                         <div className="card">
                             <div className="card-body">
-                                <h4 className="card-title">Create Category</h4>
+                                <h4 className="card-title">Thêm thể loại</h4>
                                 {/* <h4 className="card-title">Create Producer</h4> */}
                                 {
                                     validationMsg.api === "Bạn đã thêm thành công" ?
@@ -71,7 +71,7 @@ function CreateCategory(props) {
                                         <p className="form-text text-danger">{validationMsg.name}</p>
                                     </div>
 
-                                    <button type="submit" className="btn btn-primary">Create</button>
+                                    <button type="submit" className="btn btn-primary">Thêm</button>
                                 </form>
                             </div>
                         </div>

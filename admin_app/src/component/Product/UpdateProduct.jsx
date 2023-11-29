@@ -103,10 +103,6 @@ function UpdateProduct(props) {
         {
             id:"female",
             name:"Female"
-        },
-        {
-            id:"unisex",
-            name:"Unisex"
         }
     ]
     const addProduct = async () => {
@@ -139,7 +135,7 @@ function UpdateProduct(props) {
                     <div className="col-12">
                         <div className="card">
                             <div className="card-body">
-                                <h4 className="card-title">Update Product</h4>
+                                <h4 className="card-title">Cập nhật sản phẩm</h4>
                                 {
                                     validationMsg.api === "Bạn đã thêm thành công" ?
                                         (
@@ -193,7 +189,6 @@ function UpdateProduct(props) {
                                         <p className="form-text text-danger">{validationMsg.category}</p>
                                     </div>
                                     <div className="form-group w-50">
-                                        {/* <label htmlFor="categories" className="mr-2">Chọn loại:</label> */}
                                         <label htmlFor="categories" className="mr-2">Chọn giới tính:</label>
                                         <select name="categories" id="categories" value={genderChoose} onChange={(e) => setGenderChoose(e.target.value)}>
                                             <option >Chọn loại</option>
@@ -225,12 +220,12 @@ function UpdateProduct(props) {
                                     </div>
 
                                     <div className="form-group w-50">
-                                        <label>Hình Ảnh Cũ</label>
-                                        <img src={image} alt="" style={{ width: '70px' }} />
+                                        <label>Ảnh Cũ </label>
+                                        <img src={image} alt="" style={{ width: '70px', border: "1px solid", marginLeft: "20px" }} />
                                     </div>
 
 
-                                    <button type="submit" className="btn btn-primary">Update Product</button>
+                                    <button type="submit" className="btn btn-primary">Cập nhật</button>
                                 </form>
                             </div>
                         </div>

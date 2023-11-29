@@ -4,7 +4,7 @@ module.exports.index = async (req, res) => {
     let page = parseInt(req.query.page) || 1;
     const keyWordSearch = req.query.search;
 
-    const perPage = parseInt(req.query.limit) || 8;
+    const perPage = parseInt(req.query.limit) || 5;
     const totalPage = Math.ceil(await Product.countDocuments() / perPage);
 
     let start = (page - 1) * perPage;
@@ -49,7 +49,7 @@ module.exports.create = async (req, res) => {
         newProduct.name_product = req.body.name
         newProduct.price_product = req.body.price
         newProduct.id_category = req.body.category
-        // newProduct.number = req.body.number
+        newProduct.number = req.body.number
         newProduct.describe = req.body.description
         newProduct.gender = req.body.gender
 
@@ -115,10 +115,10 @@ module.exports.update = async (req, res) => {
                 name_product: req.body.name,
                 price_product: req.body.price,
                 id_category: req.body.category,
-                // number: req.body.number,
+                number: req.body.number,
                 describe: req.body.description,
                 gender: req.body.gender,
-                image: fileProduct
+                image: "http://localhost:8000" + fileProduct
             }, function (err, res) {
                 if (err) return res.json({ msg: err });
             });
@@ -131,7 +131,7 @@ module.exports.update = async (req, res) => {
                 name_product: req.body.name,
                 price_product: req.body.price,
                 id_category: req.body.category,
-                // number: req.body.number,
+                number: req.body.number,
                 describe: req.body.description,
                 gender: req.body.gender
             }, function (err, res) {

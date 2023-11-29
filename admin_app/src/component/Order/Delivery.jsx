@@ -6,6 +6,7 @@ import queryString from "query-string";
 import orderAPI from "../Api/orderAPI";
 import Pagination from "../Shared/Pagination";
 import Search from "../Shared/Search";
+import CustomTable from "../CustomTable/CustomTable";
 
 function Delivery(props) {
   const [filter, setFilter] = useState({
@@ -23,9 +24,33 @@ function Delivery(props) {
 
     const fetchAllData = async () => {
       const od = await orderAPI.getAPI(query);
+      const newArray = od.orders.map((it) => {
+        it.email = it.id_user?.email || "";
+        it.status = (() => {
+          switch (it.status) {
+            case "1":
+              return "Đang xử lý";
+            case "2":
+              return "Đã xác nhận";
+            case "3":
+              return "Đang giao";
+            case "4":
+              return "Hoàn thành";
+            default:
+              return "Đơn bị hủy";
+          }
+        })();
+        it.pay = it.pay === true ? "Đã thanh toán" : "Chưa thanh toán";
+        it.total =
+          new Intl.NumberFormat("vi-VN", {
+            style: "decimal",
+            decimal: "VND",
+          }).format(it.total) + " VNĐ";
+        return it;
+      });
       console.log(od);
       setTotalPage(od.totalPage);
-      setOrder(od.orders);
+      setOrder(newArray);
     };
 
     fetchAllData();
@@ -63,7 +88,82 @@ function Delivery(props) {
       });
     }
   };
+  const columns = [
+    {
+      title: "Tên",
+      dataIndex: "fullname",
+      key: "fullname",
+    },
+    {
+      title: "Email",
+      dataIndex: "email",
+      key: "email",
+    },
+    {
+      title: "Điện thoại",
+      dataIndex: "phone",
+      key: "phone",
+    },
+    {
+      title: "Địa chỉ",
+      dataIndex: "address",
+      key: "address",
+    },
+    {
+      title: "Trạng thái",
+      dataIndex: "status",
+      key: "status",
+    },
+    {
+      title: "Tổng tiền",
+      dataIndex: "total",
+      key: "total",
+    },
+    {
+      title: "Trạng thái thanh toán",
+      dataIndex: "pay",
+      key: "pay",
+    },
+    {
+      title: "Hành động",
+      key: "action",
+      render: (_, value) => {
+        return (
+          <div className="d-flex">
+          <Link
+            to={"/order/detail/" + value._id}
+            className="btn btn-info mr-1"
+          >
+            Chi tiết
+          </Link>
 
+          <button
+            type="button"
+            style={{ cursor: "pointer", color: "white" }}
+            onClick={() => handleConfirm(value)}
+            className="btn btn-success mr-1"
+          >
+            Xác nhận
+          </button>
+
+          {!value.pay && (
+            <button
+              type="button"
+              style={{
+                cursor: "pointer",
+                color: "white",
+              }}
+              onClick={() => handleCancel(value)}
+              className="btn btn-danger"
+            >
+              Hủy bỏ
+            </button>
+          )}
+        </div>
+        );
+      },
+    },
+  ];
   return (
     <div className="page-wrapper">
       <div className="container-fluid">
@@ -71,105 +171,15 @@ function Delivery(props) {
           <div className="col-12">
             <div className="card">
               <div className="card-body">
-                <h4 className="card-title">Delivery</h4>
+                <h4 className="card-title">Vận chuyển</h4>
 
-                <div className="table-responsive mt-3">
-                  <table className="table table-striped table-bordered no-wrap">
-                    <thead>
-                      <tr>
-                        <th>Action</th>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>Address</th>
-                        <th>Status</th>
-                        <th>Total Money</th>
-                        <th>Payment</th>
-                      </tr>
-                    </thead>
-
-                    <tbody>
-                      {order &&
-                        order.map((value, index) => (
-                          <tr key={index}>
-                            <td>
-                              <div className="d-flex">
-                                <Link
-                                  to={"/order/detail/" + value._id}
-                                  className="btn btn-info mr-1"
-                                >
-                                  Detail
-                                </Link>
-
-                                <button
-                                  type="button"
-                                  style={{ cursor: "pointer", color: "white" }}
-                                  onClick={() => handleConfirm(value)}
-                                  className="btn btn-success mr-1"
-                                >
-                                  Xác nhận
-                                </button>
-
-                                {!value.pay && (
-                                  <button
-                                    type="button"
-                                    style={{
-                                      cursor: "pointer",
-                                      color: "white",
-                                    }}
-                                    onClick={() => handleCancel(value)}
-                                    className="btn btn-danger"
-                                  >
-                                    Hủy bỏ
-                                  </button>
-                                )}
-                              </div>
-                            </td>
-                            <td className="name">{value._id}</td>
-                            <td className="name">{value.id_note.fullname}</td>
-                            <td className="name">
-                              {value.id_user?.email || ""}
-                            </td>
-                            <td className="name">{value.id_note.phone}</td>
-                            <td className="name">{value.address}</td>
-                            <td>
-                              {(() => {
-                                switch (value.status) {
-                                  case "1":
-                                    return "Đang xử lý";
-                                  case "2":
-                                    return "Đã xác nhận";
-                                  case "3":
-                                    return "Đang giao";
-                                  case "4":
-                                    return "Hoàn thành";
-                                  default:
-                                    return "Đơn bị hủy";
-                                }
-                              })()}
-                            </td>
-                            <td className="name">
-                              {new Intl.NumberFormat("vi-VN", {
-                                style: "decimal",
-                                decimal: "VND",
-                              }).format(value.total) + " VNĐ"}
-                            </td>
-                            <td className="name">
-                              {value.pay === true
-                                ? "Đã thanh toán"
-                                : "Chưa thanh toán"}
-                            </td>
-                          </tr>
-                        ))}
-                    </tbody>
-                  </table>
-                  <Pagination
-                    filter={filter}
-                    onPageChange={onPageChange}
-                    totalPage={totalPage}
-                  />
-                </div>
+                <CustomTable
+                  columns={columns}
+                  dataSource={order}
+                  totalPage={totalPage}
+                  filter={filter}
+                  setFilter={setFilter}
+                />
               </div>
             </div>
           </div>
