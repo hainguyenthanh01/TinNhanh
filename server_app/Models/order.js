@@ -15,6 +15,7 @@ var schema = new mongoose.Schema(
             ref: 'Note'
         },
         address: String,
+        full_name: String,
         total: Number,
         status: String,
         pay: Boolean,
