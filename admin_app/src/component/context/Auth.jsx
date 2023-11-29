@@ -20,7 +20,7 @@ const AuthContextProvider = (props) => {
 
         setJWT(jwt);
         setUser(user);
-        
+
     }
 
     const logOut = () => {
@@ -29,7 +29,7 @@ const AuthContextProvider = (props) => {
 
         setJWT();
         setUser();
-        <Redirect to="/" />
+        // <Redirect to="/" />
     }
 
 

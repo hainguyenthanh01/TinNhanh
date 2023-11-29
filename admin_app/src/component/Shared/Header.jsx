@@ -1,11 +1,19 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Logoicon from "../Image/biglogo.svg";
 import Logotext from "../Image/logo-text.png";
 import Logolight from "../Image/logo-light-text.png";
 import { AuthContext } from "../context/Auth";
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 function Header(props) {
   const { jwt, user, logOut } = useContext(AuthContext);
+  const history = useHistory()
+  useEffect(() => {
+    if (!user) {
+      // window.location.href = '/'
+      history.push('/')
+    }
+  }, [user])
   return (
     <div>
       {jwt && user ? (
