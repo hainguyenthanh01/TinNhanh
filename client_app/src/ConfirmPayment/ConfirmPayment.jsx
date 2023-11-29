@@ -14,6 +14,8 @@ import OrderAPI from '../API/OrderAPI';
 import Detail_OrderAPI from '../API/Detail_OrderAPI';
 import CartAPI from '../API/CartAPI'
 import { addCart } from '../Redux/Action/ActionCart';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import User from '../API/User';
 
 
 const socket = io("http://localhost:8000", {
@@ -25,6 +27,7 @@ socket.connect();
 function ConfirmPayment() {
   const listCard = useSelector((state) => state.Cart.listCart);
   const dispatch = useDispatch();
+  const history = useHistory();
   const totalPrice =
     listCard &&
     listCard.reduce(
@@ -60,6 +63,12 @@ function ConfirmPayment() {
         setProvince(response.data);
       }
     };
+    const fetchDataUser = async () => {
+      const response = await User.Get_User(getUserCookie());
+      setState({ ...state, email: response.email })
+    };
+
+    fetchDataUser();
 
     fetchData();
   }, []);
@@ -129,7 +138,7 @@ function ConfirmPayment() {
     const districtItem = district.find(it => it.value === state.district)
     const wardsItem = wards.find(it => it.value === state.wards)
 
-    let addressNew = ` ${state.address} - ${state.wards} - ${state.district} - ${state.province} `
+    let addressNew = ` ${state.address} - ${wardsItem.label} - ${districtItem.label} - ${provinceItem.label} `
 
 
 
@@ -166,6 +175,7 @@ function ConfirmPayment() {
       content: "Đặt hàng thành công",
       active: new Date() * 1
     })
+    history.push('/')
     socket.emit('send_order', "Có người vừa đặt hàng")
     localStorage.removeItem('id_coupon')
     localStorage.removeItem('coupon')
@@ -203,8 +213,9 @@ function ConfirmPayment() {
                 <Col span={18}>
                   <Input
                     value={state.email}
-                    onChange={(e) => handleChangeValue("email", e.target.value)}
+                    // onChange={(e) => handleChangeValue("email", e.target.value)}
                     type="email"
+                    disabled
                     placeholder="Email"
                   />
                 </Col>
