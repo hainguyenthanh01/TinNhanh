@@ -11,7 +11,7 @@ import Cart from "../API/CartAPI";
 import CommentAPI from "../API/CommentAPI";
 import CartsLocal from "../Share/CartsLocal";
 import SaleAPI from "../API/SaleAPI";
-import { getUserCookie } from '../helper';
+import { getUserCookie } from "../helper";
 import { TiMinus, TiPlus } from "react-icons/ti";
 
 Detail_Product.propTypes = {};
@@ -64,15 +64,13 @@ function Detail_Product(props) {
       size: size,
     };
     set_show_success(true);
-    const dataRes = await Cart.Post_Cart(data)
+    const dataRes = await Cart.Post_Cart(data);
     if (dataRes.code == 200) {
-      dispatch(addCart(dataRes.data))
+      dispatch(addCart(dataRes.data));
     }
     setTimeout(() => {
       set_show_success(false);
-    }, 1000)
-
-
+    }, 1000);
   };
 
   // Hàm này dùng để giảm số lượng
@@ -255,22 +253,16 @@ function Detail_Product(props) {
                           decimal: "VND",
                         }).format(
                           parseInt(sale.id_product.price_product) -
-                          (parseInt(sale.id_product.price_product) *
-                            parseInt(sale.promotion)) /
-                          100
+                            (parseInt(sale.id_product.price_product) *
+                              parseInt(sale.promotion)) /
+                              100
                         ) + " VNĐ"}
                       </span>
                     )}
                   </div>
                   <div className="product-desc">
                     <p>
-                      <span>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Vel harum tenetur delectus nam quam assumenda? Soluta
-                        vitae tempora ratione excepturi doloremque, repudiandae
-                        ullam, eum corporis, itaque dolor aperiam enim
-                        aspernatur.
-                      </span>
+                      <span>{product.describe}</span>
                     </p>
                   </div>
                   <div className="product-variants">
@@ -287,11 +279,17 @@ function Detail_Product(props) {
                     </div>
                   </div>
                   <div className="single-add-to-cart">
-                    <form action="#" className="cart-quantity" style={{marginTop: "15px"}}>
-                      <div className="quantity" style={{marginBottom: "18px"}}>
+                    <form
+                      action="#"
+                      className="cart-quantity"
+                      style={{ marginTop: "15px" }}
+                    >
+                      <div
+                        className="quantity"
+                        style={{ marginBottom: "18px" }}
+                      >
                         <label>Số lượng</label>
                         <div className="cart-plus-minus">
-                        
                           <div className="dec qtybutton" onClick={downCount}>
                             <TiMinus />
                           </div>
@@ -306,7 +304,12 @@ function Detail_Product(props) {
                           </div>
                         </div>
                       </div>
-                      <a href="#" onClick={handler_addcart} className="add-to-cart" type="submit">
+                      <a
+                        href="#"
+                        onClick={handler_addcart}
+                        className="add-to-cart"
+                        type="submit"
+                      >
                         Thêm vào giỏ hàng
                       </a>
                     </form>
@@ -345,12 +348,7 @@ function Detail_Product(props) {
               role="tabpanel"
             >
               <div className="product-description">
-                <span>
-                  The best is yet to come! Give your walls a voice with a framed
-                  poster. This aesthethic, optimistic poster will look great in
-                  your desk or in an open-space office. Painted wooden frame
-                  with passe-partout for more depth.
-                </span>
+                <span>{product.describe}</span>
               </div>
             </div>
             <div id="reviews" className="tab-pane" role="tabpanel">
@@ -431,7 +429,7 @@ function Detail_Product(props) {
                       <div className="modal-content">
                         <div className="modal-body">
                           <h3 className="review-page-title">
-                          Đánh giá của bạn
+                            Đánh giá của bạn
                           </h3>
                           <div className="modal-inner-area row">
                             <div className="col-lg-6">
@@ -463,9 +461,7 @@ function Detail_Product(props) {
                               <div className="li-review-content">
                                 <div className="feedback-area">
                                   <div className="feedback">
-                                    <h3 className="feedback-title">
-                                      Phản hồi
-                                    </h3>
+                                    <h3 className="feedback-title">Phản hồi</h3>
                                     <form action="#">
                                       <p className="your-opinion">
                                         <label>Đánh giá</label>
@@ -513,7 +509,10 @@ function Detail_Product(props) {
                                             Đóng
                                           </a>
                                           <a
-                                            style={{ cursor: "pointer", fontWeight: "500" }}
+                                            style={{
+                                              cursor: "pointer",
+                                              fontWeight: "500",
+                                            }}
                                             onClick={handler_Comment}
                                           >
                                             Đồng ý

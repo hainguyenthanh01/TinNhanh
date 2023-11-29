@@ -5,18 +5,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { io } from "socket.io-client";
 import AddressAPI from "../API/AddressAPI";
 import MoMo from "../Checkout/MoMo";
-import { forIn } from 'lodash';
-import MessageNotify from '../Message/Message';
-import CouponAPI from '../API/CouponAPI';
-import NoteAPI from '../API/NoteAPI';
-import { getUserCookie } from '../helper';
-import OrderAPI from '../API/OrderAPI';
-import Detail_OrderAPI from '../API/Detail_OrderAPI';
-import CartAPI from '../API/CartAPI'
-import { addCart } from '../Redux/Action/ActionCart';
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
-import User from '../API/User';
-
+import { forIn } from "lodash";
+import MessageNotify from "../Message/Message";
+import CouponAPI from "../API/CouponAPI";
+import NoteAPI from "../API/NoteAPI";
+import { getUserCookie } from "../helper";
+import OrderAPI from "../API/OrderAPI";
+import Detail_OrderAPI from "../API/Detail_OrderAPI";
+import CartAPI from "../API/CartAPI";
+import { addCart } from "../Redux/Action/ActionCart";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import User from "../API/User";
 
 const socket = io("http://localhost:8000", {
   transports: ["websocket"],
@@ -38,9 +37,9 @@ function ConfirmPayment() {
   const [district, setDistrict] = useState([]);
   const [wards, setWards] = useState([]);
   const [messageObj, setMessageObj] = useState({
-    type: '',
-    content: '',
-    active: 0
+    type: "",
+    content: "",
+    active: 0,
   });
   const [state, setState] = useState({
     name: "",
@@ -65,7 +64,7 @@ function ConfirmPayment() {
     };
     const fetchDataUser = async () => {
       const response = await User.Get_User(getUserCookie());
-      setState({ ...state, email: response.email })
+      setState({ ...state, email: response.email });
     };
 
     fetchDataUser();
@@ -113,34 +112,32 @@ function ConfirmPayment() {
   const handleConfirm = async () => {
     for (const property in state) {
       console.log(`${property}: ${state[property]}`);
-      if (!state[property] && property !== 'note') {
+      if (!state[property] && property !== "note") {
         setMessageObj({
-          type: 'error',
+          type: "error",
           content: "Vui lòng nhập đầy đủ thông tin đặt hàng!",
-          active: new Date() * 1
-        })
-        return
+          active: new Date() * 1,
+        });
+        return;
       }
     }
     if (localStorage.getItem("id_coupon")) {
-
-      const responseUpdate = await CouponAPI.updateCoupon(localStorage.getItem("id_coupon"))
-      console.log(responseUpdate)
-
+      const responseUpdate = await CouponAPI.updateCoupon(
+        localStorage.getItem("id_coupon")
+      );
+      console.log(responseUpdate);
     }
 
     const data_delivery = {
       fullname: state.name,
       phone: state.phoneNumber,
-    }
-    const responseDelivery = await NoteAPI.post_note(data_delivery)
-    const provinceItem = province.find(it => it.value === state.province)
-    const districtItem = district.find(it => it.value === state.district)
-    const wardsItem = wards.find(it => it.value === state.wards)
+    };
+    const responseDelivery = await NoteAPI.post_note(data_delivery);
+    const provinceItem = province.find((it) => it.value === state.province);
+    const districtItem = district.find((it) => it.value === state.district);
+    const wardsItem = wards.find((it) => it.value === state.wards);
 
-    let addressNew = ` ${state.address} - ${wardsItem.label} - ${districtItem.label} - ${provinceItem.label} `
-
-
+    let addressNew = ` ${state.address} - ${wardsItem.label} - ${districtItem.label} - ${provinceItem.label} `;
 
     const dataOrder = {
       id_user: getUserCookie(),
@@ -149,13 +146,17 @@ function ConfirmPayment() {
       total: totalPrice,
       status: "1",
       pay: false,
-      id_payment: '6086709cdc52ab1ae999e882',
+      id_payment: "6086709cdc52ab1ae999e882",
       id_note: responseDelivery._id,
       feeship: 30000,
-      id_coupon: localStorage.getItem('id_coupon') ? localStorage.getItem('id_coupon') : '',
-      create_time: `${new Date().getDate()}/${parseInt(new Date().getMonth()) + 1}/${new Date().getFullYear()}`
-    }
-    const responseOrder = await OrderAPI.post_order(dataOrder)
+      id_coupon: localStorage.getItem("id_coupon")
+        ? localStorage.getItem("id_coupon")
+        : "",
+      create_time: `${new Date().getDate()}/${
+        parseInt(new Date().getMonth()) + 1
+      }/${new Date().getFullYear()}`,
+    };
+    const responseOrder = await OrderAPI.post_order(dataOrder);
     for (let i = 0; i < listCard.length; i++) {
       const dataDetailOrder = {
         id_order: responseOrder._id,
@@ -163,24 +164,24 @@ function ConfirmPayment() {
         name_product: listCard[i].name_product,
         price_product: listCard[i].price_product,
         count: listCard[i].count,
-        size: listCard[i].size
-      }
-      await Detail_OrderAPI.post_detail_order(dataDetailOrder)
+        size: listCard[i].size,
+      };
+      await Detail_OrderAPI.post_detail_order(dataDetailOrder);
     }
     const dataRes = await CartAPI.Delete_Cart({ id_user: getUserCookie() });
     if (dataRes.code == 200) {
       dispatch(addCart(dataRes.data));
     }
     setMessageObj({
-      type: 'success',
+      type: "success",
       content: "Đặt hàng thành công",
-      active: new Date() * 1
-    })
-    history.push('/')
-    socket.emit('send_order', "Có người vừa đặt hàng")
-    localStorage.removeItem('id_coupon')
-    localStorage.removeItem('coupon')
-  }
+      active: new Date() * 1,
+    });
+    history.push("/");
+    socket.emit("send_order", "Có người vừa đặt hàng");
+    localStorage.removeItem("id_coupon");
+    localStorage.removeItem("coupon");
+  };
   return (
     <div>
       <div className="breadcrumb-area">
@@ -297,7 +298,8 @@ function ConfirmPayment() {
                         }}
                       >
                         <Checkbox
-                          checked={paymentMethod.cod}
+                          // checked={paymentMethod.cod}
+                          checked={true}
                           onChange={(e) => {
                             setPaymentMethod({
                               momo: false,
@@ -306,7 +308,7 @@ function ConfirmPayment() {
                           }}
                         />
                         <span style={{ marginLeft: "10px" }}>
-                          Thanh toán khi nhận hàng(COD)
+                          Thanh toán khi nhận hàng (COD)
                         </span>
                       </div>
                       <div
@@ -457,7 +459,11 @@ function ConfirmPayment() {
           </Row>
         </div>
       </div>
-      <MessageNotify type={messageObj.type} content={messageObj.content} active={messageObj.active} />
+      <MessageNotify
+        type={messageObj.type}
+        content={messageObj.content}
+        active={messageObj.active}
+      />
     </div>
   );
 }

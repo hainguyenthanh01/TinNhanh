@@ -27,8 +27,8 @@ import {
 function Header(props) {
   // State count of cart
   const [count_cart, set_count_cart] = useState(0);
-const [isShowMenuUser , setIsShowMenuUser] = useState(false)
-const refMenu = useRef(null)
+  const [isShowMenuUser, setIsShowMenuUser] = useState(false);
+  const refMenu = useRef(null);
 
   const [total_price, set_total_price] = useState(0);
 
@@ -103,7 +103,6 @@ const refMenu = useRef(null)
       }
     }
   }, [id_user]);
-
 
   // Hàm này dùng để xử lý phần log out
   const handler_logout = () => {
@@ -191,8 +190,8 @@ const refMenu = useRef(null)
   useEffect(() => {
     function handleClickOutside(event) {
       console.log(refMenu.current && !refMenu.current.contains(event.target));
-      if(refMenu.current && !refMenu.current.contains(event.target)){
-        setIsShowMenuUser(false)
+      if (refMenu.current && !refMenu.current.contains(event.target)) {
+        setIsShowMenuUser(false);
       }
     }
     document.addEventListener("mousedown", handleClickOutside);
@@ -369,67 +368,72 @@ const refMenu = useRef(null)
                   </div>
                 )}
               </form>
-              <li >
+              <li>
                 <div ref={refMenu}>
-                <div className="ht-setting-trigger" onClick={()=>{setIsShowMenuUser(!isShowMenuUser)}} >
-                  <FaUserCircle
-                    style={{ marginRight: "5px", marginTop: "-4px" }}
-                  />
-                  {active_user ? (
-                    <span
-                      // data-toggle="collapse"
-                      // data-target="#collapseExample"
-                      // aria-expanded="false"
-                      // aria-controls="collapseExample"
-                      style={{ fontWeight: "bold" }}
-                    >
-                      {user.fullname}
-                    </span>
-                  ) : (
-                    <span
-                      // data-toggle="collapse"
-                      // data-target="#collapseExample"
-                      // aria-expanded="false"
-                      // aria-controls="collapseExample"
-                      style={{ fontWeight: "bold" }}
-                    >
-                      Tài khoản
-                    </span>
+                  <div
+                    className="ht-setting-trigger"
+                    onClick={() => {
+                      setIsShowMenuUser(!isShowMenuUser);
+                    }}
+                  >
+                    <FaUserCircle
+                      style={{ marginRight: "5px", marginTop: "-4px" }}
+                    />
+                    {active_user ? (
+                      <span
+                        // data-toggle="collapse"
+                        // data-target="#collapseExample"
+                        // aria-expanded="false"
+                        // aria-controls="collapseExample"
+                        style={{ fontWeight: "bold" }}
+                      >
+                        {user.fullname}
+                      </span>
+                    ) : (
+                      <span
+                        // data-toggle="collapse"
+                        // data-target="#collapseExample"
+                        // aria-expanded="false"
+                        // aria-controls="collapseExample"
+                        style={{ fontWeight: "bold" }}
+                      >
+                        Tài khoản
+                      </span>
+                    )}
+                  </div>
+                  {isShowMenuUser && (
+                    <div className="ul_setting">
+                      {active_user ? (
+                        <ul className="setting_ul">
+                          <li className="li_setting">
+                            <Link to={`/profile/${getUserCookie()}`}>
+                              Tài khoản
+                            </Link>
+                          </li>
+                          <li className="li_setting">
+                            <Link to="/history">Đơn hàng</Link>
+                          </li>
+                          <li className="li_setting">
+                            <a
+                              onClick={() => {
+                                handler_logout();
+                                // history.push("/");
+                              }}
+                              href="/"
+                            >
+                              Đăng xuất
+                            </a>
+                          </li>
+                        </ul>
+                      ) : (
+                        <ul className="setting_ul ">
+                          <li className="li_setting">
+                            <Link to="/signin">Đăng nhập</Link>
+                          </li>
+                        </ul>
+                      )}
+                    </div>
                   )}
-                </div>
-              {isShowMenuUser && (
-                  <div className="ul_setting" >
-                  {active_user ? (
-                    <ul className="setting_ul" >
-                      <li className="li_setting">
-                        <Link to={`/profile/${getUserCookie()}`}>
-                          Tài khoản
-                        </Link>
-                      </li>
-                      <li className="li_setting">
-                        <Link to="/history">Đơn hàng</Link>
-                      </li>
-                      <li className="li_setting">
-                        <a
-                          onClick={() => {
-                            handler_logout();
-                            history.push("/");
-                          }}
-                          href="#"
-                        >
-                          Đăng xuất
-                        </a>
-                      </li>
-                    </ul>
-                  ) : (
-                    <ul className="setting_ul ">
-                      <li className="li_setting">
-                        <Link to="/signin">Đăng nhập</Link>
-                      </li>
-                    </ul>
-                  )}
-                </div>
-              )}
                 </div>
               </li>
             </div>

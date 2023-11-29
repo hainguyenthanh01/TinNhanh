@@ -1,131 +1,190 @@
-import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import { Link, useParams } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
+import { Link, useParams } from "react-router-dom";
 // import HistoryAPI from '../../API/HistoryAPI';
-import './History.css'
-import OrderAPI from '../../API/OrderAPI';
-import Detail_OrderAPI from '../../API/Detail_OrderAPI';
-import NoteAPI from '../../API/NoteAPI';
-
+import "./History.css";
+import OrderAPI from "../../API/OrderAPI";
+import Detail_OrderAPI from "../../API/Detail_OrderAPI";
+import NoteAPI from "../../API/NoteAPI";
 
 function DetailHistory(props) {
+  const { id } = useParams();
 
-    const { id } = useParams()
+  const [order, set_order] = useState({});
 
-    const [order, set_order] = useState({})
+  const [detail_order, set_detail_order] = useState([]);
 
-    const [detail_order, set_detail_order] = useState([])
+  const [note, set_note] = useState({});
 
-    const [note, set_note] = useState({})
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await OrderAPI.get_detail(id);
+      console.log(response);
 
-    useEffect(() => {
+      set_order(response);
 
-        const fetchData = async () => {
+      const response_detail_order = await Detail_OrderAPI.get_detail_order(id);
 
-            const response = await OrderAPI.get_detail(id)
-            console.log(response)
+      set_detail_order(response_detail_order);
+    };
 
-            set_order(response)
+    fetchData();
+  }, []);
 
-            const response_detail_order = await Detail_OrderAPI.get_detail_order(id)
-
-            set_detail_order(response_detail_order)
-
-        }
-
-        fetchData()
-
-    }, [])
-
-    return (
-        <div>
-            <div className="container" style={{ paddingTop: '3rem' }}>
-                <h1>Thông Tin Chi Tiết Đơn Hàng</h1>
-                <ul>
-                    <li style={{ fontSize: '1.1rem' }}>ID Đơn hàng: <span>{order._id}</span></li>
-                    <li style={{ fontSize: '1.1rem' }}>Điện thoại: <span>{order.id_note && order.id_note.phone}</span></li>
-                    <li style={{ fontSize: '1.1rem' }}>Tên: <span>{order.id_note && order.id_note.fullname}</span></li>
-                    <li style={{ fontSize: '1.1rem' }}>Tổng: <span>{new Intl.NumberFormat('vi-VN',{style: 'decimal',decimal: 'VND'}).format(order.total) + ' VNĐ'}</span></li>
-                    <li style={{ fontSize: '1.1rem' }}>Phí vận chuyển: <span>{new Intl.NumberFormat('vi-VN',{style: 'decimal',decimal: 'VND'}).format(order.feeship) + ' VNĐ'}</span></li>
-                    <li style={{ fontSize: '1.1rem' }}>Thanh toán: <span>{order.id_payment && order.id_payment.pay_name}</span></li>
-                </ul>
-                <div className="group_box_status" style={{ marginTop: '3rem' }}>
-                    <div className="d-flex justify-content-center">
-                        <div className="group_status_delivery d-flex justify-content-around">
-                            <div className="detail_status_delivery">
-                                <div className="w-100 d-flex justify-content-center">
-                                    <div className={parseInt(order.status) > 0 && 'bg_status_delivery_active'}></div>
-                                </div>
-                                <a className="a_status_delivery">Đang xử lý</a>
-                            </div>
-
-                            <div className="detail_status_delivery">
-                                <div className="w-100 d-flex justify-content-center">
-                                    <div className={parseInt(order.status) > 1 ? 'bg_status_delivery_active' : 'bg_status_delivery'}></div>
-                                </div>
-                                <a className="a_status_delivery">Đã xác nhận</a>
-                            </div>
-
-                            <div className="detail_status_delivery">
-                                <div className="w-100 d-flex justify-content-center">
-                                    <div className={parseInt(order.status) > 2 ? 'bg_status_delivery_active' : 'bg_status_delivery'}></div>
-                                </div>
-                                <a className="a_status_delivery">Đang vận chuyển</a>
-                            </div>
-
-                            <div className="detail_status_delivery">
-                                <div className="w-100 d-flex justify-content-center">
-                                    <div className={parseInt(order.status) > 3 ? 'bg_status_delivery_active' : 'bg_status_delivery'}></div>
-                                </div>
-                                <a className="a_status_delivery">Đã hoàn thành</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="test_status d-flex justify-content-center">
-                        <div className="hr_status_delivery"></div>
-                    </div>
+  return (
+    <div>
+      <div className="container" style={{ paddingTop: "3rem" }}>
+        <h1>Thông Tin Chi Tiết Đơn Hàng</h1>
+        <ul>
+          {/* <li style={{ fontSize: '1.1rem' }}>ID Đơn hàng: <span>{order._id}</span></li> */}
+          <li style={{ fontSize: "1.1rem" }}>
+            Tên: <span>{order.id_note && order.id_note.fullname}</span>
+          </li>
+          <li style={{ fontSize: "1.1rem" }}>
+            Điện thoại: <span>{order.id_note && order.id_note.phone}</span>
+          </li>
+          <li style={{ fontSize: "1.1rem" }}>
+            Địa chỉ: <span>{order.address}</span>
+          </li>
+          <li style={{ fontSize: "1.1rem" }}>
+            Tổng:{" "}
+            <span>
+              {new Intl.NumberFormat("vi-VN", {
+                style: "decimal",
+                decimal: "VND",
+              }).format(order.total) + " VNĐ"}
+            </span>
+          </li>
+          <li style={{ fontSize: "1.1rem" }}>
+            Phí vận chuyển:{" "}
+            <span>
+              {new Intl.NumberFormat("vi-VN", {
+                style: "decimal",
+                decimal: "VND",
+              }).format(order.feeship) + " VNĐ"}
+            </span>
+          </li>
+          <li style={{ fontSize: "1.1rem" }}>
+            Thanh toán:{" "}
+            <span>{order.id_payment && order.id_payment.pay_name}</span>
+          </li>
+        </ul>
+        <div className="group_box_status" style={{ marginTop: "3rem" }}>
+          <div className="d-flex justify-content-center">
+            <div className="group_status_delivery d-flex justify-content-around">
+              <div className="detail_status_delivery">
+                <div className="w-100 d-flex justify-content-center">
+                  <div
+                    className={
+                      parseInt(order.status) > 0 && "bg_status_delivery_active"
+                    }
+                  ></div>
                 </div>
-            </div>
+                <a className="a_status_delivery">Đang xử lý</a>
+              </div>
 
-            <div className="Shopping-cart-area pt-60 pb-60">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-12">
-                            <form action="#">
-                                <div className="table-content table-responsive">
-                                    <table className="table">
-                                        <thead>
-                                            <tr>
-                                                <th className="li-product-remove">Ảnh</th>
-                                                <th className="li-product-thumbnail">Tên sản phẩm</th>
-                                                <th className="cart-product-name">Giá</th>
-                                                <th className="li-product-price">Số lượng</th>
-                                                <th className="li-product-price">Size</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {
-                                                detail_order && detail_order.map(value => (
-                                                    <tr key={value._id}>
-                                                        <td className="li-product-thumbnail"><img src={value.id_product.image} style={{ width: '5rem' }} alt="Li's Product Image" /></td>
-                                                        <td className="li-product-name"><span href="#">{value.name_product}</span></td>
-                                                        <td className="li-product-price"><span className="amount">{new Intl.NumberFormat('vi-VN',{style: 'decimal',decimal: 'VND'}).format(value.price_product) + ' VNĐ'}</span></td>
-                                                        <td className="li-product-price"><span className="amount">{value.count}</span></td>
-                                                        <td className="li-product-price"><span className="amount">{value.size}</span></td>
-                                                    </tr>
-                                                ))
-                                            }
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
+              <div className="detail_status_delivery">
+                <div className="w-100 d-flex justify-content-center">
+                  <div
+                    className={
+                      parseInt(order.status) > 1
+                        ? "bg_status_delivery_active"
+                        : "bg_status_delivery"
+                    }
+                  ></div>
                 </div>
+                <a className="a_status_delivery">Đã xác nhận</a>
+              </div>
+
+              <div className="detail_status_delivery">
+                <div className="w-100 d-flex justify-content-center">
+                  <div
+                    className={
+                      parseInt(order.status) > 2
+                        ? "bg_status_delivery_active"
+                        : "bg_status_delivery"
+                    }
+                  ></div>
+                </div>
+                <a className="a_status_delivery">Đang vận chuyển</a>
+              </div>
+
+              <div className="detail_status_delivery">
+                <div className="w-100 d-flex justify-content-center">
+                  <div
+                    className={
+                      parseInt(order.status) > 3
+                        ? "bg_status_delivery_active"
+                        : "bg_status_delivery"
+                    }
+                  ></div>
+                </div>
+                <a className="a_status_delivery">Đã hoàn thành</a>
+              </div>
             </div>
+          </div>
+          <div className="test_status d-flex justify-content-center">
+            <div className="hr_status_delivery"></div>
+          </div>
         </div>
-    );
+      </div>
+
+      <div className="Shopping-cart-area pt-60 pb-60">
+        <div className="container">
+          <div className="row">
+            <div className="col-12">
+              <form action="#">
+                <div className="table-content table-responsive">
+                  <table className="table">
+                    <thead>
+                      <tr>
+                        <th className="li-product-remove">Tên sản phẩm</th>
+                        <th className="li-product-thumbnail">Ảnh</th>
+                        <th className="cart-product-name">Giá</th>
+                        <th className="li-product-price">Số lượng</th>
+                        <th className="li-product-price">Size</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {detail_order &&
+                        detail_order.map((value) => (
+                          <tr key={value._id}>
+                            <td className="li-product-name">
+                              <span href="#">{value.name_product}</span>
+                            </td>
+                            <td className="li-product-thumbnail">
+                              <img
+                                src={value.id_product.image}
+                                style={{ width: "5rem" }}
+                                alt="Li's Product Image"
+                              />
+                            </td>
+                            <td className="li-product-price">
+                              <span className="amount">
+                                {new Intl.NumberFormat("vi-VN", {
+                                  style: "decimal",
+                                  decimal: "VND",
+                                }).format(value.price_product) + " VNĐ"}
+                              </span>
+                            </td>
+                            <td className="li-product-price">
+                              <span className="amount">{value.count}</span>
+                            </td>
+                            <td className="li-product-price">
+                              <span className="amount">{value.size}</span>
+                            </td>
+                          </tr>
+                        ))}
+                    </tbody>
+                  </table>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default DetailHistory;
