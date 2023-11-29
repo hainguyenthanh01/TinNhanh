@@ -26,6 +26,7 @@ function CompletedOrder(props) {
       const od = await orderAPI.completeOrder(query);
       const newArray = od.orders.map((it) => {
         it.email = it.id_user?.email || "";
+        it.phone = it.id_note.phone;
         it.status = (() => {
           switch (it.status) {
             case "1":
@@ -191,8 +192,9 @@ function CompletedOrder(props) {
   const columns = [
     {
       title: "Tên",
-      dataIndex: "fullname",
-      key: "fullname",
+      dataIndex: "full_name",
+      key: "full_name",
+      width: "150px",
     },
     {
       title: "Email",
@@ -203,6 +205,7 @@ function CompletedOrder(props) {
       title: "Điện thoại",
       dataIndex: "phone",
       key: "phone",
+      width: "130px",
     },
     {
       title: "Địa chỉ",
@@ -256,7 +259,7 @@ function CompletedOrder(props) {
                   filter={filter}
                   setFilter={setFilter}
                 />
-                <h4 className="card-title" style={{marginTop: "20px"}}>
+                <h4 className="card-title" style={{ marginTop: "20px" }}>
                   Tổng tiền:{" "}
                   {new Intl.NumberFormat("vi-VN", {
                     style: "decimal",
@@ -265,12 +268,12 @@ function CompletedOrder(props) {
                 </h4>
                 <div>
                   <div className="d-flex">
-                    <h4 style={{margin:"0"}}>Chọn phương thức thống kê</h4>
+                    <h4 style={{ margin: "0" }}>Chọn phương thức thống kê</h4>
                   </div>
                   <br />
                   <select
                     className="custom-select"
-                    style={{ color: "gray", width: "85px", }}
+                    style={{ color: "gray", width: "85px" }}
                     value={getDay}
                     onChange={(e) => setGetDay(e.target.value)}
                   >

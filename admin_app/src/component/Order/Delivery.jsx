@@ -25,6 +25,7 @@ function Delivery(props) {
     const fetchAllData = async () => {
       const od = await orderAPI.getAPI(query);
       const newArray = od.orders.map((it) => {
+        it.phone = it.id_note.phone;
         it.email = it.id_user?.email || "";
         it.status = (() => {
           switch (it.status) {
@@ -91,8 +92,9 @@ function Delivery(props) {
   const columns = [
     {
       title: "Tên",
-      dataIndex: "fullname",
-      key: "fullname",
+      dataIndex: "full_name",
+      key: "full_name",
+      width: "150px",
     },
     {
       title: "Email",
@@ -103,6 +105,7 @@ function Delivery(props) {
       title: "Điện thoại",
       dataIndex: "phone",
       key: "phone",
+      width: "130px",
     },
     {
       title: "Địa chỉ",
@@ -130,36 +133,36 @@ function Delivery(props) {
       render: (_, value) => {
         return (
           <div className="d-flex">
-          <Link
-            to={"/order/detail/" + value._id}
-            className="btn btn-info mr-1"
-          >
-            Chi tiết
-          </Link>
+            <Link
+              to={"/order/detail/" + value._id}
+              className="btn btn-info mr-1"
+            >
+              Chi tiết
+            </Link>
 
-          <button
-            type="button"
-            style={{ cursor: "pointer", color: "white" }}
-            onClick={() => handleConfirm(value)}
-            className="btn btn-success mr-1"
-          >
-            Xác nhận
-          </button>
-
-          {!value.pay && (
             <button
               type="button"
-              style={{
-                cursor: "pointer",
-                color: "white",
-              }}
-              onClick={() => handleCancel(value)}
-              className="btn btn-danger"
+              style={{ cursor: "pointer", color: "white" }}
+              onClick={() => handleConfirm(value)}
+              className="btn btn-success mr-1"
             >
-              Hủy bỏ
+              Xác nhận
             </button>
-          )}
-        </div>
+
+            {!value.pay && (
+              <button
+                type="button"
+                style={{
+                  cursor: "pointer",
+                  color: "white",
+                }}
+                onClick={() => handleCancel(value)}
+                className="btn btn-danger"
+              >
+                Hủy bỏ
+              </button>
+            )}
+          </div>
         );
       },
     },

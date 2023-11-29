@@ -25,6 +25,7 @@ function ConfirmDelivery(props) {
     const fetchAllData = async () => {
       const od = await orderAPI.getAPI(query);
       const newArray = od.orders.map((it) => {
+        it.phone = it.id_note.phone;
         it.email = it.id_user?.email || "";
         it.status = (() => {
           switch (it.status) {
@@ -90,8 +91,9 @@ function ConfirmDelivery(props) {
   const columns = [
     {
       title: "Tên",
-      dataIndex: "fullname",
-      key: "fullname",
+      dataIndex: "full_name",
+      key: "full_name",
+      width: "150px",
     },
     {
       title: "Email",
@@ -102,6 +104,7 @@ function ConfirmDelivery(props) {
       title: "Điện thoại",
       dataIndex: "phone",
       key: "phone",
+      width: "130px",
     },
     {
       title: "Địa chỉ",
@@ -185,7 +188,7 @@ function ConfirmDelivery(props) {
         </div>
       </div>
       <footer className="footer text-center text-muted">
-        All Rights Reserved by BULI. Designed and Developed by 
+        All Rights Reserved by BULI. Designed and Developed by
         <a href="https://www.facebook.com/NguyenThanhHai.2k1"> Hải Nguyễn</a>.
       </footer>
     </div>

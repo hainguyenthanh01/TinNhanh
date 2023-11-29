@@ -26,6 +26,7 @@ function CancelOrder(props) {
     const fetchAllData = async () => {
       const od = await orderAPI.getAPI(query);
       const newArray = od.orders.map((it) => {
+        it.phone = it.id_note.phone;
         it.email = it.id_user?.email || "";
         it.status = (() => {
           switch (it.status) {
@@ -74,8 +75,9 @@ function CancelOrder(props) {
   const columns = [
     {
       title: "Tên",
-      dataIndex: "fullname",
-      key: "fullname",
+      dataIndex: "full_name",
+      key: "full_name",
+      width: "150px",
     },
     {
       title: "Email",
@@ -86,6 +88,7 @@ function CancelOrder(props) {
       title: "Điện thoại",
       dataIndex: "phone",
       key: "phone",
+      width: "130px",
     },
     {
       title: "Địa chỉ",
@@ -132,20 +135,20 @@ function CancelOrder(props) {
             <div className="card">
               <div className="card-body">
                 <h4 className="card-title">Đơn hàng đã hủy</h4>
-                  <CustomTable
-                    columns={columns}
-                    dataSource={order}
-                    totalPage={totalPage}
-                    filter={filter}
-                    setFilter={setFilter}
-                  />
-                  <h4 className="card-title" style={{ marginTop: "20px" }}>
-                    Tổng tiền:{" "}
-                    {new Intl.NumberFormat("vi-VN", {
-                      style: "decimal",
-                      decimal: "VND",
-                    }).format(totalMoney) + " VNĐ"}
-                  </h4>
+                <CustomTable
+                  columns={columns}
+                  dataSource={order}
+                  totalPage={totalPage}
+                  filter={filter}
+                  setFilter={setFilter}
+                />
+                <h4 className="card-title" style={{ marginTop: "20px" }}>
+                  Tổng tiền:{" "}
+                  {new Intl.NumberFormat("vi-VN", {
+                    style: "decimal",
+                    decimal: "VND",
+                  }).format(totalMoney) + " VNĐ"}
+                </h4>
               </div>
             </div>
           </div>
