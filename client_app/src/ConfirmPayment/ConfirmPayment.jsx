@@ -144,6 +144,7 @@ function ConfirmPayment() {
 
     const dataOrder = {
       id_user: getUserCookie(),
+      full_name: state.name,
       address: addressNew,
       total: totalPrice,
       status: "1",
