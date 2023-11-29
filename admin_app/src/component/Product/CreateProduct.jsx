@@ -137,7 +137,7 @@ function CreateProduct(props) {
                     <div className="col-12">
                         <div className="card">
                             <div className="card-body">
-                                <h4 className="card-title">Create Product</h4>
+                                <h4 className="card-title">Thêm mới sản phẩm</h4>
                                 {
                                     validationMsg.api === "Bạn đã thêm thành công" ?
                                         (
@@ -223,7 +223,7 @@ function CreateProduct(props) {
                                         <input type="file" className="form-control-file" name="file" onChange={saveFile} />
                                     </div>
 
-                                    <button type="submit" className="btn btn-primary">Create Product</button>
+                                    <button type="submit" className="btn btn-primary">Thêm</button>
                                 </form>
                             </div>
                         </div>

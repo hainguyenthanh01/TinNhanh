@@ -80,7 +80,7 @@ function UpdateUserCus(props) {
                     <div className="col-12">
                         <div className="card">
                             <div className="card-body">
-                                <h4 className="card-title">Update Customer</h4>
+                                <h4 className="card-title">Cập nhật khách hàng</h4>
                                 {
                                     validationMsg.api === "Bạn đã update thành công" ?
                                         (
@@ -105,7 +105,7 @@ function UpdateUserCus(props) {
                                     </div>
 
                                     <div className="form-group w-50">
-                                        <label htmlFor="username">Username:</label>
+                                        <label htmlFor="username">Tài khoản:</label>
                                         <input type="text" className="form-control" id="username" name="username" value={username} disabled />
                                     </div>
 

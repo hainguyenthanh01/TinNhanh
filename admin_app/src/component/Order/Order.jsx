@@ -30,8 +30,6 @@ function Order(props) {
     const fetchAllData = async () => {
       const od = await orderAPI.getAPI(query);
       const newArray = od.orders.map((it) => {
-        it.fullname = it.id_user.fullname;
-        it.phone = it.id_note.phone;
         it.email = it.id_user?.email || "";
         it.status = (() => {
           switch (it.status) {
@@ -76,11 +74,6 @@ function Order(props) {
 
   const columns = [
     {
-      title: "ID đơn hàng",
-      dataIndex: "_id",
-      key: "_id",
-    },
-    {
       title: "Tên",
       dataIndex: "fullname",
       key: "fullname",
@@ -99,6 +92,7 @@ function Order(props) {
       title: "Địa chỉ",
       dataIndex: "address",
       key: "address",
+      width:"350px",
     },
     {
       title: "Trạng thái",
@@ -109,6 +103,7 @@ function Order(props) {
       title: "Tổng tiền",
       dataIndex: "total",
       key: "total",
+      width: "150px",
     },
     {
       title: "Trạng thái thanh toán",

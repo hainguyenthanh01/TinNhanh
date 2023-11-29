@@ -26,7 +26,7 @@ function Search({ handlerSearch }) {
         }
     }
     return (
-        <div>
+        <div style={{marginBottom: "20px"}}>
             <input className="form-control w-40" type="text" placeholder="Tìm kiếm!" value={search} onChange={onChangeText} />
         </div>
     );

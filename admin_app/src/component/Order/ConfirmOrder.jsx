@@ -34,8 +34,6 @@ function ConfirmOrder(props) {
     const fetchAllData = async () => {
       const od = await orderAPI.getAPI(query);
       const newArray = od.orders.map((it) => {
-        it.fullname = it.id_user.fullname;
-        it.phone = it.id_note.phone;
         it.email = it.id_user?.email || "";
         it.status = (() => {
           switch (it.status) {
@@ -100,11 +98,6 @@ function ConfirmOrder(props) {
     }
   };
   const columns = [
-    {
-      title: "ID đơn hàng",
-      dataIndex: "_id",
-      key: "_id",
-    },
     {
       title: "Tên",
       dataIndex: "fullname",

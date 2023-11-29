@@ -27,6 +27,7 @@ function Sale(props) {
       const ct = await SaleAPI.getAll(query);
       const newArray = ct.sale.map((it) => {
         it.name_product = it.id_product.name_product;
+        it.number = it.id_product.number;
         it.statusText = it.status ? "Active" : "Disable";
         it.start = moment(it.start).format("DD/MM/YYYY");
         it.end = moment(it.end).format("DD/MM/YYYY");
@@ -57,6 +58,11 @@ function Sale(props) {
       title: "Giảm giá",
       dataIndex: "promotion",
       key: "promotion",
+    },
+    {
+      title: "Số lượng",
+      dataIndex: "number",
+      key: "number",
     },
     {
       title: "Mô tả",

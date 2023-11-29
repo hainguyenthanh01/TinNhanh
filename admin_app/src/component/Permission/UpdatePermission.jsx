@@ -54,7 +54,7 @@ function UpdatePermission(props) {
                     <div className="col-12">
                         <div className="card">
                             <div className="card-body">
-                                <h4 className="card-title">Update Permission</h4>
+                                <h4 className="card-title">Cập nhật quyền</h4>
                                 {
                                     validationMsg.api === "Bạn đã update thành công" ?
                                         (
@@ -78,7 +78,7 @@ function UpdatePermission(props) {
                                         <p className="form-text text-danger">{validationMsg.name}</p>
                                     </div>
 
-                                    <button type="submit" className="btn btn-primary">Update</button>
+                                    <button type="submit" className="btn btn-primary">Cập nhật</button>
                                 </form>
                             </div>
                         </div>

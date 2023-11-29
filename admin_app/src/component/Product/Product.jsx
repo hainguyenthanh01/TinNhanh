@@ -37,12 +37,7 @@ function Product() {
     };
     fetchAllData();
   }, [filter]);
-  const onPageChange = (value) => {
-    setFilter({
-      ...filter,
-      page: value,
-    });
-  };
+
   const handlerSearch = (value) => {
     setFilter({
       ...filter,
@@ -71,11 +66,19 @@ function Product() {
       title: "Tên sản phẩm",
       dataIndex: "name_product",
       key: "name_product",
+      width: "200px",
     },
     {
       title: "Giá",
       dataIndex: "price_product",
       key: "price_product",
+      width: "150px",
+    },
+    {
+      title: "Số lượng",
+      dataIndex: "number",
+      key: "number",
+      width: "100px",
     },
     {
       title: "Ảnh",
@@ -88,6 +91,7 @@ function Product() {
       title: "Mô tả",
       dataIndex: "describe",
       key: "describe",
+      width: "300px",
     },
     {
       title: "Loại",

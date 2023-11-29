@@ -54,7 +54,7 @@ function UpdateCategory(props) {
                         <div className="card">
                             <div className="card-body">
                                 {/* <h4 className="card-title">Update Category</h4> */}
-                                <h4 className="card-title">Update Producer</h4>
+                                <h4 className="card-title">Cập nhật thể loại</h4>
                                 {
                                     validationMsg.api === "Bạn đã update thành công" ?
                                         (
@@ -79,7 +79,7 @@ function UpdateCategory(props) {
                                         <p className="form-text text-danger">{validationMsg.name}</p>
                                     </div>
 
-                                    <button type="submit" className="btn btn-primary">Update</button>
+                                    <button type="submit" className="btn btn-primary">Cập nhật</button>
                                 </form>
                             </div>
                         </div>
