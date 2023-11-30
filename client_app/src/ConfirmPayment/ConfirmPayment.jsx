@@ -27,6 +27,8 @@ function ConfirmPayment() {
   const listCard = useSelector((state) => state.Cart.listCart);
   const dispatch = useDispatch();
   const history = useHistory();
+  const coupon = JSON.parse(localStorage.getItem("coupon"))
+  const discount = coupon ? Number(coupon.promotion) : 0
   const totalPrice =
     listCard &&
     listCard.reduce(
@@ -143,7 +145,7 @@ function ConfirmPayment() {
       id_user: getUserCookie(),
       full_name: state.name,
       address: addressNew,
-      total: totalPrice,
+      total: totalPrice - (totalPrice * discount) / 100,
       status: "1",
       pay: false,
       id_payment: "6086709cdc52ab1ae999e882",
@@ -405,6 +407,20 @@ function ConfirmPayment() {
                 <Col span={24}>
                   <Row>
                     <Col style={{ fontWeight: "500" }} span={18}>
+                      Giảm giá sản phẩm {discount}%
+                    </Col>
+                    {console.log(discount)}
+                    <Col span={6}>
+                      {new Intl.NumberFormat("vi-VN", {
+                        style: "decimal",
+                        decimal: "VND",
+                      }).format((totalPrice * discount) / 100) + " VNĐ"}
+                    </Col>
+                  </Row>
+                </Col>
+                <Col span={24}>
+                  <Row>
+                    <Col style={{ fontWeight: "500" }} span={18}>
                       Phí ship
                     </Col>
 
@@ -426,7 +442,7 @@ function ConfirmPayment() {
                       {new Intl.NumberFormat("vi-VN", {
                         style: "decimal",
                         decimal: "VND",
-                      }).format(totalPrice) + " VNĐ"}
+                      }).format(totalPrice - (totalPrice * discount) / 100) + " VNĐ"}
                     </Col>
                   </Row>
                 </Col>
