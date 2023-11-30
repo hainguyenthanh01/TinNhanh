@@ -149,7 +149,6 @@ function Detail_Product(props) {
     if (load_comment) {
       const fetchData = async () => {
         const response = await CommentAPI.get_comment(id);
-
         set_list_comment(response);
       };
 
@@ -253,9 +252,9 @@ function Detail_Product(props) {
                           decimal: "VND",
                         }).format(
                           parseInt(sale.id_product.price_product) -
-                            (parseInt(sale.id_product.price_product) *
-                              parseInt(sale.promotion)) /
-                              100
+                          (parseInt(sale.id_product.price_product) *
+                            parseInt(sale.promotion)) /
+                          100
                         ) + " VNĐ"}
                       </span>
                     )}
@@ -354,7 +353,7 @@ function Detail_Product(props) {
             <div id="reviews" className="tab-pane" role="tabpanel">
               <div className="product-reviews">
                 <div className="product-details-comment-block">
-                  <div style={{ overflow: "auto", height: "10rem" }}>
+                  <div style={{ overflow: "auto", height: "12rem" }}>
                     {list_comment &&
                       list_comment.map((value) => (
                         <div
@@ -468,8 +467,7 @@ function Detail_Product(props) {
                                         <span>
                                           <select
                                             className="star-rating"
-                                            onChange={(e) =>
-                                              set_star(e.target.value)
+                                            onChange={(e) => set_star(e.target.value)
                                             }
                                           >
                                             <option value="1">1</option>

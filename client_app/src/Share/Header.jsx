@@ -189,7 +189,6 @@ function Header(props) {
   }, []);
   useEffect(() => {
     function handleClickOutside(event) {
-      console.log(refMenu.current && !refMenu.current.contains(event.target));
       if (refMenu.current && !refMenu.current.contains(event.target)) {
         setIsShowMenuUser(false);
       }
@@ -237,7 +236,6 @@ function Header(props) {
       }
     }
   }, [keyword_search]);
-  console.log(isShowMenuUser);
   return (
     <header>
       <div className="header-top">
@@ -255,7 +253,7 @@ function Header(props) {
                   <a
                     href="https://www.facebook.com/buli2019"
                     style={{ fontSize: "14px" }}
-                    target="_blank"
+                    target="_blank" rel="noreferrer"
                   >
                     <FaFacebook />
                   </a>
@@ -264,7 +262,7 @@ function Header(props) {
                   <a
                     href="https://www.instagram.com/buli_official/"
                     style={{ fontSize: "14px" }}
-                    target="_blank"
+                    target="_blank" rel="noreferrer"
                   >
                     <GrInstagram />
                   </a>
@@ -273,7 +271,7 @@ function Header(props) {
                   <a
                     href="https://www.tiktok.com/@bulishop"
                     style={{ fontSize: "14px" }}
-                    target="_blank"
+                    target="_blank" rel="noreferrer"
                   >
                     <FaTiktok />
                   </a>
@@ -282,7 +280,7 @@ function Header(props) {
                   <a
                     href="https://shopee.vn/bulishop"
                     style={{ fontSize: "14px" }}
-                    target="_blank"
+                    target="_blank" rel="noreferrer"
                   >
                     <SiShopee />
                   </a>
@@ -291,7 +289,7 @@ function Header(props) {
                   <a
                     href="https://buli.vn/"
                     style={{ fontSize: "14px" }}
-                    target="_blank"
+                    target="_blank" rel="noreferrer"
                   >
                     <FaEarthAsia />
                   </a>
@@ -448,9 +446,8 @@ function Header(props) {
                     <ul>
                       <li className="dropdown-holder">
                         <Link
-                          className={`${
-                            location.pathname === "/" ? "active" : ""
-                          }`}
+                          className={`${location.pathname === "/" ? "active" : ""
+                            }`}
                           to="/"
                         >
                           Trang Chủ
@@ -458,9 +455,8 @@ function Header(props) {
                       </li>
                       <li className="megamenu-holder">
                         <Link
-                          className={`${
-                            location.pathname.includes("/shop") ? "active" : ""
-                          }`}
+                          className={`${location.pathname.includes("/shop") ? "active" : ""
+                            }`}
                           to="/shop/all"
                         >
                           Menu
@@ -502,9 +498,8 @@ function Header(props) {
                       </li>
                       <li>
                         <Link
-                          className={`${
-                            location.pathname.includes("/event") ? "active" : ""
-                          }`}
+                          className={`${location.pathname.includes("/event") ? "active" : ""
+                            }`}
                           to="/event"
                         >
                           Khuyến mãi
@@ -512,11 +507,10 @@ function Header(props) {
                       </li>
                       <li>
                         <Link
-                          className={`${
-                            location.pathname.includes("/contact")
-                              ? "active"
-                              : ""
-                          }`}
+                          className={`${location.pathname.includes("/contact")
+                            ? "active"
+                            : ""
+                            }`}
                           to="/contact"
                         >
                           Liên hệ
@@ -524,9 +518,8 @@ function Header(props) {
                       </li>
                       <li>
                         <Link
-                          className={`${
-                            location.pathname.includes("/about") ? "active" : ""
-                          }`}
+                          className={`${location.pathname.includes("/about") ? "active" : ""
+                            }`}
                           to="/about"
                         >
                           Về chúng tôi
