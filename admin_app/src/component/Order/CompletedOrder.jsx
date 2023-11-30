@@ -26,6 +26,7 @@ function CompletedOrder(props) {
       const od = await orderAPI.completeOrder(query);
       const newArray = od.orders.map((it) => {
         it.email = it.id_user?.email || "";
+        it.phone = it.id_note.phone;
         it.status = (() => {
           switch (it.status) {
             case "1":
@@ -93,6 +94,7 @@ function CompletedOrder(props) {
 
   let day = [];
   let month = [];
+  let year = [];
 
   for (let i = 1; i < 32; i++) {
     day.push(i);
@@ -100,6 +102,9 @@ function CompletedOrder(props) {
 
   for (let i = 1; i < 13; i++) {
     month.push(i);
+  }
+  for (let i = 2000; i < 2024; i++) {
+    year.push(i);
   }
 
   const [getDay, setGetDay] = useState("null");
@@ -191,8 +196,9 @@ function CompletedOrder(props) {
   const columns = [
     {
       title: "Tên",
-      dataIndex: "fullname",
-      key: "fullname",
+      dataIndex: "full_name",
+      key: "full_name",
+      width: "150px",
     },
     {
       title: "Email",
@@ -203,11 +209,18 @@ function CompletedOrder(props) {
       title: "Điện thoại",
       dataIndex: "phone",
       key: "phone",
+      width: "130px",
     },
     {
       title: "Địa chỉ",
       dataIndex: "address",
       key: "address",
+      width: "350px",
+    },
+    {
+      title: "Ngày đặt hàng",
+      dataIndex: "create_time",
+      key: "create_time",
     },
     {
       title: "Trạng thái",
@@ -218,6 +231,7 @@ function CompletedOrder(props) {
       title: "Tổng tiền",
       dataIndex: "total",
       key: "total",
+      width: "150px",
     },
     {
       title: "Trạng thái thanh toán",
@@ -256,7 +270,7 @@ function CompletedOrder(props) {
                   filter={filter}
                   setFilter={setFilter}
                 />
-                <h4 className="card-title" style={{marginTop: "20px"}}>
+                <h4 className="card-title" style={{ marginTop: "20px" }}>
                   Tổng tiền:{" "}
                   {new Intl.NumberFormat("vi-VN", {
                     style: "decimal",
@@ -265,12 +279,12 @@ function CompletedOrder(props) {
                 </h4>
                 <div>
                   <div className="d-flex">
-                    <h4 style={{margin:"0"}}>Chọn phương thức thống kê</h4>
+                    <h4 style={{ margin: "0" }}>Chọn phương thức thống kê</h4>
                   </div>
                   <br />
                   <select
                     className="custom-select"
-                    style={{ color: "gray", width: "85px", }}
+                    style={{ color: "gray", width: "85px" }}
                     value={getDay}
                     onChange={(e) => setGetDay(e.target.value)}
                   >
@@ -305,8 +319,12 @@ function CompletedOrder(props) {
                     onChange={(e) => setGetYear(e.target.value)}
                   >
                     <option value="null">Năm</option>
-                    <option value="2020">2020</option>
-                    <option value="2021">2021</option>
+                    {year &&
+                      year.map((y) => (
+                        <option value={y} key={y}>
+                          {y}
+                        </option>
+                      ))}
                   </select>
                   &nbsp;
                   <input

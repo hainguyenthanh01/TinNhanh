@@ -35,6 +35,7 @@ function ConfirmOrder(props) {
       const od = await orderAPI.getAPI(query);
       const newArray = od.orders.map((it) => {
         it.email = it.id_user?.email || "";
+        it.phone = it.id_note.phone;
         it.status = (() => {
           switch (it.status) {
             case "1":
@@ -100,8 +101,9 @@ function ConfirmOrder(props) {
   const columns = [
     {
       title: "Tên",
-      dataIndex: "fullname",
-      key: "fullname",
+      dataIndex: "full_name",
+      key: "full_name",
+      width: "150px",
     },
     {
       title: "Email",
@@ -112,11 +114,18 @@ function ConfirmOrder(props) {
       title: "Điện thoại",
       dataIndex: "phone",
       key: "phone",
+      width: "130px",
     },
     {
       title: "Địa chỉ",
       dataIndex: "address",
       key: "address",
+      width: "350px",
+    },
+    {
+      title: "Ngày đặt hàng",
+      dataIndex: "create_time",
+      key: "create_time",
     },
     {
       title: "Trạng thái",
@@ -127,6 +136,7 @@ function ConfirmOrder(props) {
       title: "Tổng tiền",
       dataIndex: "total",
       key: "total",
+      width: "150px",
     },
     {
       title: "Trạng thái thanh toán",
