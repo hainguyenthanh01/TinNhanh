@@ -152,9 +152,8 @@ function ConfirmPayment() {
       id_coupon: localStorage.getItem("id_coupon")
         ? localStorage.getItem("id_coupon")
         : "",
-      create_time: `${new Date().getDate()}/${
-        parseInt(new Date().getMonth()) + 1
-      }/${new Date().getFullYear()}`,
+      create_time: `${new Date().getDate()}/${parseInt(new Date().getMonth()) + 1
+        }/${new Date().getFullYear()}`,
     };
     const responseOrder = await OrderAPI.post_order(dataOrder);
     for (let i = 0; i < listCard.length; i++) {
@@ -168,7 +167,7 @@ function ConfirmPayment() {
       };
       await Detail_OrderAPI.post_detail_order(dataDetailOrder);
     }
-    const dataRes = await CartAPI.Delete_Cart({ id_user: getUserCookie() });
+    const dataRes = await CartAPI.Delete_All_Cart({ id_user: getUserCookie() });
     if (dataRes.code == 200) {
       dispatch(addCart(dataRes.data));
     }

@@ -25,6 +25,11 @@ const Cart = {
 		const queryParams = getUrlParamsFromJson(query)
 		const url = `/api/Cart/?${queryParams}`
 		return axiosClient.delete(url)
+	},
+	Delete_All_Cart: (query) => {
+		const queryParams = getUrlParamsFromJson(query)
+		const url = `/api/Cart/all?${queryParams}`
+		return axiosClient.delete(url)
 	}
 
 }
