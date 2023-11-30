@@ -94,6 +94,12 @@ function CancelOrder(props) {
       title: "Địa chỉ",
       dataIndex: "address",
       key: "address",
+      width: "350px",
+    },
+    {
+      title: "Ngày đặt hàng",
+      dataIndex: "create_time",
+      key: "create_time",
     },
     {
       title: "Trạng thái",
@@ -104,6 +110,7 @@ function CancelOrder(props) {
       title: "Tổng tiền",
       dataIndex: "total",
       key: "total",
+      width: "150px",
     },
     {
       title: "Trạng thái thanh toán",

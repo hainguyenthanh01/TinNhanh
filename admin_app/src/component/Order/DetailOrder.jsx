@@ -139,7 +139,7 @@ function DetailOrder(props) {
                       }).format(order.total) + " VNĐ"}
                     </h5>
                     <h5>Phương thức thanh toán: {order.id_payment.pay_name}</h5>
-                    <h5>Ngày tạo: {order.create_time}</h5>
+                    <h5>Ngày đặt hàng: {order.create_time}</h5>
                   </div>
                 ) : (
                   <div></div>

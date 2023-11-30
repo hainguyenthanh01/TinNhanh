@@ -53,6 +53,7 @@ function Sale(props) {
       title: "Tên sản phẩm",
       dataIndex: "name_product",
       key: "name_product",
+      width: "250px"
     },
     {
       title: "Giảm giá",

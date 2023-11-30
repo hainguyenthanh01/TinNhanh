@@ -98,6 +98,11 @@ function Order(props) {
       width: "350px",
     },
     {
+      title: "Ngày đặt hàng",
+      dataIndex: "create_time",
+      key: "create_time",
+    },
+    {
       title: "Trạng thái",
       dataIndex: "status",
       key: "status",

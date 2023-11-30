@@ -94,6 +94,7 @@ function CompletedOrder(props) {
 
   let day = [];
   let month = [];
+  let year = [];
 
   for (let i = 1; i < 32; i++) {
     day.push(i);
@@ -101,6 +102,9 @@ function CompletedOrder(props) {
 
   for (let i = 1; i < 13; i++) {
     month.push(i);
+  }
+  for (let i = 2000; i < 2024; i++) {
+    year.push(i);
   }
 
   const [getDay, setGetDay] = useState("null");
@@ -211,6 +215,12 @@ function CompletedOrder(props) {
       title: "Địa chỉ",
       dataIndex: "address",
       key: "address",
+      width: "350px",
+    },
+    {
+      title: "Ngày đặt hàng",
+      dataIndex: "create_time",
+      key: "create_time",
     },
     {
       title: "Trạng thái",
@@ -221,6 +231,7 @@ function CompletedOrder(props) {
       title: "Tổng tiền",
       dataIndex: "total",
       key: "total",
+      width: "150px",
     },
     {
       title: "Trạng thái thanh toán",
@@ -308,8 +319,12 @@ function CompletedOrder(props) {
                     onChange={(e) => setGetYear(e.target.value)}
                   >
                     <option value="null">Năm</option>
-                    <option value="2020">2020</option>
-                    <option value="2021">2021</option>
+                    {year &&
+                      year.map((y) => (
+                        <option value={y} key={y}>
+                          {y}
+                        </option>
+                      ))}
                   </select>
                   &nbsp;
                   <input
