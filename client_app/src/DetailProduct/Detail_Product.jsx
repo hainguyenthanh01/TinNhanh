@@ -361,7 +361,7 @@ function Detail_Product(props) {
                           key={value._id}
                         >
                           <span>
-                            {value.id_user.fullname}{" "}
+                            {value?.id_user?.fullname}{" "}
                             <div style={{ fontWeight: "400" }}>
                               {value.content}
                             </div>
