@@ -1,6 +1,8 @@
 
 const Products = require('../../Models/product')
 const Category = require('../../Models/category')
+const Comment = require('../../Models/comment')
+
 
 
 module.exports.index = async (req, res) => {
@@ -34,6 +36,7 @@ module.exports.category = async (req, res) => {
     const gender = req.query.gender || null
 
     let products_category
+    let data = []
 
     if (id_category === 'all') {
         products_category = await Products.find()
@@ -42,8 +45,24 @@ module.exports.category = async (req, res) => {
     } else {
         products_category = await Products.find({ id_category: id_category })
     }
+    for (let i = 0; i < products_category.length; i++) {
+        const listStar = await Comment.find({ id_product: products_category[i]._id })
+        if (listStar && listStar.length > 0) {
+            const averageStar = listStar.reduce((sum, item) => sum + item.star, 0) / listStar.length;
+            data.push({
+                ...products_category[i]._doc,
+                star: Number(parseFloat(averageStar.toFixed(1)))
+            })
 
-    res.json(products_category)
+        } else {
+            data.push({
+                ...products_category[i]._doc,
+                star: 0
+            })
+        }
+    }
+
+    res.json(data)
 }
 
 //TH: Chi Tiết Sản Phẩm

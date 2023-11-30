@@ -121,7 +121,8 @@ function Home_Product(props) {
                                 <Rate
                                   style={{ fontSize: "14px" }}
                                   disabled
-                                  defaultValue={0}
+                                  allowHalf
+                                  defaultValue={value.star}
                                 />
                               </ul>
                             </div>

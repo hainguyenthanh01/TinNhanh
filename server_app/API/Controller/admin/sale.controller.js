@@ -1,4 +1,5 @@
 const Sale = require('../../../Models/sale')
+const Comment = require('../../../Models/comment')
 
 
 module.exports.index = async (req, res) => {
@@ -61,14 +62,14 @@ module.exports.create = async (req, res) => {
     let flag = false
 
     check.forEach(value => {
-        if (value.status === true){
+        if (value.status === true) {
             flag = true
-        } 
+        }
     })
 
-    if (flag){
+    if (flag) {
         res.send("Sản phẩm này đã có khuyến mãi")
-    }else{
+    } else {
         await Sale.create(req.body)
 
         res.send("Bạn đã thêm thành công")
@@ -107,11 +108,28 @@ module.exports.list = async (req, res) => {
 
     const sale = await Sale.find({ status: true }).populate('id_product')
     let nowTime = new Date()
-   const dataSend = sale.filter(it =>{
-    return it.start.getTime() < nowTime.getTime() && nowTime.getTime() < it.end.getTime()
-   })
+    let data = []
+    const dataSend = sale.filter(it => {
+        return it.start.getTime() < nowTime.getTime() && nowTime.getTime() < it.end.getTime()
+    })
+    for (let i = 0; i < dataSend.length; i++) {
+        const listStar = await Comment.find({ id_product: dataSend[i].id_product._id })
+        console.log(listStar);
+        if (listStar && listStar.length > 0) {
+            const averageStar = listStar.reduce((sum, item) => sum + item.star, 0) / listStar.length;
+            data.push({
+                ...dataSend[i]._doc,
+                star: Number(parseFloat(averageStar.toFixed(1)))
+            })
 
-    res.json(dataSend)
+        } else {
+            data.push({
+                ...dataSend[i]._doc,
+                star: 0
+            })
+        }
+    }
+    res.json(data)
 
 }
 
@@ -121,12 +139,12 @@ module.exports.detailList = async (req, res) => {
 
     const sale = await (await Sale.findOne({ id_product: id, status: true }).populate('id_product'));
 
-    if (sale){
+    if (sale) {
         res.json({
             msg: "Thanh Cong",
             sale: sale
         })
-    }else{
+    } else {
         res.json({
             msg: "That Bai"
         })
