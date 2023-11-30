@@ -10,6 +10,9 @@ import { changeCount } from "../Redux/Action/ActionCount";
 import { useDispatch, useSelector } from "react-redux";
 import { TiMinus, TiPlus } from "react-icons/ti";
 import { Rate } from "antd";
+import { getUserCookie } from '../helper';
+import Cart from '../API/CartAPI';
+import { addCart } from '../Redux/Action/ActionCart';
 
 Search.propTypes = {};
 
@@ -55,23 +58,19 @@ function Search(props) {
 
     fetchData();
   }, [page]);
-  const handler_addcart = (e) => {
+  const handler_addcart = async (e, value) => {
     e.preventDefault();
-
     const data = {
-      id_cart: Math.random().toString(),
-      id_product: id_modal,
-      name_product: product_detail.name_product,
-      price_product: product_detail.price_product,
+      id_user: getUserCookie(),
+      id_product: value._id,
       count: 1,
-      image: product_detail.image,
-      size: "S",
+      size: 's',
     };
 
-    CartsLocal.addProduct(data);
-
-    const action_count_change = changeCount(count_change);
-    dispatch(action_count_change);
+    const dataRes = await Cart.Post_Cart(data);
+    if (dataRes.code == 200) {
+      dispatch(addCart(dataRes.data));
+    }
   };
 
   return (
@@ -173,7 +172,7 @@ function Search(props) {
                             <div className="shop-add-action mb-xs-30">
                               <ul className="add-actions-link">
                                 <li className="add-cart">
-                                  <a onClick={handler_addcart} href="#">
+                                  <a onClick={(e) => handler_addcart(e, value)} href="#">
                                     Thêm vào giỏ hàng
                                   </a>
                                 </li>
@@ -238,11 +237,11 @@ function Search(props) {
                             <h2>{value.name_product}</h2>
                             <div className="rating-box pt-20">
                               <ul className="rating rating-with-review-item">
-                              <Rate
-                              style={{ fontSize: "14px" }}
-                              disabled
-                              defaultValue={0}
-                            />
+                                <Rate
+                                  style={{ fontSize: "14px" }}
+                                  disabled
+                                  defaultValue={0}
+                                />
                               </ul>
                             </div>
                             <div className="price-box pt-20">

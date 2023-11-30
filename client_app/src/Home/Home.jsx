@@ -13,6 +13,9 @@ import { changeCount } from "../Redux/Action/ActionCount";
 import { useDispatch, useSelector } from "react-redux";
 import CartsLocal from "../Share/CartsLocal";
 import { Rate } from 'antd';
+import { getUserCookie } from '../helper';
+import Cart from '../API/CartAPI';
+import { addCart } from '../Redux/Action/ActionCart';
 
 
 Home.propTypes = {};
@@ -49,23 +52,20 @@ function Home(props) {
   const count_change = useSelector((state) => state.Count.isLoad);
 
   // Hàm này dùng để thêm vào giỏ hàng
-  const handler_addcart = (e) => {
+  const handler_addcart = async (e) => {
     e.preventDefault();
-
     const data = {
-      id_cart: Math.random().toString(),
-      id_product: id_modal,
-      name_product: product_detail.name_product,
-      price_product: product_detail.price_product,
+      id_user: getUserCookie(),
+      id_product: product_detail._id,
       count: 1,
-      image: product_detail.image,
-      size: "S",
+      size: "s",
     };
 
-    CartsLocal.addProduct(data);
-
-    const action_count_change = changeCount(count_change);
-    dispatch(action_count_change);
+    const dataRes = await Cart.Post_Cart(data);
+    if (dataRes.code == 200) {
+      dispatch(addCart(dataRes.data));
+      set_id_modal('')
+    }
   };
 
   return (
@@ -184,7 +184,7 @@ function Home(props) {
                       <h2>{product_detail.name_product}</h2>
                       <div className="rating-box pt-20">
                         <ul className="rating rating-with-review-item">
-                          <Rate style={{fontSize: "14px"}} disabled defaultValue={0} />
+                          <Rate style={{ fontSize: "14px" }} disabled defaultValue={0} />
                         </ul>
                       </div>
                       <div className="price-box pt-20">
