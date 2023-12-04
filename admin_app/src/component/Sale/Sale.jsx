@@ -27,8 +27,8 @@ function Sale(props) {
       const ct = await SaleAPI.getAll(query);
       const newArray = ct.sale.map((it) => {
         it.name_product = it.id_product.name_product;
-        it.number = it.id_product.number;
-        it.statusText = it.status ? "Active" : "Disable";
+        // it.number = it.id_product.number;
+        it.status = it.status ? "Active" : "Disable";
         it.start = moment(it.start).format("DD/MM/YYYY");
         it.end = moment(it.end).format("DD/MM/YYYY");
         return it;
@@ -39,7 +39,6 @@ function Sale(props) {
 
     fetchAllData();
   }, [filter]);
-
 
   const handlerSearch = (value) => {
     setFilter({
@@ -53,18 +52,18 @@ function Sale(props) {
       title: "Tên sản phẩm",
       dataIndex: "name_product",
       key: "name_product",
-      width: "250px"
+      width: "250px",
     },
     {
       title: "Giảm giá",
       dataIndex: "promotion",
       key: "promotion",
     },
-    {
-      title: "Số lượng",
-      dataIndex: "number",
-      key: "number",
-    },
+    // {
+    //   title: "Số lượng",
+    //   dataIndex: "number",
+    //   key: "number",
+    // },
     {
       title: "Mô tả",
       dataIndex: "describe",
@@ -82,7 +81,7 @@ function Sale(props) {
     },
     {
       title: "Trạng thái",
-      dataIndex: "statusText",
+      dataIndex: "status",
       key: "status",
     },
 
@@ -108,7 +107,7 @@ function Sale(props) {
           <div className="col-12">
             <div className="card">
               <div className="card-body">
-                <h4 className="card-title">Giảm giá</h4>
+                <h4 className="card-title">Sản phẩm giảm giá</h4>
                 <Search handlerSearch={handlerSearch} />
 
                 <Link to="/sale/create" className="btn btn-primary my-3">

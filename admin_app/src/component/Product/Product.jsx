@@ -74,17 +74,21 @@ function Product() {
       key: "price_product",
       width: "150px",
     },
-    {
-      title: "Số lượng",
-      dataIndex: "number",
-      key: "number",
-      width: "100px",
-    },
+    // {
+    //   title: "Số lượng",
+    //   dataIndex: "number",
+    //   key: "number",
+    //   width: "100px",
+    // },
     {
       title: "Ảnh",
       key: "image",
       render: (_, value) => (
-        <img src={value.image} alt="" style={{ width: "60px", height: "60px"}} />
+        <img
+          src={value.image}
+          alt=""
+          style={{ width: "60px", height: "60px" }}
+        />
       ),
     },
     {

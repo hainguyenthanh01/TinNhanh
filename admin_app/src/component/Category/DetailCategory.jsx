@@ -39,13 +39,6 @@ function DetailCategory(props) {
     fetchAllData();
   }, [filter]);
 
-  const onPageChange = (value) => {
-    setFilter({
-      ...filter,
-      page: value,
-    });
-  };
-
   const handlerSearch = (value) => {
     setFilter({
       ...filter,
@@ -66,12 +59,12 @@ function DetailCategory(props) {
       key: "price_product",
       width: "150px",
     },
-    {
-      title: "Số lượng",
-      dataIndex: "number",
-      key: "number",
-      width: "100px",
-    },
+    // {
+    //   title: "Số lượng",
+    //   dataIndex: "number",
+    //   key: "number",
+    //   width: "100px",
+    // },
     {
       title: "Ảnh",
       key: "image",
@@ -108,7 +101,7 @@ function DetailCategory(props) {
             <div className="card">
               <div className="card-body">
                 <h4 className="card-title">{category}</h4>
-                <Search handlerSearch={handlerSearch}/>
+                <Search handlerSearch={handlerSearch} />
 
                 <CustomTable
                   columns={columns}
