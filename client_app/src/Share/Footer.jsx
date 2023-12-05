@@ -1,11 +1,16 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import Global from "../Image/Global";
+import MessageNotify from "../Message/Message";
 
 Footer.propTypes = {};
 
 function Footer(props) {
   const [email, setEmail] = useState("");
+  const [messageObj, setMessageObj] = useState({
+    type: "",
+    content: "",
+  });
   const handleNotiEmail = (e) => {
     e.preventDefault();
     const data = { email };
@@ -20,6 +25,19 @@ function Footer(props) {
       .then((res) => {
         console.log(res);
       });
+    if (!email) {
+      setMessageObj({
+        type: "error",
+        content: "Vui lòng nhập đầy đủ email!",
+        active: new Date() * 1,
+      });
+      return;
+    }
+    setMessageObj({
+      type: "success",
+      content: "Thành công",
+      active: new Date() * 1,
+    });
   };
   return (
     <div className="footer">
@@ -35,8 +53,8 @@ function Footer(props) {
                     alt="Footer Logo"
                   />
                   <p className="info">
-                    BULI - wear is swag - Với phương châm <br /> "Đơn giản là sự tinh
-                    tế tối thượng"
+                    BULI - wear is swag - Với phương châm <br /> "Đơn giản là sự
+                    tinh tế tối thượng"
                   </p>
                 </div>
                 <ul className="des">
@@ -106,6 +124,11 @@ function Footer(props) {
           </div>
         </div>
       </div>
+      <MessageNotify
+        type={messageObj.type}
+        content={messageObj.content}
+        active={messageObj.active}
+      />
     </div>
   );
 }

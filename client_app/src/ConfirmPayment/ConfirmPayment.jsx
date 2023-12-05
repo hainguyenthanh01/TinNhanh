@@ -178,7 +178,9 @@ function ConfirmPayment() {
       content: "Đặt hàng thành công",
       active: new Date() * 1,
     });
-    history.push("/");
+    setTimeout(() => {
+      history.push("/");
+    }, 1000);
     socket.emit("send_order", "Có người vừa đặt hàng");
     localStorage.removeItem("id_coupon");
     localStorage.removeItem("coupon");
@@ -270,14 +272,14 @@ function ConfirmPayment() {
                   />
                 </Col>
 
-                <Col span={24}>
+                {/* <Col span={24}>
                   <TextArea
                     value={state.note}
                     placeholder="Ghi chú"
                     onChange={(e) => handleChangeValue("note", e.target.value)}
                     autoSize={{ minRows: 3, maxRows: 5 }}
                   />
-                </Col>
+                </Col> */}
               </Row>
               <h2
                 style={{
