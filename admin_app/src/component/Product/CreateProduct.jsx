@@ -107,7 +107,9 @@ function CreateProduct(props) {
     const response = await productAPI.create(formData);
 
     if (response.msg === "Bạn đã thêm thành công") {
-      history.push("/product");
+      setTimeout(() => {
+        history.push("/product");
+      }, 1000);
       setName("");
       setPrice("");
       setDescription("");

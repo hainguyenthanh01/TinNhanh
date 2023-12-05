@@ -31,7 +31,10 @@ function UpdateSale(props) {
     };
 
     const response = await SaleAPI.updateSale(id, body);
-    history.push("/sale");
+    setTimeout(() => {
+      history.push("/sale");
+    }, 1000);
+
 
     setShowMessage(response);
   };

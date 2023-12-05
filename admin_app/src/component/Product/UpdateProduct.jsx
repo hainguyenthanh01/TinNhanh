@@ -116,7 +116,9 @@ function UpdateProduct(props) {
     const response = await productAPI.update(formData);
 
     if (response.msg === "Bạn đã update thành công") {
-      history.push("/product");
+      setTimeout(() => {
+        history.push("/product");
+      }, 1000);
       window.scrollTo(0, 0);
     }
     setValidationMsg({ api: response.msg });

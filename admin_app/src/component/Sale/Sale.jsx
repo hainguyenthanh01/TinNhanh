@@ -8,6 +8,7 @@ import Search from "../Shared/Search";
 import SaleAPI from "../Api/SaleAPI";
 import moment from "moment/moment";
 import CustomTable from "../CustomTable/CustomTable";
+import MessageNotify from "../Message/Message";
 
 function Sale(props) {
   const [filter, setFilter] = useState({
@@ -19,7 +20,10 @@ function Sale(props) {
 
   const [sale, setSale] = useState([]);
   const [totalPage, setTotalPage] = useState();
-
+  const [messageObj, setMessageObj] = useState({
+    type: "",
+    content: "",
+  });
   useEffect(() => {
     const query = "?" + queryString.stringify(filter);
 
@@ -31,6 +35,7 @@ function Sale(props) {
         it.status = it.status ? "Active" : "Disable";
         it.start = moment(it.start).format("DD/MM/YYYY");
         it.end = moment(it.end).format("DD/MM/YYYY");
+        it.image = it.id_product.image;
         return it;
       });
       setSale(newArray);
@@ -39,7 +44,19 @@ function Sale(props) {
 
     fetchAllData();
   }, [filter]);
+  const handleDelete = async (id) => {
+    const response = await SaleAPI.deleteSale(id);
 
+    setFilter({
+      ...filter,
+      status: !filter.status,
+    });
+    setMessageObj({
+      type: "success",
+      content: "Bạn đã xóa thành công",
+      active: new Date() * 1,
+    });
+  };
   const handlerSearch = (value) => {
     setFilter({
       ...filter,
@@ -53,6 +70,17 @@ function Sale(props) {
       dataIndex: "name_product",
       key: "name_product",
       width: "250px",
+    },
+    {
+      title: "Ảnh",
+      key: "image",
+      render: (_, value) => (
+        <img
+          src={value.image}
+          alt=""
+          style={{ width: "60px", height: "60px" }}
+        />
+      ),
     },
     {
       title: "Giảm giá",
@@ -94,6 +122,14 @@ function Sale(props) {
             <Link to={"/sale/" + value._id} className="btn btn-success mr-1">
               Cập nhật
             </Link>
+            <button
+              type="button"
+              style={{ cursor: "pointer", color: "white" }}
+              onClick={() => handleDelete(value._id)}
+              className="btn btn-danger"
+            >
+              Xóa
+            </button>
           </div>
         );
       },
@@ -125,6 +161,11 @@ function Sale(props) {
             </div>
           </div>
         </div>
+        <MessageNotify
+          type={messageObj.type}
+          content={messageObj.content}
+          active={messageObj.active}
+        />
       </div>
       <footer className="footer text-center text-muted">
         All Rights Reserved by BULI. Designed and Developed by{" "}

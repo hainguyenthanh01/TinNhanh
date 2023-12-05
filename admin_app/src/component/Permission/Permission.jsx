@@ -6,6 +6,7 @@ import permissionAPI from "../Api/permissionAPI";
 import Pagination from "../Shared/Pagination";
 import Search from "../Shared/Search";
 import CustomTable from "../CustomTable/CustomTable";
+import MessageNotify from "../Message/Message";
 
 function Permission(props) {
   const [filter, setFilter] = useState({
@@ -17,7 +18,10 @@ function Permission(props) {
 
   const [permission, setPermission] = useState([]);
   const [totalPage, setTotalPage] = useState();
-
+  const [messageObj, setMessageObj] = useState({
+    type: "",
+    content: "",
+  });
   useEffect(() => {
     const query = "?" + queryString.stringify(filter);
 
@@ -58,6 +62,11 @@ function Permission(props) {
       setFilter({
         ...filter,
         status: !filter.status,
+      });
+      setMessageObj({
+        type: "success",
+        content: "Bạn đã xóa thành công",
+        active: new Date() * 1,
       });
     }
   };
@@ -118,6 +127,11 @@ function Permission(props) {
             </div>
           </div>
         </div>
+        <MessageNotify
+          type={messageObj.type}
+          content={messageObj.content}
+          active={messageObj.active}
+        />
       </div>
       <footer className="footer text-center text-muted">
         All Rights Reserved by BULI. Designed and Developed by{" "}

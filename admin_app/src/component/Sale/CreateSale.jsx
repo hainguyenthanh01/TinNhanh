@@ -37,7 +37,9 @@ function CreateSale(props) {
     console.log(body);
 
     const response = await SaleAPI.postSale(body);
-    history.push("/sale");
+    setTimeout(() => {
+      history.push("/sale");
+    }, 1000);
     setShowMessage(response);
 
     reset({ defaultValues });

@@ -80,7 +80,9 @@ function CreateUserCus(props) {
 
     if (response.msg === "Bạn đã thêm thành công") {
       window.scrollTo(0, 0);
-      history.push("/customer");
+      setTimeout(() => {
+        history.push("/customer");
+      }, 1000);
       setName("");
       setUserName("");
       setEmail("");

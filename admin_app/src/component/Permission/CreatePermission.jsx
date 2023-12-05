@@ -34,7 +34,9 @@ function CreatePermission(props) {
         const query = '?' + queryString.stringify({ name: name })
         const response = await permissionAPI.create(query)
         if (response.msg === "Bạn đã thêm thành công") {
-            history.push("/permission");
+            setTimeout(() => {
+                history.push("/permission");
+              }, 1000);
             setName('');
         }
         setValidationMsg({ api: response.msg })

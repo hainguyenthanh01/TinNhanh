@@ -6,6 +6,7 @@ import categoryAPI from "../Api/categoryAPI";
 import Pagination from "../Shared/Pagination";
 import Search from "../Shared/Search";
 import CustomTable from "../CustomTable/CustomTable";
+import MessageNotify from "../Message/Message";
 
 function Category(props) {
   const [filter, setFilter] = useState({
@@ -14,7 +15,10 @@ function Category(props) {
     search: "",
     status: true,
   });
-
+  const [messageObj, setMessageObj] = useState({
+    type: "",
+    content: "",
+  });
   const [category, setCategory] = useState([]);
   const [totalPage, setTotalPage] = useState();
 
@@ -56,6 +60,11 @@ function Category(props) {
         status: !filter.status,
       });
     }
+    setMessageObj({
+      type: "success",
+      content: "Bạn đã xóa thành công",
+      active: new Date() * 1,
+    });
   };
   const columns = [
     {
@@ -82,7 +91,7 @@ function Category(props) {
               Cập nhật
             </Link>
             {/* <Link to={"/producer/" + value.category} className="btn btn-info mr-1">Detail</Link>
-                                            <Link to={"/producer/update/" + value._id} className="btn btn-success mr-1">Update</Link> */}
+            <Link to={"/producer/update/" + value._id} className="btn btn-success mr-1">Update</Link> */}
 
             <button
               type="button"
@@ -124,6 +133,11 @@ function Category(props) {
             </div>
           </div>
         </div>
+        <MessageNotify
+          type={messageObj.type}
+          content={messageObj.content}
+          active={messageObj.active}
+        />
       </div>
       <footer className="footer text-center text-muted">
         All Rights Reserved by BULI. Designed and Developed by{" "}

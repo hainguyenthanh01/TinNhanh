@@ -34,7 +34,9 @@ function CreateCategory(props) {
     const response = await categoryApi.create(query);
     if (response.msg === "Bạn đã thêm thành công") {
       setName("");
-      history.push("/category");
+      setTimeout(() => {
+        history.push("/category");
+      }, 1000);
     }
     setValidationMsg({ api: response.msg });
   };

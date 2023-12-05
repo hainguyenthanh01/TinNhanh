@@ -30,7 +30,10 @@ function CreateCoupon(props) {
     };
 
     const response = await CouponAPI.postCoupons(body);
-    history.push("/coupon");
+    setTimeout(() => {
+      history.push("/coupon");
+    }, 1000);
+
     setShowMessage(response.msg);
 
     reset({ defaultValues });

@@ -5,6 +5,7 @@ import Search from "../Shared/Search";
 import queryString from "query-string";
 import { Link } from "react-router-dom";
 import CustomTable from "../CustomTable/CustomTable";
+import MessageNotify from "../Message/Message";
 
 function Coupon(props) {
   const [filter, setFilter] = useState({
@@ -16,7 +17,10 @@ function Coupon(props) {
 
   const [coupons, setCoupons] = useState([]);
   const [totalPage, setTotalPage] = useState();
-
+  const [messageObj, setMessageObj] = useState({
+    type: "",
+    content: "",
+  });
   useEffect(() => {
     const query = "?" + queryString.stringify(filter);
 
@@ -42,6 +46,11 @@ function Coupon(props) {
     setFilter({
       ...filter,
       status: !filter.status,
+    });
+    setMessageObj({
+      type: "success",
+      content: "Bạn đã xóa thành công",
+      active: new Date() * 1,
     });
   };
   const columns = [
@@ -114,6 +123,11 @@ function Coupon(props) {
             </div>
           </div>
         </div>
+        <MessageNotify
+          type={messageObj.type}
+          content={messageObj.content}
+          active={messageObj.active}
+        />
       </div>
       <footer className="footer text-center text-muted">
         All Rights Reserved by BULI. Designed and Developed by{" "}

@@ -20,7 +20,11 @@ const SaleAPI = {
     updateSale: (id, data) => {
         const url = `/admin/sale/${id}`
         return axiosClient.patch(url, data)
-    }
+    },
+    deleteSale: (id) => {
+        const url = `/admin/sale/${id}`
+        return axiosClient.delete(url)
+    },
 
 }
 

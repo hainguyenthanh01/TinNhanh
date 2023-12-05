@@ -36,7 +36,9 @@ function UpdateCoupon(props) {
     };
 
     const response = await CouponAPI.updateCoupon(id, body);
-    history.push("/coupon");
+    setTimeout(() => {
+      history.push("/coupon");
+    }, 1000);
     setShowMessage(response.msg);
   };
 

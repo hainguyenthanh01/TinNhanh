@@ -43,7 +43,9 @@ function UpdateCategory(props) {
   const updatecategory = async () => {
     const query = "?" + queryString.stringify({ id: id, name: name });
     const response = await categoryAPI.update(query);
-    history.push("/category");
+    setTimeout(() => {
+      history.push("/category");
+    }, 1000);
     setValidationMsg({ api: response.msg });
   };
   return (

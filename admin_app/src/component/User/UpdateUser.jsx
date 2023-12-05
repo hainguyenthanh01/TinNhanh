@@ -67,7 +67,9 @@ function UpdateUser(props) {
     const response = await userApi.update(query);
 
     if (response.msg === "Bạn đã update thành công") {
-      history.push("/user");
+      setTimeout(() => {
+        history.push("/user");
+      }, 1000);
       window.scrollTo(0, 0);
       setPassword("");
     }

@@ -7,6 +7,7 @@ import orderAPI from "../Api/orderAPI";
 import Pagination from "../Shared/Pagination";
 import Search from "../Shared/Search";
 import CustomTable from "../CustomTable/CustomTable";
+import MessageNotify from "../Message/Message";
 
 const socket = io("http://localhost:8000/", {
   transports: ["websocket"],
@@ -23,7 +24,10 @@ function Order(props) {
   const [order, setOrder] = useState([]);
   const [totalPage, setTotalPage] = useState();
   const [note, setNote] = useState([]);
-
+  const [messageObj, setMessageObj] = useState({
+    type: "",
+    content: "",
+  });
   useEffect(() => {
     const query = "?" + queryString.stringify(filter);
 
@@ -72,7 +76,25 @@ function Order(props) {
       }, 4000);
     });
   }, []);
+  const handleDelete = async (value) => {
+    const data = {
+      id: value,
+    };
+    const query = "?" + queryString.stringify(data);
 
+    const response = await orderAPI.delete(query);
+
+    if (response.msg === "Thanh Cong") {
+      setFilter({
+        ...filter,
+      });
+      setMessageObj({
+        type: "success",
+        content: "Bạn đã xóa thành công",
+        active: new Date() * 1,
+      });
+    }
+  };
   const columns = [
     {
       title: "Tên",
@@ -130,6 +152,14 @@ function Order(props) {
             >
               Chi tiết
             </Link>
+            <button
+              type="button"
+              style={{ cursor: "pointer", color: "white" }}
+              onClick={() => handleDelete(value._id)}
+              className="btn btn-danger"
+            >
+              Xóa
+            </button>
           </div>
         );
       },
@@ -160,6 +190,11 @@ function Order(props) {
             </div>
           </div>
         </div>
+        <MessageNotify
+          type={messageObj.type}
+          content={messageObj.content}
+          active={messageObj.active}
+        />
       </div>
       <footer className="footer text-center text-muted">
         All Rights Reserved by BULI. Designed and Developed by

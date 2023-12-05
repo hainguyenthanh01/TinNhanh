@@ -2,7 +2,7 @@ import axiosClient from "./axiosClient"
 
 const orderAPI = {
     getAPI: (query) => {
-        const url = `/admin/order${query}`
+        const url = `/admin/Order${query}`
         return axiosClient.get(url)
     },
     details: (id) => {
@@ -32,7 +32,11 @@ const orderAPI = {
     completeOrder: (query) => {
         const url = `/admin/order/completeOrder${query}`
         return axiosClient.get(url)
-    }
+    },
+    delete: (query) => {
+        const url = `/admin/order/delete${query}`
+        return axiosClient.delete(url)
+    },
 }
 
 export default orderAPI
