@@ -16,4 +16,6 @@ router.get('/list/product', Sale.list)
 
 router.get('/list/:id', Sale.detailList)
 
+router.delete('/:id', Sale.delete)
+
 module.exports = router

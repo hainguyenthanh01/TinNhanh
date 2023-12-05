@@ -16,6 +16,7 @@ module.exports.index = async (req, res) => {
   let end = page * perPage;
 
   let orders;
+  console.log(status);
   if (status) {
     orders = await (
       await Order.find({ status: status })
@@ -99,6 +100,18 @@ module.exports.details = async (req, res) => {
 
   res.json(order);
 };
+module.exports.delete = async (req, res) => {
+  const id = req.query.id;
+
+  await Order.deleteOne({ _id: id }, (err) => {
+      if (err) {
+          res.json({ msg: err })
+          return;
+      }
+      res.json({ msg: "Thanh Cong" })
+  })
+  
+}
 
 module.exports.confirmOrder = async (req, res) => {
   await Order.updateOne(

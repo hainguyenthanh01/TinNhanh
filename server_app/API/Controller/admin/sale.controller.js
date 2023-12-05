@@ -104,6 +104,16 @@ module.exports.update = async (req, res) => {
 
 }
 
+module.exports.delete = async (req, res) => {
+
+    const id = req.params.id
+
+    await Sale.deleteOne({ _id: id })
+
+    res.json("Thanh Cong")
+
+}
+
 module.exports.list = async (req, res) => {
 
     const sale = await Sale.find({ status: true }).populate('id_product')
