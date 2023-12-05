@@ -22,13 +22,15 @@ const socket = io("http://localhost:8000", {
   jsonp: false,
 });
 socket.connect();
-
+function PhoneNumber(number) {
+  return /(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/.test(number);
+}
 function ConfirmPayment() {
   const listCard = useSelector((state) => state.Cart.listCart);
   const dispatch = useDispatch();
   const history = useHistory();
-  const coupon = JSON.parse(localStorage.getItem("coupon"))
-  const discount = coupon ? Number(coupon.promotion) : 0
+  const coupon = JSON.parse(localStorage.getItem("coupon"));
+  const discount = coupon ? Number(coupon.promotion) : 0;
   const totalPrice =
     listCard &&
     listCard.reduce(
@@ -55,7 +57,7 @@ function ConfirmPayment() {
   });
   const [paymentMethod, setPaymentMethod] = useState({
     cod: false,
-    momo: false,
+    vnpay: false,
   });
   useEffect(() => {
     const fetchData = async () => {
@@ -112,6 +114,14 @@ function ConfirmPayment() {
     setState({ ...state, ...newValue });
   };
   const handleConfirm = async () => {
+    if (!PhoneNumber(state.phoneNumber)) {
+      setMessageObj({
+        type: "error",
+        content: "Vui lòng nhập đúng định dạng số điện thoại!",
+        active: new Date() * 1,
+      });
+      return;
+    }
     for (const property in state) {
       console.log(`${property}: ${state[property]}`);
       if (!state[property] && property !== "note") {
@@ -154,8 +164,9 @@ function ConfirmPayment() {
       id_coupon: localStorage.getItem("id_coupon")
         ? localStorage.getItem("id_coupon")
         : "",
-      create_time: `${new Date().getDate()}/${parseInt(new Date().getMonth()) + 1
-        }/${new Date().getFullYear()}`,
+      create_time: `${new Date().getDate()}/${
+        parseInt(new Date().getMonth()) + 1
+      }/${new Date().getFullYear()}`,
     };
     const responseOrder = await OrderAPI.post_order(dataOrder);
     for (let i = 0; i < listCard.length; i++) {
@@ -224,9 +235,10 @@ function ConfirmPayment() {
                     placeholder="Email"
                   />
                 </Col>
-                <Col span={6}>
+                <Col span={6} className="phone-number">
                   <Input
                     value={state.phoneNumber}
+                    type="number"
                     onChange={(e) =>
                       handleChangeValue("phoneNumber", e.target.value)
                     }
@@ -301,11 +313,10 @@ function ConfirmPayment() {
                         }}
                       >
                         <Checkbox
-                          // checked={paymentMethod.cod}
-                          checked={true}
+                          checked={paymentMethod.cod}
                           onChange={(e) => {
                             setPaymentMethod({
-                              momo: false,
+                              vnpay: false,
                               cod: e.target.checked,
                             });
                           }}
@@ -337,16 +348,16 @@ function ConfirmPayment() {
                         }}
                       >
                         <Checkbox
-                          checked={paymentMethod.momo}
+                          checked={paymentMethod.vnpay}
                           onChange={(e) => {
                             setPaymentMethod({
                               cod: false,
-                              momo: e.target.checked,
+                              vnpay: e.target.checked,
                             });
                           }}
                         />
                         <span style={{ marginLeft: "10px" }}>
-                          Thanh toán qua momo
+                          Thanh toán qua VNPay
                         </span>
                       </div>
                       <div
@@ -362,7 +373,7 @@ function ConfirmPayment() {
                         <div>- Hỗ trợ đổi hàng trong vòng 5 ngày</div>
                       </div>
                     </div>
-                    <MoMo orderID={1234} total={198000} />
+                    {/* <MoMo orderID={1234} total={198000} /> */}
                   </Col>
                 </Row>
               </div>
@@ -444,7 +455,8 @@ function ConfirmPayment() {
                       {new Intl.NumberFormat("vi-VN", {
                         style: "decimal",
                         decimal: "VND",
-                      }).format(totalPrice - (totalPrice * discount) / 100) + " VNĐ"}
+                      }).format(totalPrice - (totalPrice * discount) / 100) +
+                        " VNĐ"}
                     </Col>
                   </Row>
                 </Col>

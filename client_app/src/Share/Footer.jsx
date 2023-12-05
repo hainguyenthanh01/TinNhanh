@@ -11,6 +11,9 @@ function Footer(props) {
     type: "",
     content: "",
   });
+  function Email(email) {
+    return /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(email);
+  }
   const handleNotiEmail = (e) => {
     e.preventDefault();
     const data = { email };
@@ -25,6 +28,14 @@ function Footer(props) {
       .then((res) => {
         console.log(res);
       });
+    if (!Email(email)) {
+      setMessageObj({
+        type: "error",
+        content: "Vui lòng nhập đúng định dạng email!",
+        active: new Date() * 1,
+      });
+      return;
+    }
     if (!email) {
       setMessageObj({
         type: "error",
