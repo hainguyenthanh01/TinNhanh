@@ -83,12 +83,12 @@ function Product() {
       key: "price_product",
       width: "150px",
     },
-    // {
-    //   title: "Số lượng",
-    //   dataIndex: "number",
-    //   key: "number",
-    //   width: "100px",
-    // },
+    {
+      title: "Số lượng",
+      dataIndex: "number",
+      key: "number",
+      width: "100px",
+    },
     {
       title: "Ảnh",
       key: "image",

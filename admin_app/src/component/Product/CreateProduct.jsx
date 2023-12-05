@@ -100,7 +100,7 @@ function CreateProduct(props) {
     formData.append("name", name);
     formData.append("price", price);
     formData.append("category", categoryChoose);
-    // formData.append("number", number)
+    formData.append("number", number);
     formData.append("description", description);
     formData.append("gender", genderChoose);
 
@@ -113,7 +113,7 @@ function CreateProduct(props) {
       setName("");
       setPrice("");
       setDescription("");
-      // setNumber('')
+      setNumber("");
       setCategoryChoose("");
       setGenderChoose("");
       setFile("");
@@ -196,11 +196,21 @@ function CreateProduct(props) {
                       {validationMsg.description}
                     </p>
                   </div>
-                  {/* <div className="form-group w-50">
-                                        <label htmlFor="number">Số lượng: </label>
-                                        <input type="number" className="form-control" id="number" name="number" value={number} onChange={(e) => onChangeNumber(e)} required />
-                                        <p className="form-text text-danger">{validationMsg.number}</p>
-                                    </div> */}
+                  <div className="form-group w-50">
+                    <label htmlFor="number">Số lượng: </label>
+                    <input
+                      type="number"
+                      className="form-control"
+                      id="number"
+                      name="number"
+                      value={number}
+                      onChange={(e) => onChangeNumber(e)}
+                      required
+                    />
+                    <p className="form-text text-danger">
+                      {validationMsg.number}
+                    </p>
+                  </div>
 
                   <div className="form-group w-50">
                     {/* <label htmlFor="categories" className="mr-2">Chọn loại:</label> */}
