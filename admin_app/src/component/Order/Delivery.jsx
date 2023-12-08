@@ -111,6 +111,7 @@ function Delivery(props) {
       title: "Địa chỉ",
       dataIndex: "address",
       key: "address",
+      width: "270px",
     },
     {
       title: "Trạng thái",

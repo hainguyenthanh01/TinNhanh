@@ -94,7 +94,7 @@ function CancelOrder(props) {
       title: "Địa chỉ",
       dataIndex: "address",
       key: "address",
-      width: "350px",
+      width: "270px",
     },
     {
       title: "Ngày đặt hàng",
