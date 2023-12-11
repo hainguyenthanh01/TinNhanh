@@ -19,6 +19,7 @@ import { FaFacebook, FaTiktok } from "react-icons/fa";
 import { FaEarthAsia } from "react-icons/fa6";
 import { GrInstagram } from "react-icons/gr";
 import { SiShopee } from "react-icons/si";
+import MessageNotify from "../Message/Message";
 import {
   getUrlParamsFromJson,
   getUserCookie,
@@ -38,7 +39,11 @@ function Header(props) {
   const [countCart, setCountCart] = useState(0);
 
   const id_user = useSelector((state) => state.Session.idUser);
-
+  const [messageObj, setMessageObj] = useState({
+    type: "",
+    content: "",
+    active: 0,
+  });
   // Hàm này để khởi tạo localStorage dùng để lưu trữ giỏ hàng
   // Và nó sẽ chạy lần đầu
   useEffect(async () => {
@@ -109,6 +114,15 @@ function Header(props) {
     const action = deleteSession("");
     dispatch(action);
     removeUserCookie();
+    setMessageObj({
+      type: "success",
+      content: "Đăng xuất thành công",
+      active: new Date() * 1,
+    });
+    setTimeout(() => {
+      history.push("/");
+    }, 1500);
+
   };
 
   // Get trạng thái từ redux khi user chưa đăng nhập
@@ -253,7 +267,8 @@ function Header(props) {
                   <a
                     href="https://www.facebook.com/buli2019"
                     style={{ fontSize: "14px" }}
-                    target="_blank" rel="noreferrer"
+                    target="_blank"
+                    rel="noreferrer"
                   >
                     <FaFacebook />
                   </a>
@@ -262,7 +277,8 @@ function Header(props) {
                   <a
                     href="https://www.instagram.com/buli_official/"
                     style={{ fontSize: "14px" }}
-                    target="_blank" rel="noreferrer"
+                    target="_blank"
+                    rel="noreferrer"
                   >
                     <GrInstagram />
                   </a>
@@ -271,7 +287,8 @@ function Header(props) {
                   <a
                     href="https://www.tiktok.com/@bulishop"
                     style={{ fontSize: "14px" }}
-                    target="_blank" rel="noreferrer"
+                    target="_blank"
+                    rel="noreferrer"
                   >
                     <FaTiktok />
                   </a>
@@ -280,7 +297,8 @@ function Header(props) {
                   <a
                     href="https://shopee.vn/bulishop"
                     style={{ fontSize: "14px" }}
-                    target="_blank" rel="noreferrer"
+                    target="_blank"
+                    rel="noreferrer"
                   >
                     <SiShopee />
                   </a>
@@ -289,7 +307,8 @@ function Header(props) {
                   <a
                     href="https://buli.vn/"
                     style={{ fontSize: "14px" }}
-                    target="_blank" rel="noreferrer"
+                    target="_blank"
+                    rel="noreferrer"
                   >
                     <FaEarthAsia />
                   </a>
@@ -415,9 +434,8 @@ function Header(props) {
                             <a
                               onClick={() => {
                                 handler_logout();
-                                // history.push("/");
                               }}
-                              href="/"
+                              href="#"
                             >
                               Đăng xuất
                             </a>
@@ -446,8 +464,9 @@ function Header(props) {
                     <ul>
                       <li className="dropdown-holder">
                         <Link
-                          className={`${location.pathname === "/" ? "active" : ""
-                            }`}
+                          className={`${
+                            location.pathname === "/" ? "active" : ""
+                          }`}
                           to="/"
                         >
                           Trang Chủ
@@ -455,8 +474,9 @@ function Header(props) {
                       </li>
                       <li className="megamenu-holder">
                         <Link
-                          className={`${location.pathname.includes("/shop") ? "active" : ""
-                            }`}
+                          className={`${
+                            location.pathname.includes("/shop") ? "active" : ""
+                          }`}
                           to="/shop/all"
                         >
                           Menu
@@ -498,8 +518,9 @@ function Header(props) {
                       </li>
                       <li>
                         <Link
-                          className={`${location.pathname.includes("/event") ? "active" : ""
-                            }`}
+                          className={`${
+                            location.pathname.includes("/event") ? "active" : ""
+                          }`}
                           to="/event"
                         >
                           Khuyến mãi
@@ -507,10 +528,11 @@ function Header(props) {
                       </li>
                       <li>
                         <Link
-                          className={`${location.pathname.includes("/contact")
-                            ? "active"
-                            : ""
-                            }`}
+                          className={`${
+                            location.pathname.includes("/contact")
+                              ? "active"
+                              : ""
+                          }`}
                           to="/contact"
                         >
                           Liên hệ
@@ -518,8 +540,9 @@ function Header(props) {
                       </li>
                       <li>
                         <Link
-                          className={`${location.pathname.includes("/about") ? "active" : ""
-                            }`}
+                          className={`${
+                            location.pathname.includes("/about") ? "active" : ""
+                          }`}
                           to="/about"
                         >
                           Về chúng tôi
@@ -542,6 +565,11 @@ function Header(props) {
           </div>
         </div>
       </div>
+      <MessageNotify
+        type={messageObj.type}
+        content={messageObj.content}
+        active={messageObj.active}
+      />
     </header>
   );
 }
