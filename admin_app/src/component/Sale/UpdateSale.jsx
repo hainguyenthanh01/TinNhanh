@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import productAPI from "../Api/productAPI";
 import SaleAPI from "../Api/SaleAPI";
@@ -34,7 +35,6 @@ function UpdateSale(props) {
     setTimeout(() => {
       history.push("/sale");
     }, 1000);
-
 
     setShowMessage(response);
   };
@@ -171,6 +171,24 @@ function UpdateSale(props) {
                           </option>
                         ))}
                     </select>
+                  </div>
+                  <div className="form-group w-50">
+                    <label htmlFor="description">Ngày bắt đầu</label>
+                    <br />
+                    <DatePicker
+                      className="form-control"
+                      // selected={startDate}
+                      // onChange={(date) => setStartDate(date)}
+                    />
+                  </div>
+                  <div className="form-group w-50">
+                    <label htmlFor="description">Ngày kết thúc</label>
+                    <br />
+                    <DatePicker
+                      className="form-control"
+                      // selected={endDate}
+                      // onChange={(date) => setEndDate(date)}
+                    />
                   </div>
 
                   <button type="submit" className="btn btn-primary">

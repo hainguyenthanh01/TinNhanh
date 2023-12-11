@@ -117,6 +117,20 @@ function CreateSale(props) {
                       </p>
                     )}
                   </div>
+                  <div className="form-group w-25">
+                    <select
+                      className="form-control"
+                      value={selectProduct}
+                      onChange={(e) => setSelectProduct(e.target.value)}
+                    >
+                      {product &&
+                        product.map((value) => (
+                          <option value={value._id} key={value._id}>
+                            {value.name_product}
+                          </option>
+                        ))}
+                    </select>
+                  </div>
                   <div className="form-group w-50">
                     <label htmlFor="description">Ngày bắt đầu</label>
                     <br />
@@ -134,20 +148,6 @@ function CreateSale(props) {
                       selected={endDate}
                       onChange={(date) => setEndDate(date)}
                     />
-                  </div>
-                  <div className="form-group w-25">
-                    <select
-                      className="form-control"
-                      value={selectProduct}
-                      onChange={(e) => setSelectProduct(e.target.value)}
-                    >
-                      {product &&
-                        product.map((value) => (
-                          <option value={value._id} key={value._id}>
-                            {value.name_product}
-                          </option>
-                        ))}
-                    </select>
                   </div>
 
                   <button type="submit" className="btn btn-primary">

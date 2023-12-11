@@ -72,11 +72,9 @@ function CreateProduct(props) {
     if (isEmpty(description)) {
       msg.description = "Mô tả không được để trống";
     }
-    // if (isEmpty(number)) {
-    //     msg.number = "Số lượng không được để trống"
-    // } else if (!priceRegex.test(number)) {
-    //     msg.number = "Số lượng sai định dạng"
-    // }
+    if (isEmpty(number)) {
+      msg.number = "Số lượng không được để trống";
+    }
     if (isEmpty(categoryChoose)) {
       msg.category = "Vui lòng chọn loại";
     }
