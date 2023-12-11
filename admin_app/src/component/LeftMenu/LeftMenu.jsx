@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { BiSolidDiscount   } from "react-icons/bi";
-import { FaUserCircle, FaUser } from "react-icons/fa";
+import { FaUserCircle, FaUser, FaChartLine  } from "react-icons/fa";
 import { Breadcrumb, Layout, Menu, theme } from "antd";
 import { HiShoppingCart } from "react-icons/hi";
 import { ImFire } from "react-icons/im";
@@ -44,6 +44,7 @@ import CreateCoupon from '../Conpon/CreateCoupon';
 import UpdateCoupon from '../Conpon/UpdateCoupon';
 import CreateSale from '../Sale/CreateSale';
 import UpdateSale from '../Sale/UpdateSale';
+import Statistical from '../Statistical/Statistical'
 const { Header, Content, Footer, Sider } = Layout;
 function getItem(label, key, icon, link, children) {
   return {
@@ -59,8 +60,8 @@ const items = [
   getItem("Mã giảm giá ", "2", <BiSolidDiscount/>, "/coupon"),
   getItem("Sản phẩm ", "3", <HiShoppingCart />, "/product"),
   getItem("Sale ", "4", <ImFire />, "/sale"),
-  getItem("Thể loại ", "5", <BiSolidCategory  />, "/category"),
-  getItem("Đơn hàng ", "6", <GiStabbedNote  />, "/order", [
+  getItem("Thể loại ", "5", <BiSolidCategory/>, "/category"),
+  getItem("Đơn hàng ", "6", <GiStabbedNote/>, "/order", [
     getItem("Đơn hàng", "children_oder_1", null, "/order"),
     getItem("Xác nhận đơn hàng", "children_oder_2", null, "/confirmorder"),
     getItem("Đơn hàng đã hoàn thành", "children_oder_3", null, "/completedorder"),
@@ -70,9 +71,10 @@ const items = [
     getItem("Vận chuyển", "children_delivery_1", null, "/delivery"),
     getItem("Xác nhận vận chuyển", "children_delivery_2", null, "/confirmdelivery"),
   ]),
-  getItem("Tài khoản", "sub1", <FaUser />, "/user"),
+  getItem("Tài khoản", "sub1", <FaUser/>, "/user"),
 
-  getItem("Quyền", "sub2", <FaUserGroup  />, "/permission"),
+  getItem("Quyền", "sub2", <FaUserGroup/>, "/permission"),
+  getItem("Thống kê", "8", <FaChartLine/>, "/statistical"),
 ];
 const LeftMenu = () => {
   const [collapsed, setCollapsed] = useState(false);
@@ -94,6 +96,7 @@ const LeftMenu = () => {
         width={260}
         collapsed={collapsed}
         onCollapse={(value) => setCollapsed(value)}
+        trigger = {null}
       >
         <div className="ant-layout-sider-children" style={{position:"fixed", width:"13.5%"}}>
         <Menu
@@ -161,6 +164,8 @@ const LeftMenu = () => {
             <Route exact path='/sale' component={Sale} />
             <Route path='/sale/create' component={CreateSale} />
             <Route path='/sale/:id' component={UpdateSale} />
+
+            <Route exact path='/statistical' component={Statistical} />
 
             <Route component={NotFound} />
           </Switch>

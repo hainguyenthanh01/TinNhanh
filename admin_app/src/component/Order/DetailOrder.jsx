@@ -36,6 +36,20 @@ function DetailOrder(props) {
     const fetchAllData = async () => {
       const od = await orderAPI.detailOrder(idDetail, query);
       const newArray = od.details.map((it) => {
+        it.status = (() => {
+          switch (it.id_order.status) {
+            case "1":
+              return "Đang xử lý";
+            case "2":
+              return "Đã xác nhận";
+            case "3":
+              return "Đang giao";
+            case "4":
+              return "Hoàn thành";
+            default:
+              return "Đơn bị hủy";
+          }
+        })();
         it.name_product = it.id_product.name_product;
         it.price_product =
           new Intl.NumberFormat("vi-VN", {
@@ -107,10 +121,9 @@ function DetailOrder(props) {
       ),
     },
     {
-      title: "Tổng tiền",
-      dataIndex: "total",
-      key: "total",
-      width: "250px",
+      title: "Trạng thái",
+      dataIndex: "status",
+      key: "status",
     },
   ];
   return (
@@ -158,7 +171,7 @@ function DetailOrder(props) {
         </div>
       </div>
       <footer className="footer text-center text-muted">
-        All Rights Reserved by BULI. Designed and Developed by
+        All Rights Reserved by BULI. Designed and Developed by{" "}
         <a href="https://www.facebook.com/NguyenThanhHai.2k1">Hải Nguyễn</a>.
       </footer>
     </div>
