@@ -93,7 +93,7 @@ function Footer(props) {
                   <h3 className="footer-block-title">Công ty chúng tôi</h3>
                   <ul>
                     <li>
-                      <a href="#">Về chúng tôi</a>
+                      <a href="/about">Về chúng tôi</a>
                     </li>
                     <li>
                       <a href="/contact">Liên hệ</a>

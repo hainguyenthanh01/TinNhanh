@@ -83,9 +83,9 @@ function Search(props) {
                 <div className="product-short">
                   <p>Sắp xếp theo:</p>
                   <select className="nice-select">
-                    <option value="trending">Mức độ</option>
-                    <option value="rating">Giá (Thấp &gt; Cao)</option>
-                    <option value="rating">Giá (Cao &gt; Thấp)</option>
+                    <option value="trending">Giá</option>
+                    <option value="rating">Giá (Thấp đến Cao)</option>
+                    <option value="rating">Giá (Cao đến Thấp)</option>
                   </select>
                 </div>
               </div>
@@ -138,7 +138,8 @@ function Search(props) {
                                       <Rate
                                         style={{ fontSize: "14px" }}
                                         disabled
-                                        defaultValue={0}
+                                        allowHalf
+                                        defaultValue={value.star}
                                       />
                                     </ul>
                                   </div>
@@ -159,11 +160,7 @@ function Search(props) {
                                   </span>
                                 </div>
                                 <p>
-                                  Lorem ipsum dolor sit amet consectetur
-                                  adipisicing elit. Facere assumenda ea quia
-                                  magnam, aspernatur earum quidem eum et illum
-                                  dolorem commodi sunt delectus totam blanditiis
-                                  doloremque at voluptates nisi iusto!
+                                {value.describe}
                                 </p>
                               </div>
                             </div>
@@ -255,12 +252,7 @@ function Search(props) {
                             <div className="product-desc">
                               <p>
                                 <span>
-                                  Lorem ipsum dolor sit amet consectetur
-                                  adipisicing elit. Veritatis reiciendis hic
-                                  voluptatibus aperiam culpa ullam dolor esse
-                                  error ducimus itaque ipsa facilis saepe rem
-                                  veniam exercitationem quos magnam, odit
-                                  perspiciatis.
+                                {value.describe}
                                 </span>
                               </p>
                             </div>
