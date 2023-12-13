@@ -16,6 +16,8 @@ function UpdateSale(props) {
   const { id } = useParams();
   const history = useHistory();
   const [showMessage, setShowMessage] = useState("");
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
 
   const {
     register,
@@ -29,6 +31,8 @@ function UpdateSale(props) {
       describe: describe,
       status: status,
       id_product: selectProduct,
+      start: startDate,
+      end: endDate,
     };
 
     const response = await SaleAPI.updateSale(id, body);
@@ -59,6 +63,8 @@ function UpdateSale(props) {
       setDescribe(resDetail.describe);
       resDetail.status ? setStatus("true") : setStatus("false");
       setSelectProduct(resDetail.id_product);
+      setEndDate(new Date(resDetail.end));
+      setStartDate(new Date(resDetail.start));
     };
 
     fetchData();
@@ -177,8 +183,8 @@ function UpdateSale(props) {
                     <br />
                     <DatePicker
                       className="form-control"
-                      // selected={startDate}
-                      // onChange={(date) => setStartDate(date)}
+                      selected={startDate}
+                      onChange={(date) => setStartDate(date)}
                     />
                   </div>
                   <div className="form-group w-50">
@@ -186,8 +192,8 @@ function UpdateSale(props) {
                     <br />
                     <DatePicker
                       className="form-control"
-                      // selected={endDate}
-                      // onChange={(date) => setEndDate(date)}
+                      selected={endDate}
+                      onChange={(date) => setEndDate(date)}
                     />
                   </div>
 

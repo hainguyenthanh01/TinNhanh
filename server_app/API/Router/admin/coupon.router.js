@@ -17,5 +17,6 @@ router.delete('/:id', Coupon.delete)
 router.get('/promotion/checking', Coupon.checking)
 
 router.patch('/promotion/:id', Coupon.createCoupon)
+router.post('/update-count', Coupon.updateCount)
 
 module.exports = router

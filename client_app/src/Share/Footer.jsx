@@ -17,17 +17,6 @@ function Footer(props) {
   const handleNotiEmail = (e) => {
     e.preventDefault();
     const data = { email };
-    fetch("http://localhost:8000/api/email-receive-notification", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        console.log(res);
-      });
     if (!Email(email)) {
       setMessageObj({
         type: "error",
@@ -44,6 +33,18 @@ function Footer(props) {
       });
       return;
     }
+    fetch("http://localhost:8000/api/email-receive-notification", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+      });
+
     setMessageObj({
       type: "success",
       content: "Thành công",

@@ -11,16 +11,17 @@ module.exports.index = async (req, res) => {
     let end = page * perPage;
 
     const products = await Product.find().populate('id_category');
+    const productsRevers = products.reverse();
 
 
     if (!keyWordSearch) {
         res.json({
-            products: products.slice(start, end),
+            products: productsRevers.slice(start, end),
             totalPage: totalPage
         })
 
     } else {
-        var newData = products.filter(value => {
+        var newData = productsRevers.filter(value => {
             return value.name_product.toUpperCase().indexOf(keyWordSearch.toUpperCase()) !== -1 ||
                 value.price_product.toUpperCase().indexOf(keyWordSearch.toUpperCase()) !== -1 ||
                 value.id.toUpperCase().indexOf(keyWordSearch.toUpperCase()) !== -1
@@ -81,7 +82,7 @@ module.exports.delete = async (req, res) => {
         }
         res.json({ msg: "Thanh Cong" })
     })
-    
+
 }
 
 module.exports.details = async (req, res) => {

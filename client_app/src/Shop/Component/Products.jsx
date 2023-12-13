@@ -25,7 +25,7 @@ function Products(props) {
       return b.price_product - a.price_product;
     });
   }
-
+  console.log(products);
   return (
     <div className="row">
       {products &&

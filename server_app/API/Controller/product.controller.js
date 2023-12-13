@@ -62,7 +62,7 @@ module.exports.category = async (req, res) => {
         }
     }
 
-    res.json(data)
+    res.json(data.reverse())
 }
 
 //TH: Chi Tiết Sản Phẩm
@@ -104,23 +104,41 @@ module.exports.pagination = async (req, res) => {
     } else {
         products = await Products.find({ id_category: category })
     }
+    const productsRevers = products.reverse()
 
-    var paginationProducts = products.slice(start, end)
-
+    var paginationProducts = productsRevers.slice(start, end)
+    let data = []
+    let arrNew = []
 
     if (!keyWordSearch) {
 
-        res.json(paginationProducts)
+        arrNew = paginationProducts
 
     } else {
         var newData = paginationProducts.filter(value => {
             return value.name_product.toUpperCase().indexOf(keyWordSearch.toUpperCase()) !== -1 ||
                 value.price_product.toUpperCase().indexOf(keyWordSearch.toUpperCase()) !== -1
         })
+        arrNew = newData
+    }
+    for (let i = 0; i < arrNew.length; i++) {
+        const listStar = await Comment.find({ id_product: arrNew[i]._id })
+        if (listStar && listStar.length > 0) {
+            const averageStar = listStar.reduce((sum, item) => sum + item.star, 0) / listStar.length;
+            data.push({
+                ...arrNew[i]._doc,
+                star: Number(parseFloat(averageStar.toFixed(1)))
+            })
 
-        res.json(newData)
+        } else {
+            data.push({
+                ...arrNew[i]._doc,
+                star: 0
+            })
+        }
     }
 
+    res.json(data)
 }
 
 // Hàm này dùng để hiện những sản phẩm search theo scoll ở component tìm kiếm bên client

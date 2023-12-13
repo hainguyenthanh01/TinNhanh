@@ -117,3 +117,9 @@ module.exports.createCoupon = async (req, res) => {
     res.json("Thanh Cong")
 
 }
+module.exports.updateCount = async (req, res) => {
+    const id = req.body.id
+
+    const coupon = await Coupon.updateOne({ _id: id }, { $set: { count: req.body.count } })
+    res.json(coupon)
+}

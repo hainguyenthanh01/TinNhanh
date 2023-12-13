@@ -34,8 +34,8 @@ function ConfirmPayment() {
   const totalPrice =
     listCard &&
     listCard.reduce(
-      (prev, curIt) => prev + +curIt.price_product * +curIt.count || 0,
-      30000
+      (prev, curIt) => prev + curIt.price_product * curIt.count || 0,
+      0
     );
   const [province, setProvince] = useState([]);
   const [district, setDistrict] = useState([]);
@@ -145,6 +145,15 @@ function ConfirmPayment() {
       phone: state.phoneNumber,
     };
     const responseDelivery = await NoteAPI.post_note(data_delivery);
+    const dataCoupon = localStorage.getItem("coupon")
+      ? JSON.parse(localStorage.getItem("coupon"))
+      : null;
+    if (dataCoupon) {
+      await NoteAPI.post_coupon_count({
+        id: dataCoupon._id,
+        count: dataCoupon.count - 1,
+      });
+    }
     const provinceItem = province.find((it) => it.value === state.province);
     const districtItem = district.find((it) => it.value === state.district);
     const wardsItem = wards.find((it) => it.value === state.wards);
@@ -155,7 +164,7 @@ function ConfirmPayment() {
       id_user: getUserCookie(),
       full_name: state.name,
       address: addressNew,
-      total: totalPrice - (totalPrice * discount) / 100,
+      total: totalPrice - (totalPrice * discount) / 100 + 30000,
       status: "1",
       pay: false,
       id_payment: "6086709cdc52ab1ae999e882",
@@ -178,7 +187,15 @@ function ConfirmPayment() {
         count: listCard[i].count,
         size: listCard[i].size,
       };
-      await Detail_OrderAPI.post_detail_order(dataDetailOrder);
+      const data = await Detail_OrderAPI.post_detail_order(dataDetailOrder);
+      if (data.code !== 200) {
+        setMessageObj({
+          type: "error",
+          content: data.message,
+          active: new Date() * 1,
+        });
+        return;
+      }
     }
     const dataRes = await CartAPI.Delete_All_Cart({ id_user: getUserCookie() });
     if (dataRes.code == 200) {
@@ -403,7 +420,7 @@ function ConfirmPayment() {
                           {new Intl.NumberFormat("vi-VN", {
                             style: "decimal",
                             decimal: "VND",
-                          }).format(+ it.price_product * +it.count || 0) +
+                          }).format(+it.price_product * +it.count || 0) +
                             " VNĐ"}
                         </Col>
                       </Row>
@@ -455,8 +472,9 @@ function ConfirmPayment() {
                       {new Intl.NumberFormat("vi-VN", {
                         style: "decimal",
                         decimal: "VND",
-                      }).format(totalPrice - (totalPrice * discount) / 100) +
-                        " VNĐ"}
+                      }).format(
+                        totalPrice - (totalPrice * discount) / 100 + 30000
+                      ) + " VNĐ"}
                     </Col>
                   </Row>
                 </Col>
