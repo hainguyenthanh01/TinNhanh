@@ -369,35 +369,35 @@ function Detail_Product(props) {
                           </span>
                           <ul className="rating">
                             <li>
-                              <i
-                                className={
+                              <i  style={{fontSize: "14px"}}
+                                className={ 
                                   value.star > 0 ? "fa fa-star" : "fa fa-star-o"
                                 }
                               ></i>
                             </li>
                             <li>
-                              <i
+                              <i  style={{fontSize: "14px"}}
                                 className={
                                   value.star > 1 ? "fa fa-star" : "fa fa-star-o"
                                 }
                               ></i>
                             </li>
                             <li>
-                              <i
+                              <i  style={{fontSize: "14px"}}
                                 className={
                                   value.star > 2 ? "fa fa-star" : "fa fa-star-o"
                                 }
                               ></i>
                             </li>
                             <li>
-                              <i
+                              <i  style={{fontSize: "14px"}}
                                 className={
                                   value.star > 3 ? "fa fa-star" : "fa fa-star-o"
                                 }
                               ></i>
                             </li>
                             <li>
-                              <i
+                              <i  style={{fontSize: "14px"}}
                                 className={
                                   value.star > 4 ? "fa fa-star" : "fa fa-star-o"
                                 }

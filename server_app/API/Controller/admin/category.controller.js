@@ -132,7 +132,7 @@ module.exports.update = async (req, res) => {
         if (err) return res.json({ msg: err });
       }
     );
-    res.json({ msg: "Bạn đã update thành công" });
+    res.json({ msg: "Bạn đã cập nhật thành công" });
   }
 };
 

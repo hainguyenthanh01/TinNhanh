@@ -10,9 +10,9 @@ import { changeCount } from "../Redux/Action/ActionCount";
 import { useDispatch, useSelector } from "react-redux";
 import { TiMinus, TiPlus } from "react-icons/ti";
 import { Rate } from "antd";
-import { getUserCookie } from '../helper';
-import Cart from '../API/CartAPI';
-import { addCart } from '../Redux/Action/ActionCart';
+import { getUserCookie } from "../helper";
+import Cart from "../API/CartAPI";
+import { addCart } from "../Redux/Action/ActionCart";
 
 Search.propTypes = {};
 
@@ -58,20 +58,6 @@ function Search(props) {
 
     fetchData();
   }, [page]);
-  const handler_addcart = async (e, value) => {
-    e.preventDefault();
-    const data = {
-      id_user: getUserCookie(),
-      id_product: value._id,
-      count: 1,
-      size: 's',
-    };
-
-    const dataRes = await Cart.Post_Cart(data);
-    if (dataRes.code == 200) {
-      dispatch(addCart(dataRes.data));
-    }
-  };
 
   return (
     <div className="content-wraper pt-60 pb-60">
@@ -144,7 +130,7 @@ function Search(props) {
                                     </ul>
                                   </div>
                                 </div>
-                                <h4>
+                                <h4 style={{display: "flex"}}>
                                   <Link to={`/detail/${value._id}`}>
                                     <a className="product_name" href="">
                                       {value.name_product}
@@ -159,32 +145,8 @@ function Search(props) {
                                     }).format(value.price_product) + " VNĐ"}
                                   </span>
                                 </div>
-                                <p>
-                                {value.describe}
-                                </p>
+                                <p>{value.describe}</p>
                               </div>
-                            </div>
-                          </div>
-                          <div className="col-lg-4">
-                            <div className="shop-add-action mb-xs-30">
-                              <ul className="add-actions-link">
-                                <li className="add-cart">
-                                  <a onClick={(e) => handler_addcart(e, value)} href="#">
-                                    Thêm vào giỏ hàng
-                                  </a>
-                                </li>
-                                <li>
-                                  <a
-                                    className="quick-view"
-                                    data-toggle="modal"
-                                    data-target={`#${value._id}`}
-                                    href="#"
-                                  >
-                                    <i className="fa fa-eye" />
-                                    Xem sản phẩm
-                                  </a>
-                                </li>
-                              </ul>
                             </div>
                           </div>
                         </div>
@@ -237,7 +199,8 @@ function Search(props) {
                                 <Rate
                                   style={{ fontSize: "14px" }}
                                   disabled
-                                  defaultValue={0}
+                                  allowHalf
+                                  defaultValue={value.star}
                                 />
                               </ul>
                             </div>
@@ -251,38 +214,9 @@ function Search(props) {
                             </div>
                             <div className="product-desc">
                               <p>
-                                <span>
-                                {value.describe}
-                                </span>
+                                <span>{value.describe}</span>
                               </p>
                             </div>
-                            {/* <div className="single-add-to-cart">
-                              <form
-                                onSubmit={handler_addcart}
-                                action="#"
-                                className="cart-quantity"
-                              >
-                                <div className="quantity">
-                                  <label>Quantity</label>
-                                  <div className="cart-plus-minus">
-                                  <div className="dec qtybutton">
-                                    <TiMinus />
-                                    </div>
-                                    <input
-                                      className="cart-plus-minus-box"
-                                      value="1"
-                                      type="text"
-                                    />
-                                    <div className="inc qtybutton">
-                                    <TiPlus />
-                                    </div>
-                                  </div>
-                                </div>
-                                <button className="add-to-cart" type="submit">
-                                  Add to cart
-                                </button>
-                              </form>
-                            </div> */}
                           </div>
                         </div>
                       </div>

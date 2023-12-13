@@ -403,7 +403,7 @@ function ConfirmPayment() {
                           {new Intl.NumberFormat("vi-VN", {
                             style: "decimal",
                             decimal: "VND",
-                          }).format(+it.price_product * +it.count || 0) +
+                          }).format(+ it.price_product * +it.count || 0) +
                             " VNĐ"}
                         </Col>
                       </Row>

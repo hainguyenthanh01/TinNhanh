@@ -122,7 +122,7 @@ module.exports.update = async (req, res) => {
             }, function (err, res) {
                 if (err) return res.json({ msg: err });
             });
-            res.json({ msg: "Bạn đã update thành công" })
+            res.json({ msg: "Bạn đã cập nhật thành công" })
 
             fileImage.mv('./public/img/' + fileName)
         }
@@ -137,7 +137,7 @@ module.exports.update = async (req, res) => {
             }, function (err, res) {
                 if (err) return res.json({ msg: err });
             });
-            res.json({ msg: "Bạn đã update thành công" })
+            res.json({ msg: "Bạn đã cập nhật thành công" })
         }
 
 
