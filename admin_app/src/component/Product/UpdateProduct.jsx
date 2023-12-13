@@ -116,10 +116,10 @@ function UpdateProduct(props) {
     const response = await productAPI.update(formData);
 
     if (response.msg === "Bạn đã update thành công") {
+      window.scrollTo(0, 0);
       setTimeout(() => {
         history.push("/product");
       }, 1000);
-      window.scrollTo(0, 0);
     }
     setValidationMsg({ api: response.msg });
   };
@@ -257,19 +257,6 @@ function UpdateProduct(props) {
                       {validationMsg.category}
                     </p>
                   </div>
-
-                  {/* <div className="form-group w-50">
-                                        <label htmlFor="gender" className="mr-2">Chọn giới tính:</label>
-                                        <select name="gender" id="gender" value={genderChoose} onChange={(e) => setGenderChoose(e.target.value)}>
-                                            {
-                                                gender && gender.map((item, index) => (
-                                                    <option value={item} key={index}>{item}</option>
-                                                ))
-                                            }
-
-                                        </select>
-                                    </div> */}
-
                   <div className="form-group w-50">
                     <label>Hình Ảnh</label>
                     <input

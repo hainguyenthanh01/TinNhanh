@@ -62,7 +62,7 @@ function Home_Category(props) {
   useEffect(() => {
     const fetchData = async () => {
       const response = await SaleAPI.getList();
-      console.log(response, 'đâs', product_category);
+      console.log(response, "đâs", product_category);
       set_product_category(response);
     };
 
@@ -85,8 +85,8 @@ function Home_Category(props) {
             </div>
           </div>
         </div>
-        {product_category && product_category.length >= 4 ?
-          (<Slider {...settings}>
+        {product_category && product_category.length >= 4 ? (
+          <Slider {...settings}>
             {product_category &&
               product_category.map((value = {}) => (
                 <div
@@ -136,9 +136,9 @@ function Home_Category(props) {
                               decimal: "VND",
                             }).format(
                               parseInt(value.id_product?.price_product) -
-                              (parseInt(value.id_product?.price_product) *
-                                parseInt(value.promotion)) /
-                              100
+                                (parseInt(value.id_product?.price_product) *
+                                  parseInt(value.promotion)) /
+                                  100
                             ) + " VNĐ"}
                           </span>
                         </div>
@@ -156,9 +156,9 @@ function Home_Category(props) {
                                 GET_id_modal(
                                   `${value.id_product?._id}`,
                                   parseInt(value.id_product.price_product) -
-                                  (parseInt(value.id_product.price_product) *
-                                    parseInt(value.promotion)) /
-                                  100
+                                    (parseInt(value.id_product.price_product) *
+                                      parseInt(value.promotion)) /
+                                      100
                                 )
                               }
                             >
@@ -171,10 +171,12 @@ function Home_Category(props) {
                   </div>
                 </div>
               ))}
-          </Slider>) : (
-            <div className="row" style={{ marginTop: "10px" }}>
-              {product_category &&
-                product_category.map((value) => (<div
+          </Slider>
+        ) : (
+          <div className="row" style={{ marginTop: "10px" }}>
+            {product_category &&
+              product_category.map((value) => (
+                <div
                   className="col-lg-3 animate__animated animate__zoomIn col_product"
                   style={{ minHeight: "320px" }}
                   key={value._id}
@@ -221,9 +223,9 @@ function Home_Category(props) {
                               decimal: "VND",
                             }).format(
                               parseInt(value.id_product?.price_product) -
-                              (parseInt(value.id_product?.price_product) *
-                                parseInt(value.promotion)) /
-                              100
+                                (parseInt(value.id_product?.price_product) *
+                                  parseInt(value.promotion)) /
+                                  100
                             ) + " VNĐ"}
                           </span>
                         </div>
@@ -241,9 +243,9 @@ function Home_Category(props) {
                                 GET_id_modal(
                                   `${value.id_product?._id}`,
                                   parseInt(value.id_product.price_product) -
-                                  (parseInt(value.id_product.price_product) *
-                                    parseInt(value.promotion)) /
-                                  100
+                                    (parseInt(value.id_product.price_product) *
+                                      parseInt(value.promotion)) /
+                                      100
                                 )
                               }
                             >
@@ -254,11 +256,10 @@ function Home_Category(props) {
                       </div>
                     </div>
                   </div>
-                </div>))}
-            </div>
-          )
-        }
-
+                </div>
+              ))}
+          </div>
+        )}
       </div>
     </div>
   );

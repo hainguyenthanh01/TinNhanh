@@ -67,7 +67,7 @@ function About(props) {
                     𝐂𝐨𝐧𝐭𝐚𝐜𝐭 𝐮𝐬: <br />
                     ▪️ 𝐀𝐝𝐝𝟏: 122 Triều Khúc - Thanh Xuân - HN <br />
                     ▪️ 𝐀𝐝𝐝𝟐: 27 Hồ Tùng Mậu - Cầu Giấy - HN <br />
-                    ▪️ 𝐇𝐨𝐭𝐥𝐢𝐧𝐞: 0869.666.218 - 0812.666.218 <br />
+                    ▪️ 𝐇𝐨𝐭𝐥𝐢𝐧𝐞: 0392.126.898 <br />
                     </label>
                   </div>
                 </div>

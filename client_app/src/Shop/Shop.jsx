@@ -233,7 +233,7 @@ function Shop(props) {
                   <div className="product-short">
                     <p>Sắp xếp:</p>
                     <select className="nice-select">
-                      <option value="trending">Mức độ</option>
+                      <option value="trending">Giá</option>
                       <option value="rating">Giá (Thấp &gt; Cao)</option>
                       <option value="rating">Giá (Cao &gt; Thấp)</option>
                     </select>

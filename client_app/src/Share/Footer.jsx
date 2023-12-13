@@ -75,13 +75,11 @@ function Footer(props) {
                   </li>
                   <li>
                     <span>Phone: </span>
-                    <a href="#">0869666218</a>
+                    0392136898
                   </li>
                   <li>
                     <span>Email: </span>
-                    <a href="mailto://hainguyenthanh16101@gmail.com">
-                      hainguyenthanh16101@gmail.com
-                    </a>
+                    hainguyenthanh16101@gmail.com
                   </li>
                 </ul>
               </div>

@@ -38,7 +38,7 @@ function Contact(props) {
                   <h4>
                     <i className="fa fa-phone"></i> Điện thoại
                   </h4>
-                  <p>Di động: 0869.666.218</p>
+                  <p>Di động: 0392 136 898</p>
                 </div>
                 <div className="single-contact-block last-child">
                   <h4>
