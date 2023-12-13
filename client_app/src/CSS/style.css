@@ -5417,9 +5417,11 @@ span.required {
   font-size: 18px;
 }
 .product-description,
-.product-details-manufacturer,
-.product-reviews {
+.product-details-manufacturer {
   padding: 25px 0;
+}
+.product-reviews{
+  padding-bottom: 25px;
 }
 .product-details-manufacturer a img {
   padding: 0.25rem;

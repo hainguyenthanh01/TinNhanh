@@ -252,9 +252,9 @@ function Detail_Product(props) {
                           decimal: "VND",
                         }).format(
                           parseInt(sale.id_product.price_product) -
-                          (parseInt(sale.id_product.price_product) *
-                            parseInt(sale.promotion)) /
-                          100
+                            (parseInt(sale.id_product.price_product) *
+                              parseInt(sale.promotion)) /
+                              100
                         ) + " VNĐ"}
                       </span>
                     )}
@@ -369,35 +369,40 @@ function Detail_Product(props) {
                           </span>
                           <ul className="rating">
                             <li>
-                              <i  style={{fontSize: "14px"}}
-                                className={ 
+                              <i
+                                style={{ fontSize: "14px" }}
+                                className={
                                   value.star > 0 ? "fa fa-star" : "fa fa-star-o"
                                 }
                               ></i>
                             </li>
                             <li>
-                              <i  style={{fontSize: "14px"}}
+                              <i
+                                style={{ fontSize: "14px" }}
                                 className={
                                   value.star > 1 ? "fa fa-star" : "fa fa-star-o"
                                 }
                               ></i>
                             </li>
                             <li>
-                              <i  style={{fontSize: "14px"}}
+                              <i
+                                style={{ fontSize: "14px" }}
                                 className={
                                   value.star > 2 ? "fa fa-star" : "fa fa-star-o"
                                 }
                               ></i>
                             </li>
                             <li>
-                              <i  style={{fontSize: "14px"}}
+                              <i
+                                style={{ fontSize: "14px" }}
                                 className={
                                   value.star > 3 ? "fa fa-star" : "fa fa-star-o"
                                 }
                               ></i>
                             </li>
                             <li>
-                              <i  style={{fontSize: "14px"}}
+                              <i
+                                style={{ fontSize: "14px" }}
                                 className={
                                   value.star > 4 ? "fa fa-star" : "fa fa-star-o"
                                 }
@@ -441,18 +446,7 @@ function Detail_Product(props) {
                                 />
                                 <div className="li-review-product-desc">
                                   <p className="li-product-name">
-                                    Today is a good day Framed poster
-                                  </p>
-                                  <p>
-                                    <span>
-                                      Beach Camera Exclusive Bundle - Includes
-                                      Two Samsung Radiant 360 R3 Wi-Fi Bluetooth
-                                      Speakers. Fill The Entire Room With
-                                      Exquisite Sound via Ring Radiator
-                                      Technology. Stream And Control R3 Speakers
-                                      Wirelessly With Your Smartphone.
-                                      Sophisticated, Modern Design{" "}
-                                    </span>
+                                    <span>{product.describe}</span>
                                   </p>
                                 </div>
                               </div>
@@ -468,7 +462,8 @@ function Detail_Product(props) {
                                         <span>
                                           <select
                                             className="star-rating"
-                                            onChange={(e) => set_star(e.target.value)
+                                            onChange={(e) =>
+                                              set_star(e.target.value)
                                             }
                                           >
                                             <option value="1">1</option>
