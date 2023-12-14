@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-
+import Banner from "../Image/banner.jpg";
 function About(props) {
   return (
     <div>
@@ -16,11 +16,11 @@ function About(props) {
           </div>
         </div>
       </div>
-      <div className="contact-main-page mt-40 mb-40 mb-md-40 mb-sm-40 mb-xs-40" >
+      <div className="contact-main-page mt-40 mb-40 mb-md-40 mb-sm-40 mb-xs-40">
         <div className="container">
           <div className="row">
-            <div className="col-lg-6 col-md-12 order-2 order-lg-1">
-              <div className="contact-form-content pt-sm-55 pt-xs-55">
+            <div className="col-lg-6 col-md-12 order-2 order-lg-1" style={{width: "100%"}}>
+              <div className="contact-form-content pt-sm-55 pt-xs-55" style={{width: "40%"}}>
                 <h3 className="contact-page-title">𝐁𝐔𝐋𝐈</h3>
                 <div className="contact-form">
                   <div className="form-group">
@@ -50,29 +50,29 @@ function About(props) {
                       Sau 7 năm hoạt động. Một lần nữa, 𝐁𝐔𝐋𝐈 muốn gửi đến bạn
                       lời cảm ơn sâu sắc và chân thành nhất. Bởi bạn đã trở
                       thành một phần trong thương hiệu của chúng mình.
-                     <br />
+                      <br />
                       Chúng mình rất trân trọng và biết ơn sự ủng hộ thường
                       xuyên của bạn suốt thời gian qua. Xin cảm ơn bạn một lần
                       nữa. Và chúc bạn có một ngày tốt lành. ❞
                     </label>
                     <label>
                       🛒 Các nền tảng của 𝐁𝐔𝐋𝐈: <br />
-                      🌐 Fanpage: BULi  <br />
-                      🌐 Website: https://buli.vn/  <br />
+                      🌐 Fanpage: BULi <br />
+                      🌐 Website: https://buli.vn/ <br />
                       🌐 Shopee: https://shopee.vn/bulishop <br />
                       🌐 Tiktok: https://www.tiktok.com/@bulishop <br />
                       🌐 Ins: https://www.instagram.com/buli_official/ <br />
                     </label>
                     <label>
-                    𝐂𝐨𝐧𝐭𝐚𝐜𝐭 𝐮𝐬: <br />
-                    ▪️ 𝐀𝐝𝐝𝟏: 122 Triều Khúc - Thanh Xuân - HN <br />
-                    ▪️ 𝐀𝐝𝐝𝟐: 27 Hồ Tùng Mậu - Cầu Giấy - HN <br />
-                    ▪️ 𝐇𝐨𝐭𝐥𝐢𝐧𝐞: 0392.126.898 <br />
+                      𝐂𝐨𝐧𝐭𝐚𝐜𝐭 𝐮𝐬: <br />
+                      ▪️ 𝐀𝐝𝐝𝟏: 122 Triều Khúc - Thanh Xuân - HN <br />
+                      ▪️ 𝐀𝐝𝐝𝟐: 27 Hồ Tùng Mậu - Cầu Giấy - HN <br />
+                      ▪️ 𝐇𝐨𝐭𝐥𝐢𝐧𝐞: 0392.126.898 <br />
                     </label>
                   </div>
                 </div>
-                <p className="form-messege"></p>
               </div>
+                <img style={{ width: "45%" }} src={Banner} alt="" />
             </div>
           </div>
         </div>

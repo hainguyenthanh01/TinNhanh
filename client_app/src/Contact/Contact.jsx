@@ -1,9 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
+import emailjs from "emailjs-com";
+import MessageNotify from "../Message/Message";
 
 Contact.propTypes = {};
 
 function Contact(props) {
+  const [messageObj, setMessageObj] = useState({
+    type: "",
+    content: "",
+  });
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm(
+        "service_ccalq8y",
+        "template_gjpomgx",
+        e.target,
+        "QOFsRPf2Lo5m_xVnO"
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+          setTimeout(() => {
+            window.location.reload()
+          }, 100);
+        },
+        (error) => {
+          console.log(error.text);
+        }
+      );
+    setMessageObj({
+      type: "success",
+      content: "Thành công",
+      active: new Date() * 1,
+    });
+  };
   return (
     <div>
       <div className="breadcrumb-area">
@@ -52,11 +85,7 @@ function Contact(props) {
               <div className="contact-form-content pt-sm-55 pt-xs-55">
                 <h3 className="contact-page-title">Ý kiến của bạn</h3>
                 <div className="contact-form">
-                  <form
-                    id="contact-form"
-                    action="http://demo.hasthemes.com/limupa-v3/limupa/mail.php"
-                    method="post"
-                  >
+                  <form id="contact-form" onSubmit={sendEmail}>
                     <div className="form-group">
                       <label>
                         Tên của bạn <span className="required">*</span>
@@ -84,6 +113,7 @@ function Contact(props) {
                       <textarea
                         name="contactMessage"
                         id="contactMessage"
+                        required
                       ></textarea>
                     </div>
                     <div className="form-group">
@@ -99,6 +129,11 @@ function Contact(props) {
                 <p className="form-messege"></p>
               </div>
             </div>
+            <MessageNotify
+              type={messageObj.type}
+              content={messageObj.content}
+              active={messageObj.active}
+            />
           </div>
         </div>
       </div>
