@@ -24,7 +24,7 @@ function Search(props) {
   const dispatch = useDispatch();
   const [show_load, set_show_load] = useState(false);
   const count_change = useSelector((state) => state.Count.isLoad);
-
+  const [sortBy, setSortBy] = useState("")
   useEffect(() => {
     if (id_modal !== "") {
       const fetchData = async () => {
@@ -67,7 +67,7 @@ function Search(props) {
             <div className="shop-top-bar">
               <div className="product-select-box">
                 <div className="product-short">
-                  <p>Sắp xếp theo:</p>
+                  <p>Sắp xếp:</p>
                   <select className="nice-select">
                     <option value="trending">Giá</option>
                     <option value="rating">Giá (Thấp đến Cao)</option>

@@ -343,9 +343,9 @@ function Header(props) {
                 <button
                   type="submit"
                   style={{ height: "45px" }}
-                  class="btn btn-primary"
+                  className="btn btn-primary"
                 >
-                  <i class="fa fa-search"></i>
+                  <i className="fa fa-search"></i>
                 </button>
                 {keyword_search && (
                   <div className="show_search_product">
@@ -481,7 +481,7 @@ function Header(props) {
                         >
                           Menu
                         </Link>
-                        <ul class="megamenu hb-megamenu">
+                        <ul className="megamenu hb-megamenu">
                           <li>
                             <Link to="/shop/all">Male</Link>
                             <ul>

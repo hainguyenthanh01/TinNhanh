@@ -16,7 +16,7 @@ function Shop(props) {
 
   //Tổng số trang
   const [totalPage, setTotalPage] = useState();
-
+  const [sortBy, setSortBy] = useState("")
   //Từng trang hiện tại
   const [pagination, setPagination] = useState({
     page: "1",
@@ -234,8 +234,8 @@ function Shop(props) {
                     <p>Sắp xếp:</p>
                     <select className="nice-select">
                       <option value="trending">Giá</option>
-                      <option value="rating">Giá (Thấp &gt; Cao)</option>
-                      <option value="rating">Giá (Cao &gt; Thấp)</option>
+                      <option value="rating">Giá (Thấp đến Cao)</option>
+                      <option value="rating">Giá (Cao đến Thấp)</option>
                     </select>
                   </div>
                 </div>

@@ -133,9 +133,9 @@ function UpdateSale(props) {
                   </div>
                   <div className="form-group w-50">
                     <label htmlFor="description">Trạng Thái</label>
-                    <div class="form-check">
+                    <div className="form-check">
                       <input
-                        class="form-check-input"
+                        className="form-check-input"
                         type="radio"
                         name="gridRadios"
                         id="gridRadios1"
@@ -145,13 +145,13 @@ function UpdateSale(props) {
                           setStatus(e.target.value);
                         }}
                       />
-                      <label class="form-check-label" for="gridRadios1">
+                      <label className="form-check-label" for="gridRadios1">
                         Hoạt Động
                       </label>
                     </div>
-                    <div class="form-check">
+                    <div className="form-check">
                       <input
-                        class="form-check-input"
+                        className="form-check-input"
                         type="radio"
                         name="gridRadios"
                         id="gridRadios2"
@@ -159,7 +159,7 @@ function UpdateSale(props) {
                         checked={status === "false"}
                         onClick={(e) => setStatus(e.target.value)}
                       />
-                      <label class="form-check-label" for="gridRadios2">
+                      <label className="form-check-label" for="gridRadios2">
                         Ngưng Hoạt Động
                       </label>
                     </div>
