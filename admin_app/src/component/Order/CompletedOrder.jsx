@@ -32,13 +32,13 @@ function CompletedOrder(props) {
             case "1":
               return "Đang xử lý";
             case "2":
-              return "Đã xác nhận";
+              return "Chờ vận chuyển";
             case "3":
               return "Đang giao";
             case "4":
               return "Hoàn thành";
             default:
-              return "Đơn bị hủy";
+              return "Đã hủy";
           }
         })();
         it.pay = it.pay === true ? "Đã thanh toán" : "Chưa thanh toán";
@@ -234,7 +234,7 @@ function CompletedOrder(props) {
       width: "150px",
     },
     {
-      title: "Trạng thái thanh toán",
+      title: "Thanh Toán",
       dataIndex: "pay",
       key: "pay",
     },
@@ -284,7 +284,7 @@ function CompletedOrder(props) {
                   <br />
                   <select
                     className="custom-select"
-                    style={{ color: "gray", width: "85px" }}
+                    style={{ color: "gray", width: "90px" }}
                     value={getDay}
                     onChange={(e) => setGetDay(e.target.value)}
                   >
@@ -299,7 +299,7 @@ function CompletedOrder(props) {
                   &nbsp;/&nbsp;
                   <select
                     className="custom-select"
-                    style={{ color: "gray", width: "85px" }}
+                    style={{ color: "gray", width: "95px" }}
                     value={getMonth}
                     onChange={(e) => setGetMonth(e.target.value)}
                   >
@@ -314,7 +314,7 @@ function CompletedOrder(props) {
                   &nbsp;/&nbsp;
                   <select
                     className="custom-select"
-                    style={{ color: "gray", width: "85px" }}
+                    style={{ color: "gray", width: "90px" }}
                     value={getYear}
                     onChange={(e) => setGetYear(e.target.value)}
                   >
@@ -343,13 +343,13 @@ function CompletedOrder(props) {
                   )}
                 </div>
                 <br />
-                <a
+                {/* <a
                   className="btn btn-success"
                   onClick={handler_Report}
                   style={{ color: "#fff", cursor: "pointer" }}
                 >
                   Thống Kê
-                </a>
+                </a> */}
               </div>
             </div>
           </div>

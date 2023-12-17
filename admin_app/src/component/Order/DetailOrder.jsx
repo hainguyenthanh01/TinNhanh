@@ -41,13 +41,13 @@ function DetailOrder(props) {
             case "1":
               return "Đang xử lý";
             case "2":
-              return "Đã xác nhận";
+              return "Chờ vận chuyển";
             case "3":
               return "Đang giao";
             case "4":
               return "Hoàn thành";
             default:
-              return "Đơn bị hủy";
+              return "Đã hủy";
           }
         })();
         it.name_product = it.id_product.name_product;

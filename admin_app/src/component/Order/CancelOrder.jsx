@@ -33,13 +33,13 @@ function CancelOrder(props) {
             case "1":
               return "Đang xử lý";
             case "2":
-              return "Đã xác nhận";
+              return "Chờ vận chuyển";
             case "3":
               return "Đang giao";
             case "4":
               return "Hoàn thành";
             default:
-              return "Đơn bị hủy";
+              return "Đã hủy";
           }
         })();
         it.pay = it.pay === true ? "Đã thanh toán" : "Chưa thanh toán";
@@ -113,7 +113,7 @@ function CancelOrder(props) {
       width: "150px",
     },
     {
-      title: "Trạng thái thanh toán",
+      title: "Thanh Toán",
       dataIndex: "pay",
       key: "pay",
     },
