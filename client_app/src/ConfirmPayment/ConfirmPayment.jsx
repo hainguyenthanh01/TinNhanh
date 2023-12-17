@@ -310,7 +310,7 @@ function ConfirmPayment() {
                   />
                 </Col> */}
               </Row>
-              <h2
+              {/* <h2
                 style={{
                   fontSize: "20px",
                   fontWeight: "500",
@@ -318,9 +318,8 @@ function ConfirmPayment() {
                 }}
               >
                 Phương thức thanh toán
-              </h2>
-              <div>
-                <Row gutter={[16, 24]}>
+              </h2> */}
+              {/* <Row gutter={[16, 24]}>
                   <Col span={24}>
                     <div style={{ border: "1px solid #d9d9d9" }}>
                       <div
@@ -391,9 +390,8 @@ function ConfirmPayment() {
                       </div>
                     </div>
                     {/* <MoMo orderID={1234} total={198000} /> */}
-                  </Col>
-                </Row>
-              </div>
+              {/* </Col>
+                </Row> */}
             </Col>
             <Col span={4} />
             <Col span={8}>
@@ -493,11 +491,29 @@ function ConfirmPayment() {
                     <Col span={6}>
                       <Button
                         type="primary"
-                        style={{ background: "#fed700", color: "#242424" }}
+                        style={{
+                          background: "#fed700",
+                          color: "#242424",
+                          width: "150px",
+                          marginLeft: "-40px",
+                        }}
                         onClick={handleConfirm}
                       >
-                        Đặt hàng
+                        Thanh toán COD
                       </Button>
+                      {/* <Button
+                        type="primary"
+                        style={{
+                          background: "#fed700",
+                          color: "#242424",
+                          marginTop: "10px",
+                          width: "150px",
+                          marginLeft: "-40px",
+                        }}
+                        onClick={handleConfirm}
+                      >
+                        Thanh toán VNPAY
+                      </Button> */}
                     </Col>
                   </Row>
                 </Col>
