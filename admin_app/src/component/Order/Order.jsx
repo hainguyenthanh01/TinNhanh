@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react";
 import io from "socket.io-client";
 import { Link } from "react-router-dom";
 import queryString from "query-string";
-
 import orderAPI from "../Api/orderAPI";
 import Pagination from "../Shared/Pagination";
 import Search from "../Shared/Search";
 import CustomTable from "../CustomTable/CustomTable";
 import MessageNotify from "../Message/Message";
+import { CSVLink, CSVDownload } from "react-csv";
+import { FaFileExport } from "react-icons/fa6";
 
 const socket = io("http://localhost:8000/", {
   transports: ["websocket"],
@@ -186,6 +187,27 @@ function Order(props) {
                   filter={filter}
                   setFilter={setFilter}
                 />
+                <CSVLink
+                  filename={"Đơn_hàng.csv"}
+                  className="btn btn-primary"
+                  data={order}
+                  style={{
+                    float: "left",
+                    marginTop: "25px",
+                    backgroundcolor: "",
+                    display: "flex",
+                    alignItems: "center",
+                    backgroundColor: "#0C8045",
+                    borderColor: "#0C8045",
+                  }}
+                >
+                  <FaFileExport
+                    style={{
+                      marginRight: "3px",
+                    }}
+                  />
+                  Xuất Excel
+                </CSVLink>
               </div>
             </div>
           </div>
