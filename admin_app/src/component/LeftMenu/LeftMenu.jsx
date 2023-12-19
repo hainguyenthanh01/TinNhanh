@@ -82,7 +82,7 @@ const items = [
   getItem("Tài khoản", "sub1", <FaUser />, "/user"),
 
   getItem("Quyền", "sub2", <FaUserGroup />, "/permission"),
-  getItem("Thống kê", "8", <FaChartLine />, "/statistical"),
+  // getItem("Thống kê", "8", <FaChartLine />, "/statistical"),
 ];
 const LeftMenu = () => {
   const [collapsed, setCollapsed] = useState(false);

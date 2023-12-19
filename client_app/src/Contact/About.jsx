@@ -19,8 +19,14 @@ function About(props) {
       <div className="contact-main-page mt-40 mb-40 mb-md-40 mb-sm-40 mb-xs-40">
         <div className="container">
           <div className="row">
-            <div className="col-lg-6 col-md-12 order-2 order-lg-1" style={{width: "100%"}}>
-              <div className="contact-form-content pt-sm-55 pt-xs-55" style={{width: "40%"}}>
+            <div
+              className="col-lg-6 col-md-12 order-2 order-lg-1"
+              style={{ width: "100%" }}
+            >
+              <div
+                className="contact-form-content pt-sm-55 pt-xs-55"
+                style={{ width: "100%" }}
+              >
                 <h3 className="contact-page-title">𝐁𝐔𝐋𝐈</h3>
                 <div className="contact-form">
                   <div className="form-group">
@@ -72,7 +78,7 @@ function About(props) {
                   </div>
                 </div>
               </div>
-                <img style={{ width: "45%" }} src={Banner} alt="" />
+              {/* <img style={{ width: "45%" }} src={Banner} alt="" /> */}
             </div>
           </div>
         </div>

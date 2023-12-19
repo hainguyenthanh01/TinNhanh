@@ -39,7 +39,7 @@ function UserCus(props) {
   }, [filter]);
   const columns = [
     {
-      title: "Name",
+      title: "Tên",
       dataIndex: "fullname",
       key: "name",
     },
@@ -49,7 +49,7 @@ function UserCus(props) {
       key: "email",
     },
     {
-      title: "Permission",
+      title: "Quyền",
       dataIndex: "permission",
       key: "permission",
     },
