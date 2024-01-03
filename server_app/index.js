@@ -34,7 +34,7 @@ const Sale = require("./API/Router/admin/sale.router");
 
 const mongoose = require("mongoose");
 mongoose
-  .connect("mongodb+srv://bulishop:bulishop@cluster0.xy8aspv.mongodb.net/", {
+  .connect("mongodb+srv://bulishop:bulishop@cluster0.xy8aspv.mongodb.net/web", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
